@@ -74,6 +74,6 @@ public class CustomProtocolParser implements ProtocolParser {
     }
 
     private String replaceAllInappropriateSymbols(String input) {
-        return input.replaceAll("[^A-Za-z0-9^]", "");
+        return input.replaceAll("[^A-Za-z0-9=^]", "");
     }
 }
