@@ -1,7 +1,7 @@
 package by.bsac.tcs.server;
 
-import by.bsac.tcs.server.manager.RequestManagerDao;
 import by.bsac.tcs.server.manager.RequestManager;
+import by.bsac.tcs.server.manager.RequestManagerDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
