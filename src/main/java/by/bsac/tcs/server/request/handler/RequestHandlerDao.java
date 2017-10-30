@@ -1,6 +1,6 @@
 package by.bsac.tcs.server.request.handler;
 
-import by.bsac.tcs.server.request.handler.Impl.RequestHandlerImpl;
+import by.bsac.tcs.server.request.handler.impl.RequestHandlerImpl;
 
 import java.net.Socket;
 

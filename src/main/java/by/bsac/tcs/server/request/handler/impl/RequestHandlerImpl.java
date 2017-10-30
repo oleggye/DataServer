@@ -1,4 +1,4 @@
-package by.bsac.tcs.server.request.handler.Impl;
+package by.bsac.tcs.server.request.handler.impl;
 
 import by.bsac.tcs.server.request.Request;
 import by.bsac.tcs.server.request.handler.RequestHandler;
