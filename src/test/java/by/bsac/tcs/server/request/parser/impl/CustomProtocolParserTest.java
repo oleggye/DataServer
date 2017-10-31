@@ -1,6 +1,7 @@
 package by.bsac.tcs.server.request.parser.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -10,11 +11,9 @@ import static org.mockito.Mockito.when;
 import by.bsac.tcs.server.request.Request;
 import by.bsac.tcs.server.request.RequestBuilder;
 import by.bsac.tcs.server.request.parser.ProtocolParser;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
@@ -59,16 +58,30 @@ public class CustomProtocolParserTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void parseWhenPassedBadParamWithAndDelimiterCharacter() throws Exception {
-    final int badParam = '5';
+  public void parseWhenPassedOnlyParamKeyAndDelimiterCharacter() throws Exception {
+      final int paramKey = '5';
     final int paramDelimiter = ';';
     final int exitInputStreamCode = -1;
 
     when(socket.getInputStream()).thenReturn(inputStream);
-    doReturn(badParam, paramDelimiter, exitInputStreamCode).when(inputStream).read();
+      doReturn(paramKey, paramDelimiter, exitInputStreamCode).when(inputStream).read();
 
     parser.parse(socket);
   }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void parseWhenPassedOnlyParamKeyAndEqAndDelimiterCharacter() throws Exception {
+        final int paramKey = '5';
+        final int eqPairDelimiter = '=';
+
+        final int paramDelimiter = ';';
+        final int exitInputStreamCode = -1;
+
+        when(socket.getInputStream()).thenReturn(inputStream);
+        doReturn(paramKey, eqPairDelimiter, paramDelimiter, exitInputStreamCode).when(inputStream).read();
+
+        parser.parse(socket);
+    }
 
   @Test
   public void parseWhenPassedOneParamAndDelimiterCharacter() throws Exception {

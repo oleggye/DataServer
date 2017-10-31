@@ -3,7 +3,7 @@ package by.bsac.tcs.server.request.handler.impl;
 import by.bsac.tcs.server.request.Request;
 import by.bsac.tcs.server.request.handler.RequestHandler;
 import by.bsac.tcs.server.request.handler.RequestHandlerException;
-import by.bsac.tcs.server.request.parser.ParserDAO;
+import by.bsac.tcs.server.request.parser.ProtocolParserDAO;
 import by.bsac.tcs.server.request.parser.ProtocolParseException;
 import by.bsac.tcs.server.request.parser.ProtocolParser;
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ import java.net.Socket;
 public class RequestHandlerImpl implements RequestHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestHandlerImpl.class);
 
-    private static final ParserDAO DAO = ParserDAO.getInstance();
+    private static final ProtocolParserDAO DAO = ProtocolParserDAO.getInstance();
 
     private final Socket clientSocket;
     private final ProtocolParser parser;

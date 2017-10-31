@@ -2,16 +2,16 @@ package by.bsac.tcs.server.request.parser;
 
 import by.bsac.tcs.server.request.parser.impl.CustomProtocolParser;
 
-public class ParserDAO {
+public class ProtocolParserDAO {
 
-    private static final ParserDAO INSTANCE = new ParserDAO();
+    private static final ProtocolParserDAO INSTANCE = new ProtocolParserDAO();
 
     private static final ProtocolParser parser = new CustomProtocolParser();
 
-    private ParserDAO() {
+    private ProtocolParserDAO() {
     }
 
-    public static final ParserDAO getInstance() {
+    public static final ProtocolParserDAO getInstance() {
         return INSTANCE;
     }
 
