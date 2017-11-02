@@ -25,7 +25,7 @@ public class CustomProtocolParser implements ProtocolParser {
         String requestData = pullRequestData(clientSocket);
         return parseRequestData(requestData);
     }
-
+//FIXME: Pay attention that this parser can wait infinite time
     private String pullRequestData(Socket clientSocket) throws ProtocolParseException {
         try (BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
             StringBuilder userRequestData = null;
