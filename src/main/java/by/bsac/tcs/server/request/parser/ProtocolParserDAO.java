@@ -4,18 +4,18 @@ import by.bsac.tcs.server.request.parser.impl.CustomProtocolParser;
 
 public class ProtocolParserDAO {
 
-    private static final ProtocolParserDAO INSTANCE = new ProtocolParserDAO();
+  private static final ProtocolParserDAO INSTANCE = new ProtocolParserDAO();
 
-    private static final ProtocolParser parser = new CustomProtocolParser();
+  private static final ProtocolParser parser = new CustomProtocolParser();
 
-    private ProtocolParserDAO() {
-    }
+  private ProtocolParserDAO() {
+  }
 
-    public static final ProtocolParserDAO getInstance() {
-        return INSTANCE;
-    }
+  public static ProtocolParserDAO getInstance() {
+    return INSTANCE;
+  }
 
-    public ProtocolParser getProtocolParser() {
-        return parser;
-    }
+  public ProtocolParser getProtocolParser() {
+    return parser;
+  }
 }

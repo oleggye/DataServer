@@ -2,24 +2,23 @@ package by.bsac.tcs.server.manager.impl;
 
 import by.bsac.tcs.server.request.handler.RequestHandler;
 import by.bsac.tcs.server.request.handler.RequestHandlerDao;
-
 import java.net.Socket;
 
 //TODO: ADD LOGGING
 public class RequestManagerImpl extends AbstractRequestManager {
 
-    private final RequestHandlerDao dao;
+  private final RequestHandlerDao dao;
 
-    public RequestManagerImpl() {
-        dao = RequestHandlerDao.getInstance();
-    }
+  public RequestManagerImpl() {
+    dao = RequestHandlerDao.getInstance();
+  }
 
-    public RequestManagerImpl(RequestHandlerDao dao) {
-        this.dao = dao;
-    }
+  public RequestManagerImpl(RequestHandlerDao dao) {
+    this.dao = dao;
+  }
 
-    public void manage(Socket socket) {
-        RequestHandler requestHandler = dao.getRequestProcessor(socket);
-        pool.submit(requestHandler);
-    }
+  public void manage(Socket socket) {
+    RequestHandler requestHandler = dao.getRequestProcessor(socket);
+    pool.submit(requestHandler);
+  }
 }

@@ -8,21 +8,19 @@ import org.mockito.MockitoAnnotations;
 
 class ServerTest {
 
-    @Mock
-    private RequestManager manager;
+  @Mock
+  private RequestManager manager;
 
-    @Before
-    void setUp() {
+  @Before
+  void setUp() {
 
-        MockitoAnnotations.initMocks(this);
-    }
+    MockitoAnnotations.initMocks(this);
+  }
 
-    @Test
-    void startServerTest() {
+  @Test
+  void startServerTest() {
 
-
-    }
-
+  }
 
 
 }

@@ -5,32 +5,32 @@ import java.util.Map;
 
 public class Request {
 
-    private final Map<String, String> paramMap = new HashMap<>();
+  private final Map<String, String> paramMap = new HashMap<>();
 
-    public String getRequestParam(String paramName) {
-        return paramMap.get(paramName);
+  public String getRequestParam(String paramName) {
+    return paramMap.get(paramName);
+  }
+
+  public void setRequestParam(String key, String val) {
+    paramMap.put(key, val);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
 
-    public void setRequestParam(String key, String val) {
-        paramMap.put(key, val);
-    }
+    Request request = (Request) o;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+    return paramMap.equals(request.paramMap);
+  }
 
-        Request request = (Request) o;
-
-        return paramMap.equals(request.paramMap);
-    }
-
-    @Override
-    public int hashCode() {
-        return paramMap.hashCode();
-    }
+  @Override
+  public int hashCode() {
+    return paramMap.hashCode();
+  }
 }

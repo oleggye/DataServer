@@ -11,14 +11,13 @@ import static org.mockito.Mockito.when;
 import by.bsac.tcs.server.request.Request;
 import by.bsac.tcs.server.request.RequestBuilder;
 import by.bsac.tcs.server.request.parser.ProtocolParser;
+import java.io.InputStream;
+import java.net.Socket;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-
-import java.io.InputStream;
-import java.net.Socket;
 
 public class CustomProtocolParserTest {
 
@@ -59,29 +58,30 @@ public class CustomProtocolParserTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void parseWhenPassedOnlyParamKeyAndDelimiterCharacter() throws Exception {
-      final int paramKey = '5';
+    final int paramKey = '5';
     final int paramDelimiter = ';';
     final int exitInputStreamCode = -1;
 
     when(socket.getInputStream()).thenReturn(inputStream);
-      doReturn(paramKey, paramDelimiter, exitInputStreamCode).when(inputStream).read();
+    doReturn(paramKey, paramDelimiter, exitInputStreamCode).when(inputStream).read();
 
     parser.parse(socket);
   }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void parseWhenPassedOnlyParamKeyAndEqAndDelimiterCharacter() throws Exception {
-        final int paramKey = '5';
-        final int eqPairDelimiter = '=';
+  @Test(expected = IllegalArgumentException.class)
+  public void parseWhenPassedOnlyParamKeyAndEqAndDelimiterCharacter() throws Exception {
+    final int paramKey = '5';
+    final int eqPairDelimiter = '=';
 
-        final int paramDelimiter = ';';
-        final int exitInputStreamCode = -1;
+    final int paramDelimiter = ';';
+    final int exitInputStreamCode = -1;
 
-        when(socket.getInputStream()).thenReturn(inputStream);
-        doReturn(paramKey, eqPairDelimiter, paramDelimiter, exitInputStreamCode).when(inputStream).read();
+    when(socket.getInputStream()).thenReturn(inputStream);
+    doReturn(paramKey, eqPairDelimiter, paramDelimiter, exitInputStreamCode).when(inputStream)
+        .read();
 
-        parser.parse(socket);
-    }
+    parser.parse(socket);
+  }
 
   @Test
   public void parseWhenPassedOneParamAndDelimiterCharacter() throws Exception {

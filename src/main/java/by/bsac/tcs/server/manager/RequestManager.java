@@ -4,9 +4,9 @@ import java.net.Socket;
 
 public interface RequestManager {
 
-    void init();
+  void init();
 
-    void shutdown();
+  void shutdown();
 
-    void manage(Socket socket);
+  void manage(Socket socket);
 }

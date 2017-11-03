@@ -1,20 +1,21 @@
 package by.bsac.tcs.server.request.handler;
 
 import by.bsac.tcs.server.request.handler.impl.RequestHandlerImpl;
-
 import java.net.Socket;
 
 public class RequestHandlerDao {
-    private static final RequestHandlerDao INSTANCE = new RequestHandlerDao();
 
-    private RequestHandlerDao(){}
+  private static final RequestHandlerDao INSTANCE = new RequestHandlerDao();
 
-    public static RequestHandlerDao getInstance(){
-        return INSTANCE;
-    }
+  private RequestHandlerDao() {
+  }
 
-    public RequestHandler getRequestProcessor(Socket requestSocket){
-        return new RequestHandlerImpl(requestSocket);
-    }
+  public static RequestHandlerDao getInstance() {
+    return INSTANCE;
+  }
+
+  public RequestHandler getRequestProcessor(Socket requestSocket) {
+    return new RequestHandlerImpl(requestSocket);
+  }
 
 }
