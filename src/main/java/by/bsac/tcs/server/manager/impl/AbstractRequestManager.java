@@ -4,8 +4,12 @@ import by.bsac.tcs.server.manager.RequestManager;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractRequestManager implements RequestManager {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRequestManager.class);
 
   private static final long TIME_OUT_SECONDS = 3;
 
@@ -27,7 +31,7 @@ public abstract class AbstractRequestManager implements RequestManager {
       try {
         pool.awaitTermination(TIME_OUT_SECONDS, TimeUnit.SECONDS);
       } catch (InterruptedException e) {
-        e.printStackTrace();
+        LOGGER.error("An error occurred while shutting down the pool!", e);
       } finally {
         pool.shutdownNow();
       }

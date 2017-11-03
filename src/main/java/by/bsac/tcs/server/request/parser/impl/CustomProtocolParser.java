@@ -37,7 +37,7 @@ public class CustomProtocolParser implements ProtocolParser {
       String userInput;
       while ((userInput = input.readLine()) != null) {
         userInput = replaceAllInappropriateSymbols(userInput);
-        LOGGER.info("User input: " + userInput);
+        LOGGER.info("User input: {}", userInput);
 
         if (Objects.isNull(userRequestData)) {
           userRequestData = new StringBuilder();

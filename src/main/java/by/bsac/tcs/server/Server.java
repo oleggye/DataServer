@@ -35,7 +35,7 @@ public class Server {
     manager.init();
 
     try (ServerSocket serverSocket = new ServerSocket(port)) {
-      LOGGER.info(String.format("Server is listening on %d port", port));
+      LOGGER.info("Server is listening on {} port", port);
 
       Thread currentThread = Thread.currentThread();
 //TODO: don't know if this is ok
