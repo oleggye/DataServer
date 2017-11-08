@@ -29,7 +29,7 @@ public class Server {
 
   public void start() {
     //init manager
-    LOGGER.info("Starting server......");
+    LOGGER.info("Starting by.bsac.tcs.server......");
 
     LOGGER.info("Initialize manager......");
     manager.init();

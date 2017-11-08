@@ -9,7 +9,7 @@ public class Application {
   private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
   public static void main(String[] args) {
-    LOGGER.info("Starting server application......");
+    LOGGER.info("Starting by.bsac.tcs.server application......");
     testInArguments(args);
 
     final int portNumber = parsePortNumber(args[0]);
@@ -37,7 +37,7 @@ public class Application {
   }
 
   private static void urgentlyStopServer() {
-    LOGGER.error("Halt server!");
+    LOGGER.error("Halt by.bsac.tcs.server!");
     System.exit(1);
   }
 }
