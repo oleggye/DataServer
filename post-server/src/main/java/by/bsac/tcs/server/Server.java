@@ -42,11 +42,11 @@ public class Server {
       while (!currentThread.isInterrupted()) {
         Socket clientSocket = serverSocket.accept();
 
-        LOGGER.info("Processing new request....");
+        LOGGER.info("Processing new process....");
         manager.manage(clientSocket);
       }
     } catch (IOException e) {
-      LOGGER.error("An Exception occurred when trying to manage incoming request");
+      LOGGER.error("An Exception occurred when trying to manage incoming process");
       LOGGER.error(e.getMessage());
     } finally {
       manager.shutdown();

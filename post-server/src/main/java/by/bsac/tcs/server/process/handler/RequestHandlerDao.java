@@ -1,6 +1,6 @@
-package by.bsac.tcs.server.request.handler;
+package by.bsac.tcs.server.process.handler;
 
-import by.bsac.tcs.server.request.handler.impl.RequestHandlerImpl;
+import by.bsac.tcs.server.process.handler.impl.RequestHandlerImpl;
 import java.net.Socket;
 
 public class RequestHandlerDao {

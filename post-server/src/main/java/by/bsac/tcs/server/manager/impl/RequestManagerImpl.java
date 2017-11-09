@@ -1,7 +1,7 @@
 package by.bsac.tcs.server.manager.impl;
 
-import by.bsac.tcs.server.request.handler.RequestHandler;
-import by.bsac.tcs.server.request.handler.RequestHandlerDao;
+import by.bsac.tcs.server.process.handler.RequestHandler;
+import by.bsac.tcs.server.process.handler.RequestHandlerDao;
 import java.net.Socket;
 
 //TODO: ADD LOGGING

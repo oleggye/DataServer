@@ -1,4 +1,4 @@
-package by.bsac.tcs.server.request.parser.impl;
+package by.bsac.tcs.server.process.parser.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -8,9 +8,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import by.bsac.tcs.server.request.Request;
-import by.bsac.tcs.server.request.RequestBuilder;
-import by.bsac.tcs.server.request.parser.ProtocolParser;
+import by.bsac.tcs.server.model.Request;
+import by.bsac.tcs.server.model.RequestBuilder;
+import by.bsac.tcs.server.process.parser.ProtocolParser;
 import java.io.InputStream;
 import java.net.Socket;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package by.bsac.tcs.server.request.handler;
+package by.bsac.tcs.server.process.handler;
 
 public interface RequestHandler extends Runnable {
 

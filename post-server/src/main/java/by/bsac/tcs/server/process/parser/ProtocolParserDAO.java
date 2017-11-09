@@ -1,6 +1,6 @@
-package by.bsac.tcs.server.request.parser;
+package by.bsac.tcs.server.process.parser;
 
-import by.bsac.tcs.server.request.parser.impl.CustomProtocolParser;
+import by.bsac.tcs.server.process.parser.impl.CustomProtocolParser;
 
 public class ProtocolParserDAO {
 

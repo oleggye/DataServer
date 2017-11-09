@@ -1,6 +1,6 @@
-package by.bsac.tcs.server.request.parser;
+package by.bsac.tcs.server.process.parser;
 
-import by.bsac.tcs.server.request.Request;
+import by.bsac.tcs.server.model.Request;
 import java.net.Socket;
 
 public interface ProtocolParser {

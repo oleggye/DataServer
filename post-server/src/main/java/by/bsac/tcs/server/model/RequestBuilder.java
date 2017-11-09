@@ -1,4 +1,4 @@
-package by.bsac.tcs.server.request;
+package by.bsac.tcs.server.model;
 
 import java.util.HashMap;
 import java.util.Map;

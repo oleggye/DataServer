@@ -1,11 +1,11 @@
-package by.bsac.tcs.server.request.handler.impl;
+package by.bsac.tcs.server.process.handler.impl;
 
-import by.bsac.tcs.server.request.Request;
-import by.bsac.tcs.server.request.handler.RequestHandler;
-import by.bsac.tcs.server.request.handler.RequestHandlerException;
-import by.bsac.tcs.server.request.parser.ProtocolParseException;
-import by.bsac.tcs.server.request.parser.ProtocolParser;
-import by.bsac.tcs.server.request.parser.ProtocolParserDAO;
+import by.bsac.tcs.server.model.Request;
+import by.bsac.tcs.server.process.handler.RequestHandler;
+import by.bsac.tcs.server.process.handler.RequestHandlerException;
+import by.bsac.tcs.server.process.parser.ProtocolParseException;
+import by.bsac.tcs.server.process.parser.ProtocolParser;
+import by.bsac.tcs.server.process.parser.ProtocolParserDAO;
 import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ public class RequestHandlerImpl implements RequestHandler {
       Request request = parser.parse(clientSocket);
       LOGGER.info("Request was processed");
     } catch (ProtocolParseException e) {
-      String message = "Can't manage client request";
+      String message = "Can't manage client process";
       LOGGER.error(message, e);
       throw new RequestHandlerException(message, e);
     }

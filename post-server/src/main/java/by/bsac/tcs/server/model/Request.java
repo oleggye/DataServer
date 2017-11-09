@@ -1,9 +1,11 @@
-package by.bsac.tcs.server.request;
+package by.bsac.tcs.server.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Request {
+
+  private RequestType requestType;
 
   private final Map<String, String> paramMap = new HashMap<>();
 
@@ -26,11 +28,25 @@ public class Request {
 
     Request request = (Request) o;
 
+    if (requestType != request.requestType) {
+      return false;
+    }
     return paramMap.equals(request.paramMap);
   }
 
   @Override
   public int hashCode() {
-    return paramMap.hashCode();
+    int result = requestType != null ? requestType.hashCode() : 0;
+    result = 31 * result + paramMap.hashCode();
+    return result;
+  }
+
+  public RequestType getRequestType() {
+
+    return requestType;
+  }
+
+  public void setRequestType(RequestType requestType) {
+    this.requestType = requestType;
   }
 }

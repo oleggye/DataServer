@@ -1,8 +1,8 @@
-package by.bsac.tcs.server.request.parser.impl;
+package by.bsac.tcs.server.process.parser.impl;
 
-import by.bsac.tcs.server.request.Request;
-import by.bsac.tcs.server.request.parser.ProtocolParseException;
-import by.bsac.tcs.server.request.parser.ProtocolParser;
+import by.bsac.tcs.server.model.Request;
+import by.bsac.tcs.server.process.parser.ProtocolParseException;
+import by.bsac.tcs.server.process.parser.ProtocolParser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

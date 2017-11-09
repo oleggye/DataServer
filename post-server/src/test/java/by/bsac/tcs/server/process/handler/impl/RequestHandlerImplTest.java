@@ -1,4 +1,4 @@
-package by.bsac.tcs.server.request.handler.impl;
+package by.bsac.tcs.server.process.handler.impl;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -6,10 +6,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import by.bsac.tcs.server.request.Request;
-import by.bsac.tcs.server.request.handler.RequestHandlerException;
-import by.bsac.tcs.server.request.parser.ProtocolParseException;
-import by.bsac.tcs.server.request.parser.ProtocolParser;
+import by.bsac.tcs.server.model.Request;
+import by.bsac.tcs.server.process.handler.RequestHandlerException;
+import by.bsac.tcs.server.process.parser.ProtocolParseException;
+import by.bsac.tcs.server.process.parser.ProtocolParser;
 import java.net.Socket;
 import org.junit.Before;
 import org.junit.Test;

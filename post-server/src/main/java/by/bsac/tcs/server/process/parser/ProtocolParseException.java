@@ -1,4 +1,4 @@
-package by.bsac.tcs.server.request.parser;
+package by.bsac.tcs.server.process.parser;
 
 public class ProtocolParseException extends Exception {
 

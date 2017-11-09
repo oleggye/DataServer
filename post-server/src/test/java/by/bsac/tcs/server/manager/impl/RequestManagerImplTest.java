@@ -8,8 +8,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import by.bsac.tcs.server.request.handler.RequestHandler;
-import by.bsac.tcs.server.request.handler.RequestHandlerDao;
+import by.bsac.tcs.server.process.handler.RequestHandler;
+import by.bsac.tcs.server.process.handler.RequestHandlerDao;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import org.junit.Before;
