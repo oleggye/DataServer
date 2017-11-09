@@ -25,7 +25,7 @@ public class RequestTypeTest {
   @Test
   public void shouldReturnHasOpenedRequestTypeByTypeCodeTwo() throws Exception {
     final int typeCode = 2;
-    final RequestType expectedRequestType = RequestType.hasOpened;
+    final RequestType expectedRequestType = RequestType.HAS_OPENED;
 
     getRequestTypeAndAssert(typeCode, expectedRequestType);
   }
@@ -33,7 +33,7 @@ public class RequestTypeTest {
   @Test
   public void shouldReturnHasClosedRequestTypeByTypeCodeThree() throws Exception {
     final int typeCode = 3;
-    final RequestType expectedRequestType = RequestType.hasClosed;
+    final RequestType expectedRequestType = RequestType.HAS_CLOSED;
 
     getRequestTypeAndAssert(typeCode, expectedRequestType);
   }

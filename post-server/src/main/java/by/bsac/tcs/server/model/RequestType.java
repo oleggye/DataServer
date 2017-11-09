@@ -3,7 +3,7 @@ package by.bsac.tcs.server.model;
 import java.util.Objects;
 
 public enum RequestType {
-  REGISTRATION(0), KEEP_ALIVE(1), hasOpened(2), hasClosed(3), STATE_CHANGED(4);
+  REGISTRATION(0), KEEP_ALIVE(1), HAS_OPENED(2), HAS_CLOSED(3), STATE_CHANGED(4);
 
   private int typeCode;
 
