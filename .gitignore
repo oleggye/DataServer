@@ -23,4 +23,7 @@ hs_err_pid*
 /.idea/
 .idea/
 dataserver.iml
+/data-by.bsac.tcs.server.iml
 /data-server.iml
+/web-server/web-server.iml
+/post-server/post-server.iml
