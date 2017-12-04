@@ -8,6 +8,9 @@ import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Custom TCP server
+ */
 public class Server {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(Server.class);
@@ -27,6 +30,9 @@ public class Server {
     this.manager = manager;
   }
 
+  /**
+   * Start server
+   */
   public void start() {
     //init manager
     LOGGER.info("Starting server......");
@@ -38,7 +44,7 @@ public class Server {
       LOGGER.info("Server is listening on {} port", port);
 
       Thread currentThread = Thread.currentThread();
-//TODO: don't know if this is ok
+      //TODO: don't know if this is ok
       while (!currentThread.isInterrupted()) {
         Socket clientSocket = serverSocket.accept();
 

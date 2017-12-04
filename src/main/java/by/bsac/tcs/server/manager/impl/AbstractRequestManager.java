@@ -1,6 +1,7 @@
 package by.bsac.tcs.server.manager.impl;
 
 import by.bsac.tcs.server.manager.RequestManager;
+import by.bsac.tcs.server.manager.exception.RequestManagerException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +32,9 @@ public abstract class AbstractRequestManager implements RequestManager {
       try {
         pool.awaitTermination(TIME_OUT_SECONDS, TimeUnit.SECONDS);
       } catch (InterruptedException e) {
-        LOGGER.error("An error occurred while shutting down the pool!", e);
+        final String errorMessage = "An error occurred while shutting down the pool!";
+        LOGGER.error(errorMessage, e);
+        throw new RequestManagerException(errorMessage, e);
       } finally {
         pool.shutdownNow();
       }
