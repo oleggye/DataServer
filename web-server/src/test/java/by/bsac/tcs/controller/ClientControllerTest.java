@@ -24,9 +24,20 @@ public class ClientControllerTest {
   private MockMvc mvc;
 
   @Test
-  public void getDeviceStatus() throws Exception {
+  public void shouldGetDeviceStatus() throws Exception {
     mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(content().string(equalTo("OK!")));
   }
+
+  @Test
+  public void shouldAddNewClient() throws Exception {
+    mvc.perform(MockMvcRequestBuilders.post("/clients")
+        .param("id","123")
+        .param("login", "admin")
+        .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(content().string(equalTo("OK!")));
+  }
+
 }
