@@ -1,36 +1,36 @@
 package by.bsac.tcs.server.model;
 
-import java.util.Objects;
+import static java.util.Objects.isNull;
 
-public enum RequestType {
+public enum Event {
   REGISTRATION(0), KEEP_ALIVE(1), HAS_OPENED(2), HAS_CLOSED(3), STATE_CHANGED(4);
 
   private int typeCode;
 
 
-  RequestType(int typeCode) {
-    this.typeCode = typeCode;
+  Event(int eventCode) {
+    this.typeCode = eventCode;
   }
 
   /**
-   * Converts to {@link RequestType} instance according its typeCode value
+   * Converts to {@link Event} instance according its eventCode value
    *
-   * @param typeCode protocol representation of {@link RequestType}
-   * @return instance of {@link RequestType}
+   * @param eventCode protocol representation of {@link Event}
+   * @return instance of {@link Event}
    */
-  public static RequestType getRequestType(int typeCode) {
-    RequestType requestType = null;
+  public static Event getEvent(int eventCode) {
+    Event event = null;
 
-    for (RequestType element : RequestType.values()) {
-      if (element.typeCode == typeCode) {
-        requestType = element;
+    for (Event element : Event.values()) {
+      if (element.typeCode == eventCode) {
+        event = element;
       }
     }
 
-    if (Objects.isNull(requestType)) {
+    if (isNull(event)) {
       throw new IllegalArgumentException(
-          String.format("No such requestType constant for typeCode = %d", typeCode));
+          String.format("No such event constant for eventCode = %d", eventCode));
     }
-    return requestType;
+    return event;
   }
 }

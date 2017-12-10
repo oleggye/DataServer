@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Request {
 
-  private RequestType requestType;
+  private Event event;
 
   private final Map<String, String> paramMap = new HashMap<>();
 
@@ -28,7 +28,7 @@ public class Request {
 
     Request request = (Request) o;
 
-    if (requestType != request.requestType) {
+    if (event != request.event) {
       return false;
     }
     return paramMap.equals(request.paramMap);
@@ -36,17 +36,17 @@ public class Request {
 
   @Override
   public int hashCode() {
-    int result = requestType != null ? requestType.hashCode() : 0;
+    int result = event != null ? event.hashCode() : 0;
     result = 31 * result + paramMap.hashCode();
     return result;
   }
 
-  public RequestType getRequestType() {
+  public Event getEvent() {
 
-    return requestType;
+    return event;
   }
 
-  public void setRequestType(RequestType requestType) {
-    this.requestType = requestType;
+  public void setEvent(Event event) {
+    this.event = event;
   }
 }
