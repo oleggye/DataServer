@@ -9,45 +9,45 @@ public class EventTest {
   @Test
   public void shouldReturnRegistrationRequestTypeByTypeCodeZero() throws Exception {
     final int typeCode = 0;
-    final Event expectedEvent = Event.REGISTRATION;
+    final RequestType expectedRequestType = RequestType.REGISTRATION;
 
-    getRequestTypeAndAssert(typeCode, expectedEvent);
+    getRequestTypeAndAssert(typeCode, expectedRequestType);
   }
 
   @Test
   public void shouldReturnKeepAliveRequestTypeByTypeCodeOne() throws Exception {
     final int typeCode = 1;
-    final Event expectedEvent = Event.KEEP_ALIVE;
+    final RequestType expectedRequestType = RequestType.KEEP_ALIVE;
 
-    getRequestTypeAndAssert(typeCode, expectedEvent);
+    getRequestTypeAndAssert(typeCode, expectedRequestType);
   }
 
   @Test
   public void shouldReturnHasOpenedRequestTypeByTypeCodeTwo() throws Exception {
     final int typeCode = 2;
-    final Event expectedEvent = Event.HAS_OPENED;
+    final RequestType expectedRequestType = RequestType.HAS_OPENED;
 
-    getRequestTypeAndAssert(typeCode, expectedEvent);
+    getRequestTypeAndAssert(typeCode, expectedRequestType);
   }
 
   @Test
   public void shouldReturnHasClosedRequestTypeByTypeCodeThree() throws Exception {
     final int typeCode = 3;
-    final Event expectedEvent = Event.HAS_CLOSED;
+    final RequestType expectedRequestType = RequestType.HAS_CLOSED;
 
-    getRequestTypeAndAssert(typeCode, expectedEvent);
+    getRequestTypeAndAssert(typeCode, expectedRequestType);
   }
 
   @Test
   public void shouldReturnHasClosedRequestTypeByTypeCodeTwo() throws Exception {
     final int typeCode = 4;
-    final Event expectedEvent = Event.STATE_CHANGED;
+    final RequestType expectedRequestType = RequestType.STATE_CHANGED;
 
-    getRequestTypeAndAssert(typeCode, expectedEvent);
+    getRequestTypeAndAssert(typeCode, expectedRequestType);
   }
 
-  private void getRequestTypeAndAssert(final int typeCode, final Event expectedEvent) {
-    final Event takenEvent = Event.getRequestType(typeCode);
-    assertEquals(expectedEvent, takenEvent);
+  private void getRequestTypeAndAssert(final int typeCode, final RequestType expectedRequestType) {
+    final RequestType takenRequestType = RequestType.getRequestType(typeCode);
+    assertEquals(expectedRequestType, takenRequestType);
   }
 }

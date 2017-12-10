@@ -1,4 +1,4 @@
-package by.bsac.tcs.server.process.handler;
+package by.bsac.tcs.server.process.handler.exception;
 
 public class RequestHandlerException extends RuntimeException {
 

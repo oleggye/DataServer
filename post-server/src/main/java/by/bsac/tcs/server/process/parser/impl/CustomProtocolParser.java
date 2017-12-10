@@ -1,7 +1,7 @@
 package by.bsac.tcs.server.process.parser.impl;
 
 import by.bsac.tcs.server.model.Request;
-import by.bsac.tcs.server.process.parser.ProtocolParseException;
+import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
 import by.bsac.tcs.server.process.parser.ProtocolParser;
 import java.io.BufferedReader;
 import java.io.IOException;

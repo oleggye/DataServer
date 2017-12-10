@@ -7,8 +7,8 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import by.bsac.tcs.server.model.Request;
-import by.bsac.tcs.server.process.handler.RequestHandlerException;
-import by.bsac.tcs.server.process.parser.ProtocolParseException;
+import by.bsac.tcs.server.process.handler.exception.RequestHandlerException;
+import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
 import by.bsac.tcs.server.process.parser.ProtocolParser;
 import java.net.Socket;
 import org.junit.Before;

@@ -1,16 +1,18 @@
-package by.bsac.tcs.server.model;
+package by.bsac.tcs.logic.model;
+
+import by.bsac.tcs.server.model.RequestType;
 
 public class EventLog {
 
   private long id;
   private long postBoxId;
-  private Event event;
+  private RequestType requestType;
 
-  public EventLog(long id, long postBoxId, Event event) {
+  public EventLog(long id, long postBoxId, RequestType requestType) {
 
     this.id = id;
     this.postBoxId = postBoxId;
-    this.event = event;
+    this.requestType = requestType;
   }
 
   public long getId() {
@@ -29,12 +31,12 @@ public class EventLog {
     this.postBoxId = postBoxId;
   }
 
-  public Event getEvent() {
-    return event;
+  public RequestType getRequestType() {
+    return requestType;
   }
 
-  public void setEvent(Event event) {
-    this.event = event;
+  public void setRequestType(RequestType requestType) {
+    this.requestType = requestType;
   }
 
   @Override

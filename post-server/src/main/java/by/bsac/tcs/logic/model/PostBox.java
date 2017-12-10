@@ -1,4 +1,4 @@
-package by.bsac.tcs.server.model;
+package by.bsac.tcs.logic.model;
 
 public class PostBox {
 
