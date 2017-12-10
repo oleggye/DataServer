@@ -11,7 +11,7 @@ public final class LogMessageSharper {
   private LogMessageSharper() {
   }
 
-  public static String formIncommingUserLogMessage(final Socket socket) {
+  public static String formIncomingUserLogMessage(final Socket socket) {
     InetAddress address = socket.getLocalAddress();
     String hostAddress = address.getHostAddress();
     int port = socket.getLocalPort();

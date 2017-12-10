@@ -2,19 +2,19 @@ package by.bsac.tcs.server.manager;
 
 import by.bsac.tcs.server.manager.impl.RequestManagerImpl;
 
-public class RequestManagerDao {
+public class RequestManagerFactory {
 
-  private static final RequestManagerDao INSTANCE = new RequestManagerDao();
-  private static final RequestManager pool = new RequestManagerImpl();
+  private static final RequestManagerFactory INSTANCE = new RequestManagerFactory();
+  private static final RequestManager REQUEST_MANAGER = new RequestManagerImpl();
 
-  private RequestManagerDao() {
+  private RequestManagerFactory() {
   }
 
-  public static RequestManagerDao getInstance() {
+  public static RequestManagerFactory getInstance() {
     return INSTANCE;
   }
 
   public RequestManager getManager() {
-    return pool;
+    return REQUEST_MANAGER;
   }
 }

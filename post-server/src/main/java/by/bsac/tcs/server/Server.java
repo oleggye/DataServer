@@ -1,7 +1,7 @@
 package by.bsac.tcs.server;
 
 import by.bsac.tcs.server.manager.RequestManager;
-import by.bsac.tcs.server.manager.RequestManagerDao;
+import by.bsac.tcs.server.manager.RequestManagerFactory;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,7 +15,7 @@ public class Server {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(Server.class);
 
-  private static final RequestManagerDao DAO = RequestManagerDao.getInstance();
+  private static final RequestManagerFactory DAO = RequestManagerFactory.getInstance();
 
   private final int port;
   private final RequestManager manager;

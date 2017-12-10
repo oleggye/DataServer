@@ -3,14 +3,14 @@ package by.bsac.tcs.server.process.handler;
 import by.bsac.tcs.server.process.handler.impl.RequestHandlerImpl;
 import java.net.Socket;
 
-public class RequestHandlerDao {
+public class RequestHandlerFactory {
 
-  private static final RequestHandlerDao INSTANCE = new RequestHandlerDao();
+  private static final RequestHandlerFactory INSTANCE = new RequestHandlerFactory();
 
-  private RequestHandlerDao() {
+  private RequestHandlerFactory() {
   }
 
-  public static RequestHandlerDao getInstance() {
+  public static RequestHandlerFactory getInstance() {
     return INSTANCE;
   }
 

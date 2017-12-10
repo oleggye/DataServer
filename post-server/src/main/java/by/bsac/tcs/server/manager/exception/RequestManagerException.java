@@ -1,4 +1,4 @@
-package by.bsac.tcs.server.exception;
+package by.bsac.tcs.server.manager.exception;
 
 public class RequestManagerException extends RuntimeException {
 
