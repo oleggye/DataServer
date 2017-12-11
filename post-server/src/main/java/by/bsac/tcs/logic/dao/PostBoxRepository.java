@@ -1,4 +1,4 @@
-package by.bsac.tcs.logic.repository;
+package by.bsac.tcs.logic.dao;
 
 public interface PostBoxRepository {
 
