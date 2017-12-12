@@ -1,4 +1,4 @@
-package by.bsac.tcs.logic.controller.exception;
+package by.bsac.tcs.domain.controller.exception;
 
 public class ControllerException extends Exception {
 

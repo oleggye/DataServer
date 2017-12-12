@@ -1,6 +1,6 @@
-package by.bsac.tcs.logic.service.exception;
+package by.bsac.tcs.service.exception;
 
-public class PostBoxServiceException extends Exception {
+public class PostBoxServiceException extends ServiceException {
 
   public PostBoxServiceException(String message) {
     super(message);

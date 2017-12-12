@@ -1,4 +1,4 @@
-package by.bsac.tcs.logic.dao.exception;
+package by.bsac.tcs.domain.dao.exception;
 
 public class PostBoxRepositoryException extends Exception {
 

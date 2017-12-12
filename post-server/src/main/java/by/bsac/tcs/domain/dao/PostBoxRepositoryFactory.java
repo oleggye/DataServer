@@ -1,7 +1,4 @@
-package by.bsac.tcs.logic.dao;
-
-import by.bsac.tcs.logic.service.PostBoxService;
-import by.bsac.tcs.logic.service.impl.PostBoxServiceImpl;
+package by.bsac.tcs.domain.dao;
 
 public class PostBoxRepositoryFactory {
 
