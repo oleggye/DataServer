@@ -7,8 +7,13 @@ public class EventLog {
   private Event event;
   private String state;
 
-  public EventLog(long id, long postBoxId, Event event, String state) {
+  public EventLog(long postBoxId, Event event, String state) {
+    this.postBoxId = postBoxId;
+    this.event = event;
+    this.state = state;
+  }
 
+  public EventLog(long id, long postBoxId, Event event, String state) {
     this.id = id;
     this.postBoxId = postBoxId;
     this.event = event;

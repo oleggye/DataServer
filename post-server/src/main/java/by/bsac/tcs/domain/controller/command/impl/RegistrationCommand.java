@@ -15,7 +15,7 @@ public class RegistrationCommand implements Command {
 
   @Override
   public void execute(Request request) throws CommandException {
-    LOGGER.info("RegistrationCommand is executing...");
+    LOGGER.info("{} is executing...", this.getClass().getSimpleName());
     throw new UnsupportedOperationException("Method temporary is not implemented!");
   }
 }

@@ -11,7 +11,7 @@ public class KeepAliveCommand implements by.bsac.tcs.domain.controller.command.C
 
   @Override
   public void execute(Request request) throws CommandException {
-    LOGGER.info("KeepAliveCommand is executing...");
+    LOGGER.info("{} is executing...", this.getClass().getSimpleName());
     throw new UnsupportedOperationException("Method temporary is not implemented!");
   }
 }

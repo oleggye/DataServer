@@ -22,7 +22,7 @@ public class EventLogResultSetHandler implements ResultSetHandler<EventLog> {
       final long idPostBox = resultSet.getLong(ID_POST_BOX);
 
       final int idEvent = resultSet.getInt(ID_EVENT);
-      final Event event = Event.getRequestType(idEvent);
+      final Event event = Event.getEvent(idEvent);
 
       final String state = resultSet.getString(STATE);
 

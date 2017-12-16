@@ -13,14 +13,16 @@ public class EventController implements Controller {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EventController.class);
 
-  private static final String EVENT_KEY_CONST = "event";
+  //private static final String EVENT_KEY_CONST = "event";
   private static final CommandProvider provider = CommandProvider.getInstance();
+
+  //FIXME: this is used for simple implementation
+  private static final String EVENT_HARDCODED_NAME = "LOG";
 
   @Override
   public void process(Request request) throws ControllerException {
-    final String eventValue = request.getRequestParam(EVENT_KEY_CONST);
 
-    final Command command = provider.getCommand(eventValue);
+    final Command command = provider.getCommand(EVENT_HARDCODED_NAME);
     try {
       command.execute(request);
     } catch (CommandException e) {

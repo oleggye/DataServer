@@ -4,7 +4,7 @@ import static java.util.Objects.isNull;
 
 public enum Event {
 
-  REGISTRATION(1), KEEP_ALIVE(2), HAS_OPENED(3), HAS_CLOSED(4), QUANTITY_CHANGED(5);
+  REGISTRATION(1), KEEP_ALIVE(2), HAS_OPENED(3), HAS_CLOSED(4), QUANTITY_CHANGED(5), LOG(6);
 
   private int typeCode;
 
@@ -19,7 +19,7 @@ public enum Event {
    * @param requestCode protocol representation of {@link Event}
    * @return instance of {@link Event}
    */
-  public static Event getRequestType(int requestCode) {
+  public static Event getEvent(int requestCode) {
     Event requestType = null;
 
     for (Event element : Event.values()) {

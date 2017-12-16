@@ -1,11 +1,14 @@
 package by.bsac.tcs.domain.controller.command;
 
+import by.bsac.tcs.domain.controller.command.impl.HasClosedCommand;
+import by.bsac.tcs.domain.controller.command.impl.HasOpenedCommand;
 import by.bsac.tcs.domain.controller.command.impl.KeepAliveCommand;
+import by.bsac.tcs.domain.controller.command.impl.LogCommand;
+import by.bsac.tcs.domain.controller.command.impl.QuantityChangedCommand;
 import by.bsac.tcs.domain.controller.command.impl.RegistrationCommand;
 import by.bsac.tcs.domain.controller.command.impl.WrongCommand;
 import by.bsac.tcs.domain.model.Event;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 import org.slf4j.Logger;
@@ -20,14 +23,15 @@ public class CommandProvider {
   private final Command wrongCommand = new WrongCommand();
 
   private CommandProvider() {
-    final Map<Event, Command> map = new HashMap<>();
+    final Map<Event, Command> map = new EnumMap<>(Event.class);
     map.put(Event.REGISTRATION, new RegistrationCommand());
     map.put(Event.KEEP_ALIVE, new KeepAliveCommand());
     map.put(Event.HAS_OPENED, new HasOpenedCommand());
     map.put(Event.HAS_CLOSED, new HasClosedCommand());
     map.put(Event.QUANTITY_CHANGED, new QuantityChangedCommand());
+    map.put(Event.LOG, new LogCommand());
 
-    commandStore = Collections.unmodifiableMap(map);
+    commandStore = map;
   }
 
   public static CommandProvider getInstance() {
@@ -56,6 +60,9 @@ public class CommandProvider {
   private static class SingletonHolder {
 
     private static final CommandProvider INSTANCE = new CommandProvider();
+
+    private SingletonHolder() {
+    }
 
     public static CommandProvider getInstance() {
       return INSTANCE;
