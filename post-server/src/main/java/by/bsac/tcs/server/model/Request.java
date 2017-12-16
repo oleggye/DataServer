@@ -3,6 +3,7 @@ package by.bsac.tcs.server.model;
 import java.util.HashMap;
 import java.util.Map;
 
+//FIXME: BL IS CHANGED!
 public class Request {
 
   private RequestType requestType;

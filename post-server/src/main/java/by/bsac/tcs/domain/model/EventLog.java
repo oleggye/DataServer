@@ -48,7 +48,40 @@ public class EventLog {
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    EventLog eventLog = (EventLog) o;
+
+    if (id != eventLog.id) {
+      return false;
+    }
+    if (postBoxId != eventLog.postBoxId) {
+      return false;
+    }
+    if (event != eventLog.event) {
+      return false;
+    }
+    return state != null ? state.equals(eventLog.state) : eventLog.state == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = (int) (id ^ (id >>> 32));
+    result = 31 * result + (int) (postBoxId ^ (postBoxId >>> 32));
+    result = 31 * result + (event != null ? event.hashCode() : 0);
+    result = 31 * result + (state != null ? state.hashCode() : 0);
+    return result;
+  }
+
+  @Override
   public String toString() {
+
     return "EventLog{" +
         "id=" + id +
         ", postBoxId=" + postBoxId +
