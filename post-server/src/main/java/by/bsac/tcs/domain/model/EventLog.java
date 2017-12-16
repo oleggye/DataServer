@@ -5,12 +5,14 @@ public class EventLog {
   private long id;
   private long postBoxId;
   private Event event;
+  private String state;
 
-  public EventLog(long id, long postBoxId, Event event) {
+  public EventLog(long id, long postBoxId, Event event, String state) {
 
     this.id = id;
     this.postBoxId = postBoxId;
     this.event = event;
+    this.state = state;
   }
 
   public long getId() {
@@ -37,8 +39,21 @@ public class EventLog {
     this.event = event;
   }
 
+  public String getState() {
+    return state;
+  }
+
+  public void setState(String state) {
+    this.state = state;
+  }
+
   @Override
   public String toString() {
-    return super.toString();
+    return "EventLog{" +
+        "id=" + id +
+        ", postBoxId=" + postBoxId +
+        ", event=" + event +
+        ", state='" + state + '\'' +
+        '}';
   }
 }
