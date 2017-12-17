@@ -1,11 +1,11 @@
 package by.bsac.tcs.repository;
 
 import by.bsac.tcs.model.Client;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClientRepository extends MongoRepository<Client, String> {
+public interface ClientRepository extends CrudRepository<Client, String> {
 
-  public Client findByLogin(String login);
+  Client findByLogin(String login);
 }

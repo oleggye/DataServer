@@ -12,4 +12,15 @@ public class PostBoxServiceImpl implements PostBoxService {
       throws PostBoxServiceException, ServiceValidationException {
     throw new UnsupportedOperationException("Not implemented!");
   }
+
+  @Override
+  public PostBox fetchPostBox(long id) throws PostBoxServiceException, ServiceValidationException {
+    return null;
+  }
+
+  @Override
+  public void removePostBox(PostBox postBox)
+      throws PostBoxServiceException, ServiceValidationException {
+
+  }
 }

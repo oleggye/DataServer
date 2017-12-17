@@ -1,9 +1,23 @@
 package by.bsac.tcs.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class PostBox {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   private String address;
+
+  public PostBox(long id, String address) {
+
+    this.id = id;
+    this.address = address;
+  }
 
   public long getId() {
     return id;
@@ -18,12 +32,6 @@ public class PostBox {
   }
 
   public void setAddress(String address) {
-    this.address = address;
-  }
-
-  public PostBox(long id, String address) {
-
-    this.id = id;
     this.address = address;
   }
 

@@ -48,6 +48,8 @@ public class WebServerApplication extends WebMvcConfigurerAdapter {
       logger.info("findByLogin admin: " + admin);
 
 
+
+
      /* String[] beanNames = ctx.getBeanDefinitionNames();
       Arrays.sort(beanNames);
       for (String beanName : beanNames) {

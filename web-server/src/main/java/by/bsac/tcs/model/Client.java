@@ -1,6 +1,11 @@
 package by.bsac.tcs.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Client {
 
   private String id;
@@ -14,6 +19,8 @@ public class Client {
     this.login = login;
   }
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   public String getId() {
     return id;
   }
