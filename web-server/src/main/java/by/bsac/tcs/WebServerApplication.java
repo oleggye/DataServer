@@ -1,8 +1,7 @@
 package by.bsac.tcs;
 
-import by.bsac.tcs.model.Client;
+import by.bsac.tcs.model.User;
 import by.bsac.tcs.repository.ClientRepository;
-import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 @SpringBootApplication
 public class WebServerApplication extends WebMvcConfigurerAdapter {
@@ -40,11 +33,11 @@ public class WebServerApplication extends WebMvcConfigurerAdapter {
       clientRepository.deleteAll();
 
 
-      Client client = new Client("123","admin");
-      logger.info("save client: " + client);
-      clientRepository.save(client);
+      User user = new User("123","admin");
+      logger.info("save user: " + user);
+      clientRepository.save(user);
 
-      Client admin = clientRepository.findByLogin("admin");
+      User admin = clientRepository.findByLogin("admin");
       logger.info("findByLogin admin: " + admin);
 
 

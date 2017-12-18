@@ -1,6 +1,6 @@
 package by.bsac.tcs.controller;
 
-import by.bsac.tcs.model.Client;
+import by.bsac.tcs.model.User;
 import by.bsac.tcs.repository.ClientRepository;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +25,14 @@ public class ClientController {
 
   @RequestMapping(value = "/clients", method = RequestMethod.POST)
   public String addNewClient(@RequestParam String id, @RequestParam String login) {
-    Client client = new Client(id, login);
-    repository.save(client);
+    User user = new User(id, login);
+    repository.save(user);
     return "saved!";
   }
 
   @RequestMapping(value = "/clients/{login}")
-  public Client getClientByLogin(@PathVariable String login) {
-    Client client = repository.findByLogin(login);
-    return client;
+  public User getClientByLogin(@PathVariable String login) {
+    User user = repository.findByLogin(login);
+    return user;
   }
 }
