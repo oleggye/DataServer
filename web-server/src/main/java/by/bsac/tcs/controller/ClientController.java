@@ -25,8 +25,8 @@ public class ClientController {
 
   @RequestMapping(value = "/clients", method = RequestMethod.POST)
   public String addNewClient(@RequestParam String id, @RequestParam String login) {
-    User user = new User(id, login);
-    repository.save(user);
+    /*User user = new User(id, login);
+    repository.save(user);*/
     return "saved!";
   }
 

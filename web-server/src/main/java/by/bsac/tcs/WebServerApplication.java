@@ -33,9 +33,9 @@ public class WebServerApplication extends WebMvcConfigurerAdapter {
       clientRepository.deleteAll();
 
 
-      User user = new User("123","admin");
+      /*User user = new User("123","admin");
       logger.info("save user: " + user);
-      clientRepository.save(user);
+      clientRepository.save(user);*/
 
       User admin = clientRepository.findByLogin("admin");
       logger.info("findByLogin admin: " + admin);
