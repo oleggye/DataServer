@@ -5,17 +5,23 @@ import java.net.Socket;
 
 public class RequestHandlerFactory {
 
-  private static final RequestHandlerFactory INSTANCE = new RequestHandlerFactory();
-
   private RequestHandlerFactory() {
   }
 
   public static RequestHandlerFactory getInstance() {
-    return INSTANCE;
+    return SingletonHolder.getInstance();
   }
 
-  public RequestHandler getRequestProcessor(Socket requestSocket) {
+  public RequestHandler getRequestHandler(Socket requestSocket) {
     return new RequestHandlerImpl(requestSocket);
   }
 
+  private static class SingletonHolder {
+
+    private static final RequestHandlerFactory INSTANCE = new RequestHandlerFactory();
+
+    public static RequestHandlerFactory getInstance() {
+      return INSTANCE;
+    }
+  }
 }

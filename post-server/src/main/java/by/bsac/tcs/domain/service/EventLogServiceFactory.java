@@ -7,14 +7,22 @@ public class EventLogServiceFactory {
   private EventLogServiceFactory() {
   }
 
-  private static final EventLogServiceFactory INSTANCE = new EventLogServiceFactory();
   private static final EventLogService service = new EventLogServiceImpl();
 
   public static EventLogServiceFactory getInstance() {
-    return INSTANCE;
+    return SingletonHolder.getInstance();
   }
 
   public EventLogService getEventLogService() {
     return service;
+  }
+
+  private static class SingletonHolder {
+
+    private static final EventLogServiceFactory INSTANCE = new EventLogServiceFactory();
+
+    public static EventLogServiceFactory getInstance() {
+      return INSTANCE;
+    }
   }
 }

@@ -8,15 +8,23 @@ public class EventLogDAOFactory {
   private EventLogDAOFactory() {
   }
 
-  private static final EventLogDAOFactory INSTANCE = new EventLogDAOFactory();
+  private static final EventLogDAO eventLogDao = new EventLogDAOImpl(
+      DataSourceHolder.getInstance().getDataSource());
 
-  private static final EventLogDAO eventLogDao = new EventLogDAOImpl(DataSourceHolder.getInstance().getDataSource());
-
-  public EventLogDAOFactory getInstance() {
-    return INSTANCE;
+  public static EventLogDAOFactory getInstance() {
+    return SingletonHolder.getInstance();
   }
 
   public EventLogDAO getDAO() {
     return eventLogDao;
+  }
+
+  private static class SingletonHolder {
+
+    private static final EventLogDAOFactory INSTANCE = new EventLogDAOFactory();
+
+    public static EventLogDAOFactory getInstance() {
+      return INSTANCE;
+    }
   }
 }

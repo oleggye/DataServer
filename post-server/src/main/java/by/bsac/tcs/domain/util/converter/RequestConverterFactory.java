@@ -11,7 +11,7 @@ public class RequestConverterFactory {
   }
 
   public static RequestConverterFactory getInstance() {
-    return SingletoneHolder.getInstance();
+    return SingletonHolder.getInstance();
   }
 
   public <T> RequestConverter<T> getConverter(Class<T> clazz) {
@@ -22,9 +22,12 @@ public class RequestConverterFactory {
     throw new IllegalArgumentException(message);
   }
 
-  private static class SingletoneHolder {
+  private static class SingletonHolder {
 
     private static final RequestConverterFactory INSTANCE = new RequestConverterFactory();
+
+    private SingletonHolder() {
+    }
 
     public static RequestConverterFactory getInstance() {
       return INSTANCE;

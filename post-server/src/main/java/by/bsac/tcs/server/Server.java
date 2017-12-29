@@ -58,4 +58,15 @@ public class Server {
       manager.shutdown();
     }
   }
+
+  public void stop() {
+    LOGGER.info("Stopping the server....");
+    manager.shutdown();
+    LOGGER.info("Stopping server thread....");
+    Thread currentThread = Thread.currentThread();
+    currentThread.interrupt();
+    if (currentThread.isInterrupted()) {
+      LOGGER.info("Server is successfully stopped....");
+    }
+  }
 }

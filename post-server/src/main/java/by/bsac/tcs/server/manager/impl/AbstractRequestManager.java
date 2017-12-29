@@ -27,6 +27,7 @@ public abstract class AbstractRequestManager implements RequestManager {
    * Method closes pool which process user's requests.
    */
   public void shutdown() {
+    LOGGER.info("Try to shutdown request manager....");
     if (pool != null && !pool.isTerminated()) {
       pool.shutdown();
       try {
@@ -41,5 +42,6 @@ public abstract class AbstractRequestManager implements RequestManager {
     } else {
       throw new IllegalStateException("Illegal manager state exception");
     }
+    LOGGER.info("Request manager is successfully shutdown....");
   }
 }

@@ -16,19 +16,25 @@ public class LogCommand implements Command {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(LogCommand.class);
 
-  private static final EventLogServiceFactory eventLogServiceFactory = EventLogServiceFactory
-      .getInstance();
-  private static final RequestConverterFactory requestConverterFactory = RequestConverterFactory
-      .getInstance();
+  private EventLogService logService;
+  private RequestConverter<EventLog> requestConverter;
+
+  public LogCommand() {
+    this.logService = EventLogServiceFactory.getInstance().getEventLogService();
+    this.requestConverter = RequestConverterFactory.getInstance().getConverter(EventLog.class);
+  }
+
+  public LogCommand(EventLogService logService,
+      RequestConverter<EventLog> requestConverter) {
+    this.logService = logService;
+    this.requestConverter = requestConverter;
+  }
 
   @Override
   public void execute(Request request) throws CommandException {
     LOGGER.info("{} is executing...", this.getClass().getSimpleName());
 
-    final EventLogService logService = eventLogServiceFactory.getEventLogService();
-    final RequestConverter<EventLog> converter = requestConverterFactory
-        .getConverter(EventLog.class);
-    final EventLog log = converter.convert(request);
+    final EventLog log = requestConverter.convert(request);
 
     try {
       logService.log(log);

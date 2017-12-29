@@ -9,7 +9,7 @@ public interface PostBoxService {
   void registration(PostBox postBox)
       throws PostBoxServiceException, ServiceValidationException;
 
-  PostBox fetchPostBox(long id) throws PostBoxServiceException, ServiceValidationException;
+  PostBox getPostBox(long id) throws PostBoxServiceException, ServiceValidationException;
 
   void removePostBox(PostBox postBox) throws PostBoxServiceException, ServiceValidationException;
 }

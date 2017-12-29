@@ -1,14 +1,15 @@
 package by.bsac.tcs.server.process.parser.impl;
 
+import static java.util.Objects.isNull;
+
 import by.bsac.tcs.server.model.Request;
-import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
 import by.bsac.tcs.server.process.parser.ProtocolParser;
+import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Arrays;
-import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,32 +31,35 @@ public class CustomProtocolParser implements ProtocolParser {
 
   //FIXME: Pay attention that this parser can wait infinite time
   private String pullRequestData(Socket clientSocket) throws ProtocolParseException {
+    LOGGER.info("Parse the client request....");
+
     try (BufferedReader input = new BufferedReader(
         new InputStreamReader(clientSocket.getInputStream(),
             DEFAULT_INPUT_STREAM_CHARACTER_ENCODING))) {
       StringBuilder userRequestData = null;
       String userInput;
-      while ((userInput = input.readLine()) != null) {
+      //while ((userInput = input.readLine()) != null) {
+        userInput = input.readLine();
         userInput = replaceAllInappropriateSymbols(userInput);
         LOGGER.info("User input: {}", userInput);
 
-        if (Objects.isNull(userRequestData)) {
+        if (isNull(userRequestData)) {
           userRequestData = new StringBuilder();
         }
         if (userInput.contains(EXIT_SYMBOL)) {
           userInput = userInput.substring(0, userInput.length() - 1);
           userRequestData.append(userInput);
-          break;
+          //break;
         }
-        userInput += LINE_DELIMITER;
+        //userInput += LINE_DELIMITER;
 
-        userRequestData.append(userInput);
-      }
+       // userRequestData.append(userInput);
+     // }
 
       return userRequestData != null ? userRequestData.toString() : "";
 
     } catch (IOException e) {
-      String errorMessage = "Can't read client's data";
+      final String errorMessage = "Can't read client's data";
       LOGGER.error(errorMessage, e);
       throw new ProtocolParseException(errorMessage, e);
     }
@@ -79,6 +83,6 @@ public class CustomProtocolParser implements ProtocolParser {
   }
 
   private String replaceAllInappropriateSymbols(String input) {
-    return input.replaceAll("[^A-Za-z0-9=^]", "");
+    return input.replaceAll("[^A-Za-z0-9=^;]", "");
   }
 }

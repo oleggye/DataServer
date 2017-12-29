@@ -1,7 +1,7 @@
 package by.bsac.tcs.service.impl;
 
-import by.bsac.tcs.model.User;
 import by.bsac.tcs.model.PostBox;
+import by.bsac.tcs.model.User;
 import by.bsac.tcs.service.SubscriptionService;
 import by.bsac.tcs.service.exception.ServiceValidationException;
 import by.bsac.tcs.service.exception.SubscriptionServiceException;

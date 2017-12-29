@@ -23,15 +23,13 @@ public class CommandProvider {
   private final Command wrongCommand = new WrongCommand();
 
   private CommandProvider() {
-    final Map<Event, Command> map = new EnumMap<>(Event.class);
-    map.put(Event.REGISTRATION, new RegistrationCommand());
-    map.put(Event.KEEP_ALIVE, new KeepAliveCommand());
-    map.put(Event.HAS_OPENED, new HasOpenedCommand());
-    map.put(Event.HAS_CLOSED, new HasClosedCommand());
-    map.put(Event.QUANTITY_CHANGED, new QuantityChangedCommand());
-    map.put(Event.LOG, new LogCommand());
-
-    commandStore = map;
+    commandStore = new EnumMap<>(Event.class);
+    commandStore.put(Event.REGISTRATION, new RegistrationCommand());
+    commandStore.put(Event.KEEP_ALIVE, new KeepAliveCommand());
+    commandStore.put(Event.HAS_OPENED, new HasOpenedCommand());
+    commandStore.put(Event.HAS_CLOSED, new HasClosedCommand());
+    commandStore.put(Event.QUANTITY_CHANGED, new QuantityChangedCommand());
+    commandStore.put(Event.LOG, new LogCommand());
   }
 
   public static CommandProvider getInstance() {

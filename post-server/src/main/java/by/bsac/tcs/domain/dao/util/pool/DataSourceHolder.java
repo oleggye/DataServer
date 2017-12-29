@@ -15,18 +15,18 @@ public class DataSourceHolder {
 
   private DataSourceHolder() {
     final ConnectionPropertiesBundle bundle = ConnectionPropertiesBundle.getInstance();
-    final BasicDataSource dataSource = new BasicDataSource();
+    final BasicDataSource basicDataSource = new BasicDataSource();
 
-    dataSource.setUrl(bundle.getUrl());
-    dataSource.setUsername(bundle.getUser());
-    dataSource.setPassword(bundle.getPassword());
-    dataSource.setMinIdle(5);
-    dataSource.setMaxIdle(10);
-    dataSource.setMaxOpenPreparedStatements(100);
+    basicDataSource.setUrl(bundle.getUrl());
+    basicDataSource.setUsername(bundle.getUser());
+    basicDataSource.setPassword(bundle.getPassword());
+    basicDataSource.setMinIdle(5);
+    basicDataSource.setMaxIdle(10);
+    basicDataSource.setMaxOpenPreparedStatements(100);
 
-    this.dataSource = dataSource;
+    this.dataSource = basicDataSource;
 
-    Class<?> clazz = dataSource.getClass();
+    Class<?> clazz = basicDataSource.getClass();
 
     proxyDataSource = (DataSource) Proxy
         .newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), ((proxy, method, args) ->

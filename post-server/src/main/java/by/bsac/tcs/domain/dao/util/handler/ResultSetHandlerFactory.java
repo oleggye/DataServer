@@ -27,6 +27,9 @@ public class ResultSetHandlerFactory {
 
     private static final ResultSetHandlerFactory INSTANCE = new ResultSetHandlerFactory();
 
+    private SingletonHolder() {
+    }
+
     public static ResultSetHandlerFactory getInstance() {
       return INSTANCE;
     }
