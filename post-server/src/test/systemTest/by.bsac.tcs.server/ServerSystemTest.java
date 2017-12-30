@@ -1,5 +1,6 @@
 package by.bsac.tcs.server;
 
+import java.util.concurrent.TimeUnit;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -8,10 +9,14 @@ public class ServerSystemTest {
 
   private static final String SERVER_ADDRESS = "127.0.0.1";
   private static final int SERVER_PORT = 7777;
+  private static final long SLEEP_TIMEOUT_SEC = 4;
 
   private static Server server;
   private static Thread serverThread;
 
+  /**
+   * Start the server as a new thread add save ref to it
+   */
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {
     serverThread = new Thread(() -> {
@@ -21,9 +26,13 @@ public class ServerSystemTest {
     serverThread.start();
   }
 
+  /**
+   * Use delay before server stop
+   * to allow the server process all requests from test classes
+   */
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
-    Thread.currentThread().sleep(10000);
+    TimeUnit.SECONDS.sleep(SLEEP_TIMEOUT_SEC);
     if (server != null) {
       server.stop();
     }
@@ -51,5 +60,4 @@ public class ServerSystemTest {
         .requestData(data)
         .perform();
   }
-
 }
