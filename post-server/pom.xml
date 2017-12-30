@@ -14,7 +14,6 @@
   <properties>
     <dbcp2.version>2.0</dbcp2.version>
     <mysql.version>8.0.8-dmr</mysql.version>
-
   </properties>
 
   <dependencies>
