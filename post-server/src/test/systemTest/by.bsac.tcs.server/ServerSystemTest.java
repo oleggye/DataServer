@@ -44,7 +44,7 @@ public class ServerSystemTest {
 
   @Test
   public void testWhenSendRequestWithData() throws Exception {
-    final String data = "postBoxId=123;code=6;state=opened;^";
+    final String data = "postBoxId=1;code=6;state=opened;^";
     new TcpRequestBuilder()
         .serverAddress(SERVER_ADDRESS)
         .serverPort(SERVER_PORT)
