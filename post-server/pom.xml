@@ -12,7 +12,7 @@
   <artifactId>post-by.bsac.tcs.server</artifactId>
 
   <properties>
-    <dbcp2.version>2.0</dbcp2.version>
+    <dbcp2.version>2.2.0</dbcp2.version>
     <mysql.version>8.0.8-dmr</mysql.version>
   </properties>
 
@@ -27,6 +27,11 @@
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>${mysql.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
     </dependency>
   </dependencies>
 
