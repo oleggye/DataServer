@@ -4,7 +4,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
-import by.bsac.tcs.domain.dao.EventLogDAO;
+import by.bsac.tcs.domain.dao.EventLogDao;
 import by.bsac.tcs.domain.model.Event;
 import by.bsac.tcs.domain.model.EventLog;
 import org.junit.Before;
@@ -21,7 +21,7 @@ public class EventLogServiceImplTest {
   private EventLogServiceImpl eventLogService;
 
   @Mock
-  private EventLogDAO eventLogDAO;
+  private EventLogDao eventLogDAO;
 
   @Before
   public void setUp() throws Exception {

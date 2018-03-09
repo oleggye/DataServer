@@ -29,8 +29,7 @@ public class DataSourceHolder {
     Class<?> clazz = basicDataSource.getClass();
 
     proxyDataSource = (DataSource) Proxy
-        .newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), ((proxy, method, args) ->
-        {
+        .newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), ((proxy, method, args) -> {
           final String message = method.getName();
           LOGGER.info("Invoke method {}", message);
           return method.invoke(this.dataSource, args);

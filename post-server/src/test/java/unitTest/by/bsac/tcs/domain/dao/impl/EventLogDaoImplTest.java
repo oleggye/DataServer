@@ -1,21 +1,21 @@
 package by.bsac.tcs.domain.dao.impl;
 
-import by.bsac.tcs.domain.dao.EventLogDAO;
+import by.bsac.tcs.domain.dao.EventLogDao;
 import by.bsac.tcs.domain.dao.util.pool.DataSourceHolder;
 import by.bsac.tcs.domain.model.Event;
 import by.bsac.tcs.domain.model.EventLog;
 import javax.sql.DataSource;
 import org.junit.Test;
 
-public class EventLogDAOImplTest {
+public class EventLogDaoImplTest {
 
-  private final EventLogDAO dao;
+  private final EventLogDao dao;
 
-  public EventLogDAOImplTest() {
+  public EventLogDaoImplTest() {
     final DataSourceHolder holder = DataSourceHolder.getInstance();
     final DataSource dataSource = holder.getDataSource();
 
-    dao = new EventLogDAOImpl(dataSource);
+    dao = new EventLogDaoImpl(dataSource);
   }
 
   @Test

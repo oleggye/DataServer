@@ -39,22 +39,22 @@ public class CustomProtocolParser implements ProtocolParser {
       StringBuilder userRequestData = null;
       String userInput;
       //while ((userInput = input.readLine()) != null) {
-        userInput = input.readLine();
-        userInput = replaceAllInappropriateSymbols(userInput);
-        LOGGER.info("User input: {}", userInput);
+      userInput = input.readLine();
+      userInput = replaceAllInappropriateSymbols(userInput);
+      LOGGER.info("User input: {}", userInput);
 
-        if (isNull(userRequestData)) {
-          userRequestData = new StringBuilder();
-        }
-        if (userInput.contains(EXIT_SYMBOL)) {
-          userInput = userInput.substring(0, userInput.length() - 1);
-          userRequestData.append(userInput);
-          //break;
-        }
-        //userInput += LINE_DELIMITER;
+      if (isNull(userRequestData)) {
+        userRequestData = new StringBuilder();
+      }
+      if (userInput.contains(EXIT_SYMBOL)) {
+        userInput = userInput.substring(0, userInput.length() - 1);
+        userRequestData.append(userInput);
+        //break;
+      }
+      //userInput += LINE_DELIMITER;
 
-       // userRequestData.append(userInput);
-     // }
+      // userRequestData.append(userInput);
+      // }
 
       return userRequestData != null ? userRequestData.toString() : "";
 

@@ -30,12 +30,16 @@ public abstract class AbstractRequestManager implements RequestManager {
     LOGGER.info("Try to shutdown request manager....");
     if (pool != null && !pool.isTerminated()) {
       pool.shutdown();
+
       try {
         pool.awaitTermination(TIME_OUT_SECONDS, TimeUnit.SECONDS);
+
       } catch (InterruptedException e) {
+
         final String errorMessage = "An error occurred while shutting down the pool!";
         LOGGER.error(errorMessage, e);
         throw new RequestManagerException(errorMessage, e);
+
       } finally {
         pool.shutdownNow();
       }

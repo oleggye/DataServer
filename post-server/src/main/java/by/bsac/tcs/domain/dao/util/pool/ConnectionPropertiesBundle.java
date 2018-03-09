@@ -16,7 +16,7 @@ public class ConnectionPropertiesBundle {
   }
 
   public static ConnectionPropertiesBundle getInstance() {
-    return SingletonHolder.getINSTANCE();
+    return SingletonHolder.getInstance();
   }
 
   public String getProperty(String key) {
@@ -42,7 +42,7 @@ public class ConnectionPropertiesBundle {
     private SingletonHolder() {
     }
 
-    public static ConnectionPropertiesBundle getINSTANCE() {
+    public static ConnectionPropertiesBundle getInstance() {
       return INSTANCE;
     }
   }
