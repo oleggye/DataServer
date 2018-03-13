@@ -2,13 +2,22 @@ package by.bsac.tcs.server.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 //FIXME: BL IS CHANGED!
 public class Request {
 
   private RequestType requestType;
-
   private final Map<String, String> paramMap = new HashMap<>();
+  private String response;
+
+  public RequestType getRequestType() {
+    return requestType;
+  }
+
+  public void setRequestType(RequestType requestType) {
+    this.requestType = requestType;
+  }
 
   public String getRequestParam(String paramName) {
     return paramMap.get(paramName);
@@ -16,6 +25,14 @@ public class Request {
 
   public void setRequestParam(String key, String val) {
     paramMap.put(key, val);
+  }
+
+  public String getResponse() {
+    return response;
+  }
+
+  public void setResponse(String response) {
+    this.response = response;
   }
 
   @Override
@@ -26,28 +43,15 @@ public class Request {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-
     Request request = (Request) o;
-
-    if (requestType != request.requestType) {
-      return false;
-    }
-    return paramMap.equals(request.paramMap);
+    return requestType == request.requestType &&
+        Objects.equals(paramMap, request.paramMap) &&
+        Objects.equals(response, request.response);
   }
 
   @Override
   public int hashCode() {
-    int result = requestType != null ? requestType.hashCode() : 0;
-    result = 31 * result + paramMap.hashCode();
-    return result;
-  }
 
-  public RequestType getRequestType() {
-
-    return requestType;
-  }
-
-  public void setRequestType(RequestType requestType) {
-    this.requestType = requestType;
+    return Objects.hash(requestType, paramMap, response);
   }
 }

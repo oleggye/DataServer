@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 public class Application {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
+  private static final int DEFAULT_PORT = 8888;
 
   public static void main(String[] args) {
     LOGGER.info("Starting by.bsac.tcs.server application......");
@@ -32,7 +33,7 @@ public class Application {
       LOGGER.error("Illegal port format: " + portArgument);
       urgentlyStopServer();
       //if exception, never be invoke
-      return 0;
+      return DEFAULT_PORT;
     }
   }
 

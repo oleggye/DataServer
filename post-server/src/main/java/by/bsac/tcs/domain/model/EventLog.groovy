@@ -4,10 +4,10 @@ import groovy.transform.Canonical
 
 @Canonical
 class EventLog {
-    private long id
-    private long postBoxId
-    private Event event
-    private String state
+    long id
+    long postBoxId
+    Event event
+    String state
 
     EventLog(long id, long postBoxId, Event event, state) {
         this.id = id

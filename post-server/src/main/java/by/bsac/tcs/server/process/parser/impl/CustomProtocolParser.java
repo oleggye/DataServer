@@ -8,6 +8,7 @@ import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.util.Arrays;
 import org.slf4j.Logger;
@@ -33,35 +34,39 @@ public class CustomProtocolParser implements ProtocolParser {
   private String pullRequestData(Socket clientSocket) throws ProtocolParseException {
     LOGGER.info("Parse the client request....");
 
+    String userInput = readUserInput(clientSocket);
+    LOGGER.info("User input: {}", userInput);
+
+    checkUserInput(userInput);
+
+    StringBuilder userRequestData = null;
+
+    if (userInput.contains(EXIT_SYMBOL)) {
+      userInput = userInput.substring(0, userInput.length() - 1);
+      userRequestData.append(userInput);
+    }
+
+    return userRequestData != null ? userRequestData.toString() : "";
+  }
+
+  private String readUserInput(Socket clientSocket) throws ProtocolParseException {
     try (BufferedReader input = new BufferedReader(
         new InputStreamReader(clientSocket.getInputStream(),
             DEFAULT_INPUT_STREAM_CHARACTER_ENCODING))) {
-      StringBuilder userRequestData = null;
-      String userInput;
-      //while ((userInput = input.readLine()) != null) {
-      userInput = input.readLine();
-      userInput = replaceAllInappropriateSymbols(userInput);
-      LOGGER.info("User input: {}", userInput);
 
-      if (isNull(userRequestData)) {
-        userRequestData = new StringBuilder();
-      }
-      if (userInput.contains(EXIT_SYMBOL)) {
-        userInput = userInput.substring(0, userInput.length() - 1);
-        userRequestData.append(userInput);
-        //break;
-      }
-      //userInput += LINE_DELIMITER;
-
-      // userRequestData.append(userInput);
-      // }
-
-      return userRequestData != null ? userRequestData.toString() : "";
+      String userInput = input.readLine();
+      return replaceAllInappropriateSymbols(userInput);
 
     } catch (IOException e) {
       final String errorMessage = "Can't read client's data";
       LOGGER.error(errorMessage, e);
       throw new ProtocolParseException(errorMessage, e);
+    }
+  }
+
+  private void checkUserInput(String userInput) throws ProtocolParseException {
+    if (isNull(userInput) || userInput.isEmpty()) {
+      throw new ProtocolParseException("Request data is null or empty!");
     }
   }
 

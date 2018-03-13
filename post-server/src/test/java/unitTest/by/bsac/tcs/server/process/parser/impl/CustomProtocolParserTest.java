@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 import by.bsac.tcs.server.model.Request;
 import by.bsac.tcs.server.model.RequestBuilder;
 import by.bsac.tcs.server.process.parser.ProtocolParser;
+import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
 import java.io.InputStream;
 import java.net.Socket;
 import org.junit.Before;
@@ -36,24 +37,15 @@ public class CustomProtocolParserTest {
     // inputStream = socket.getInputStream();
   }
 
-  @Test
-  public void parseWhenPassedOnlyDelimiterCharacter() throws Exception {
+  @Test(expected = IllegalArgumentException.class)
+  public void parseWhenPassedOnlyDelimiterCharacterThrowException() throws Exception {
     final int paramDelimiter = ';';
     final int exitInputStreamCode = -1;
 
-    final Request expectedRequest = new Request();
     when(socket.getInputStream()).thenReturn(inputStream);
     doReturn(paramDelimiter, exitInputStreamCode).when(inputStream).read();
 
-    Request takenRequest = parser.parse(socket);
-
-    assertNotNull(takenRequest);
-    assertEquals(expectedRequest, takenRequest);
-
-    verify(socket, times(1)).getInputStream();
-    verifyNoMoreInteractions(socket);
-    verify(inputStream, times(4)).read();
-    verify(inputStream, times(1)).close();
+    parser.parse(socket);
   }
 
   @Test(expected = IllegalArgumentException.class)

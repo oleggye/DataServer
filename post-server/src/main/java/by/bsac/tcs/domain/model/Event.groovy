@@ -1,5 +1,7 @@
 package by.bsac.tcs.domain.model
 
+import static java.util.Objects.isNull
+
 enum Event {
     REGISTRATION(1),
     KEEP_ALIVE(2),
@@ -26,7 +28,7 @@ enum Event {
 
         for (Event element : Event.values()) {
             if (element.typeCode == requestCode) {
-                requestType = element;
+                requestType = element
             }
         }
 
@@ -34,10 +36,10 @@ enum Event {
             throw new IllegalArgumentException(
                     String.format("No such requestType constant for requestCode = %d", requestCode));
         }
-        return requestType;
+        return requestType
     }
 
     int getEventId() {
-        return this.ordinal() + 1;
+        return this.ordinal() + 1
     }
 }

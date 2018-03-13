@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import by.bsac.tcs.domain.controller.Controller;
+import by.bsac.tcs.domain.controller.RequestController;
 import by.bsac.tcs.domain.controller.exception.ControllerException;
 import by.bsac.tcs.server.model.Request;
 import by.bsac.tcs.server.process.handler.exception.RequestHandlerException;
@@ -34,7 +34,7 @@ public class RequestHandlerImplTest {
   private ProtocolParser parser;
 
   @Mock
-  private Controller controller;
+  private RequestController requestController;
 
  /* @Before
   public void setUp() throws Exception {
@@ -50,8 +50,8 @@ public class RequestHandlerImplTest {
 
     verify(parser, times(1)).parse(socket);
     verifyNoMoreInteractions(parser);
-    verify(controller, times(1)).process(request);
-    verifyNoMoreInteractions(controller);
+    verify(requestController, times(1)).process(request);
+    verifyNoMoreInteractions(requestController);
   }
 
   @Test(expected = RequestHandlerException.class)
@@ -65,7 +65,7 @@ public class RequestHandlerImplTest {
   public void runWithExceptionWhenControllerProcess() throws Exception {
     final Request request = mock(Request.class);
     when(parser.parse(socket)).thenReturn(request);
-    doThrow(ControllerException.class).when(controller).process(any(Request.class));
+    doThrow(ControllerException.class).when(requestController).process(any(Request.class));
 
     requestHandler.run();
   }

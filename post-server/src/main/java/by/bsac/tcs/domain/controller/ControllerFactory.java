@@ -1,6 +1,6 @@
 package by.bsac.tcs.domain.controller;
 
-import by.bsac.tcs.domain.controller.impl.EventController;
+import by.bsac.tcs.domain.controller.impl.EventRequestController;
 
 public class ControllerFactory {
 
@@ -11,8 +11,8 @@ public class ControllerFactory {
     return SingletonHolder.getInstance();
   }
 
-  public Controller getController() {
-    return new EventController();
+  public RequestController getController() {
+    return new EventRequestController();
   }
 
   private static class SingletonHolder {
