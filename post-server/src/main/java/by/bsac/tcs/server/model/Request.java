@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-//FIXME: BL IS CHANGED!
 public class Request {
 
   private RequestType requestType;
@@ -44,9 +43,9 @@ public class Request {
       return false;
     }
     Request request = (Request) o;
-    return requestType == request.requestType &&
-        Objects.equals(paramMap, request.paramMap) &&
-        Objects.equals(response, request.response);
+    return requestType == request.requestType
+        && Objects.equals(paramMap, request.paramMap)
+        && Objects.equals(response, request.response);
   }
 
   @Override

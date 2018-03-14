@@ -8,9 +8,10 @@ import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,20 +19,21 @@ public class CustomProtocolParser implements ProtocolParser {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(CustomProtocolParser.class);
 
-  private static final String DEFAULT_INPUT_STREAM_CHARACTER_ENCODING = "utf-8";
-
   private static final String EXIT_SYMBOL = "^";
   private static final String LINE_DELIMITER = ";";
   private static final String PARAM_DELIMITER = "=";
+  private static final String INAPPROPRIATE_SYMBOLS_REGEXP = "[^A-Za-z0-9=^;]";
+  private static final Pattern INAPPROPRIATE_SYMBOLS_PATTERN = Pattern
+      .compile(INAPPROPRIATE_SYMBOLS_REGEXP);
 
   @Override
-  public Request parse(Socket clientSocket) throws ProtocolParseException {
+  public Request parse(final Socket clientSocket) throws ProtocolParseException {
+    //"^(([A-Za-z_]{4,10}:[0-9]{6,10}:[0-9]{10}\\n) | ([A-Za-z_]{4,10}:[0-9]{6,10}:[0-9]{1,250}:[0-9]{10}\\n))";
     String requestData = pullRequestData(clientSocket);
     return parseRequestData(requestData);
   }
 
-  //FIXME: Pay attention that this parser can wait infinite time
-  private String pullRequestData(Socket clientSocket) throws ProtocolParseException {
+  private String pullRequestData(final Socket clientSocket) throws ProtocolParseException {
     LOGGER.info("Parse the client request....");
 
     String userInput = readUserInput(clientSocket);
@@ -39,23 +41,23 @@ public class CustomProtocolParser implements ProtocolParser {
 
     checkUserInput(userInput);
 
-    StringBuilder userRequestData = null;
-
     if (userInput.contains(EXIT_SYMBOL)) {
-      userInput = userInput.substring(0, userInput.length() - 1);
-      userRequestData.append(userInput);
+      return userInput.substring(0, userInput.length() - 1);
     }
 
-    return userRequestData != null ? userRequestData.toString() : "";
+    return userInput;
   }
 
-  private String readUserInput(Socket clientSocket) throws ProtocolParseException {
+  private String readUserInput(final Socket clientSocket) throws ProtocolParseException {
     try (BufferedReader input = new BufferedReader(
         new InputStreamReader(clientSocket.getInputStream(),
-            DEFAULT_INPUT_STREAM_CHARACTER_ENCODING))) {
+            StandardCharsets.UTF_8))) {
 
       String userInput = input.readLine();
-      return replaceAllInappropriateSymbols(userInput);
+
+      checkUserInput(userInput);
+
+      return userInput;
 
     } catch (IOException e) {
       final String errorMessage = "Can't read client's data";
@@ -65,12 +67,14 @@ public class CustomProtocolParser implements ProtocolParser {
   }
 
   private void checkUserInput(String userInput) throws ProtocolParseException {
-    if (isNull(userInput) || userInput.isEmpty()) {
-      throw new ProtocolParseException("Request data is null or empty!");
+    if (isNull(userInput)
+        || userInput.isEmpty()
+        || containsInappropriateSymbols(userInput)) {
+      throw new ProtocolParseException("Request data is incorrect: " + userInput);
     }
   }
 
-  private Request parseRequestData(String requestData) {
+  private Request parseRequestData(final String requestData) {
     String[] lines = requestData.split(LINE_DELIMITER);
     Request request = new Request();
 
@@ -87,7 +91,7 @@ public class CustomProtocolParser implements ProtocolParser {
     return request;
   }
 
-  private String replaceAllInappropriateSymbols(String input) {
-    return input.replaceAll("[^A-Za-z0-9=^;]", "");
+  private boolean containsInappropriateSymbols(final String input) {
+    return INAPPROPRIATE_SYMBOLS_PATTERN.matcher(input).find();
   }
 }

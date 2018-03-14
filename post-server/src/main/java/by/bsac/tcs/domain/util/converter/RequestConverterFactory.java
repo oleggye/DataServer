@@ -5,7 +5,8 @@ import by.bsac.tcs.domain.util.converter.impl.RequestToEventLogConverter;
 
 public class RequestConverterFactory {
 
-  private static final RequestToEventLogConverter requestToEventLogConverter = new RequestToEventLogConverter();
+  private static final RequestToEventLogConverter requestToEventLogConverter =
+      new RequestToEventLogConverter();
 
   private RequestConverterFactory() {
   }

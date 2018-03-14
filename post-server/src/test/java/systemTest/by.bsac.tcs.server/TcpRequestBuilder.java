@@ -1,8 +1,10 @@
 package by.bsac.tcs.server;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,19 +21,20 @@ public class TcpRequestBuilder {
     return this;
   }
 
-  public TcpRequestBuilder serverAddress(String serverAddress){
+  public TcpRequestBuilder serverAddress(String serverAddress) {
     this.serverAddress = serverAddress;
     return this;
   }
 
-  public TcpRequestBuilder serverPort(int port){
+  public TcpRequestBuilder serverPort(int port) {
     this.port = port;
     return this;
   }
 
   public void perform() {
     try (Socket socket = new Socket(serverAddress, port)) {
-      try(PrintWriter out = new PrintWriter(socket.getOutputStream(), true)){
+      try (OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(),
+          StandardCharsets.UTF_8)) {
         out.append(requestData);
       }
     } catch (IOException e) {

@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 
 import by.bsac.tcs.server.process.handler.RequestHandler;
 import by.bsac.tcs.server.process.handler.RequestHandlerFactory;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -51,6 +52,7 @@ public class RequestManagerImplTest {
     assertTrue(requestManager.pool.isShutdown());
   }
 
+  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   @Test
   public void invokeManageMethod() throws Exception {
     requestManager.pool = pool;

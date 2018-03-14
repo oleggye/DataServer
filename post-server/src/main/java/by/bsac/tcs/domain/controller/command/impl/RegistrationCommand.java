@@ -11,8 +11,6 @@ public class RegistrationCommand implements Command {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationCommand.class);
 
-  private static final EventLogServiceFactory factory = EventLogServiceFactory.getInstance();
-
   @Override
   public void execute(Request request) throws CommandException {
     LOGGER.info("{} is executing...", this.getClass().getSimpleName());

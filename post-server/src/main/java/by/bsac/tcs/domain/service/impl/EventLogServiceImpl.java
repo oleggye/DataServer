@@ -9,21 +9,21 @@ import by.bsac.tcs.domain.service.exception.EventLogServiceException;
 
 public class EventLogServiceImpl implements EventLogService {
 
-  private EventLogDao eventLogDAO;
+  private EventLogDao eventLogDao;
 
   public EventLogServiceImpl() {
     final EventLogDaoFactory daoFactory = EventLogDaoFactory.getInstance();
-    this.eventLogDAO = daoFactory.getDao();
+    this.eventLogDao = daoFactory.getDao();
   }
 
-  public EventLogServiceImpl(EventLogDao eventLogDAO) {
-    this.eventLogDAO = eventLogDAO;
+  public EventLogServiceImpl(EventLogDao eventLogDao) {
+    this.eventLogDao = eventLogDao;
   }
 
   @Override
   public void log(EventLog eventLog) throws EventLogServiceException {
     try {
-      eventLogDAO.save(eventLog);
+      eventLogDao.save(eventLog);
     } catch (DaoException e) {
       throw new EventLogServiceException("An exception occurred while log()", e);
     }

@@ -1,7 +1,6 @@
 package by.bsac.tcs.server.process.response;
 
 import by.bsac.tcs.server.process.response.impl.SimpleResponseWriter;
-import java.net.Socket;
 
 public class ResponseWriterFactory {
 
