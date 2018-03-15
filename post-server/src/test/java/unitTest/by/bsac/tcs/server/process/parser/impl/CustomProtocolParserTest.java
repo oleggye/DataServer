@@ -37,8 +37,8 @@ public class CustomProtocolParserTest {
     // inputStream = socket.getInputStream();
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void parseWhenPassedOnlyDelimiterCharacterThrowException() throws Exception {
+  @Test(expected = ProtocolParseException.class)
+  public void testParseWhenPassedOnlyDelimiterCharacterThrowException() throws Exception {
     final int paramDelimiter = ';';
     final int exitInputStreamCode = -1;
 
@@ -48,8 +48,8 @@ public class CustomProtocolParserTest {
     parser.parse(socket);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void parseWhenPassedOnlyParamKeyAndDelimiterCharacter() throws Exception {
+  @Test(expected = ProtocolParseException.class)
+  public void testParseWhenPassedOnlyParamKeyAndDelimiterCharacter() throws Exception {
     final int paramKey = '5';
     final int paramDelimiter = ';';
     final int exitInputStreamCode = -1;
