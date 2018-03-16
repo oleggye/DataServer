@@ -20,11 +20,15 @@ public class KeepAlive implements RequestParser {
     Pattern pattern = keepAlive.getPattern();
     Matcher matcher = pattern.matcher(requestString);
 
+    if (!matcher.find()) {
+      throw new IllegalArgumentException("Wrong requestString: " + requestString);
+    }
+
     String id = matcher.group(1);
     String letterCount = matcher.group(2);
     String epochTime = matcher.group(3);
     return new RequestBuilder()
-        .setParam("method", keepAlive.toString())
+        .setParam("method", keepAlive.name())
         .setParam("id", id)
         .setParam("count", letterCount)
         .setParam("time", epochTime)

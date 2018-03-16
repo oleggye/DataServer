@@ -8,7 +8,7 @@ import org.junit.Test;
 public class ServerSystemTest {
 
   private static final String SERVER_ADDRESS = "127.0.0.1";
-  private static final int SERVER_PORT = 7777;
+  private static final int SERVER_PORT = 8888;
   private static final long SLEEP_TIMEOUT_SEC = 4;
 
   private static Server server;
@@ -27,8 +27,7 @@ public class ServerSystemTest {
   }
 
   /**
-   * Use delay before server stop
-   * to allow the server process all requests from test classes
+   * Use delay before server stop to allow the server process all requests from test classes
    */
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
@@ -52,8 +51,8 @@ public class ServerSystemTest {
   }
 
   @Test
-  public void testWhenSendRequestWithData() throws Exception {
-    final String data = "postBoxId=1;code=6;state=opened;^";
+  public void testWhenSendKeepAliveRequest() throws Exception {
+    final String data = "KEEP_ALIVE:222850:5:1519800922\n";
     new TcpRequestBuilder()
         .serverAddress(SERVER_ADDRESS)
         .serverPort(SERVER_PORT)

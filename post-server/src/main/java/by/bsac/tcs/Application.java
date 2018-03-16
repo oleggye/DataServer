@@ -11,19 +11,15 @@ public class Application {
 
   public static void main(String[] args) {
     LOGGER.info("Starting by.bsac.tcs.server application......");
-    testInArguments(args);
 
-    final int portNumber = parsePortNumber(args[0]);
+    final int portNumber = isPortArgumentSet(args) ? parsePortNumber(args[0]) : DEFAULT_PORT;
 
     Server server = new Server(portNumber);
     server.start();
   }
 
-  private static void testInArguments(String[] args) {
-    if (args.length < 1) {
-      LOGGER.error("Wrong argument for port number");
-      urgentlyStopServer();
-    }
+  private static boolean isPortArgumentSet(String... portArgument) {
+    return portArgument.length >= 1;
   }
 
   private static int parsePortNumber(String portArgument) {
@@ -32,8 +28,8 @@ public class Application {
     } catch (NumberFormatException e) {
       LOGGER.error("Illegal port format: " + portArgument);
       urgentlyStopServer();
-      //if exception, never be invoke
-      return DEFAULT_PORT;
+      //if exception, never be invoked
+      throw e;
     }
   }
 

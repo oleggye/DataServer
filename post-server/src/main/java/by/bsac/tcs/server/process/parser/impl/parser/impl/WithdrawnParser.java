@@ -20,10 +20,14 @@ public class WithdrawnParser implements RequestParser {
     Pattern pattern = withdrawn.getPattern();
     Matcher matcher = pattern.matcher(requestString);
 
+    if (!matcher.find()) {
+      throw new IllegalArgumentException("Wrong requestString: " + requestString);
+    }
+
     String id = matcher.group(1);
     String epochTime = matcher.group(2);
     return new RequestBuilder()
-        .setParam("method", withdrawn.toString())
+        .setParam("method", withdrawn.name())
         .setParam("id", id)
         .setParam("time", epochTime)
         .build();

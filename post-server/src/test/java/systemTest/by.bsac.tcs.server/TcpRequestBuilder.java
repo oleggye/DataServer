@@ -36,6 +36,7 @@ public class TcpRequestBuilder {
       try (OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(),
           StandardCharsets.UTF_8)) {
         out.append(requestData);
+        out.flush();
       }
     } catch (IOException e) {
       final String message = "An exception occurred while perform request";

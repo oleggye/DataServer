@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,12 +31,17 @@ public class CustomProtocolParser implements ProtocolParser {
     return parseUserInput(userInput);
   }
 
+  /**
+   * It's important that protocol sends \n as end of line flag , but BufferedReader uses it for its
+   * purpose and then removes!!!
+   */
   private String readUserInput(final Socket clientSocket) throws ProtocolParseException {
     try (BufferedReader input = new BufferedReader(
         new InputStreamReader(clientSocket.getInputStream(),
             StandardCharsets.UTF_8))) {
 
-      return input.readLine();
+      return input.lines().reduce("", (a, b) -> a + b);
+
 
     } catch (IOException e) {
       final String errorMessage = "Can't read client's data";
