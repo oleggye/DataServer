@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import by.bsac.tcs.domain.model.EventLog;
-import by.bsac.tcs.domain.service.EventLogService;
+import by.bsac.tcs.domain.service.EventService;
 import by.bsac.tcs.domain.util.converter.RequestConverter;
 import by.bsac.tcs.server.model.Request;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class LogCommandTest {
   private LogCommand logCommand;
 
   @Mock
-  private EventLogService eventLogService;
+  private EventService eventService;
   @Mock
   private RequestConverter<EventLog> requestConverter;
   @Mock
@@ -41,8 +41,8 @@ public class LogCommandTest {
         .convert(request);
     verifyNoMoreInteractions(requestConverter);
 
-    verify(eventLogService, times(1)).log(eventLog);
-    verifyNoMoreInteractions(eventLogService);
+    verify(eventService, times(1)).log(eventLog);
+    verifyNoMoreInteractions(eventService);
   }
 
 }

@@ -27,9 +27,9 @@ public class ListParser implements RequestParser {
     String id = matcher.group(1);
     String epochTime = matcher.group(2);
     return new RequestBuilder()
-        .setParam("method", list.name())
-        .setParam("id", id)
-        .setParam("time", epochTime)
+        .method(list)
+        .id(id)
+        .time(epochTime)
         .build();
   }
 }

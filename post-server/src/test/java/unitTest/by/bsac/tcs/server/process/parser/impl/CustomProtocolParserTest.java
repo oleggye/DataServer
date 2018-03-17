@@ -43,8 +43,8 @@ public class CustomProtocolParserTest {
     Request parse = parser.parse(socket);
 
     assertNotNull(parse);
-    assertEquals(Method.REG.name(), parse.getRequestParam("method"));
-    assertEquals("222850", parse.getRequestParam("id"));
+    assertEquals(Method.REG, parse.getMethod());
+    assertEquals(222850, parse.getPostBoxId());
 
     verify(socket).getInputStream();
     verifyNoMoreInteractions(socket);
@@ -85,9 +85,9 @@ public class CustomProtocolParserTest {
     Request parse = parser.parse(socket);
 
     assertNotNull(parse);
-    assertEquals(Method.LIST.name(), parse.getRequestParam("method"));
-    assertEquals("222850", parse.getRequestParam("id"));
-    assertEquals("1519800922", parse.getRequestParam("time"));
+    assertEquals(Method.LIST, parse.getMethod());
+    assertEquals(222850, parse.getPostBoxId());
+    assertEquals(1519800922, parse.getEpochTime());
 
     verify(socket).getInputStream();
     verifyNoMoreInteractions(socket);
@@ -139,9 +139,9 @@ public class CustomProtocolParserTest {
     Request parse = parser.parse(socket);
 
     assertNotNull(parse);
-    assertEquals(Method.EMPTY.name(), parse.getRequestParam("method"));
-    assertEquals("222850", parse.getRequestParam("id"));
-    assertEquals("1519800922", parse.getRequestParam("time"));
+    assertEquals(Method.EMPTY, parse.getMethod());
+    assertEquals(222850, parse.getPostBoxId());
+    assertEquals(1519800922, parse.getEpochTime());
 
     verify(socket).getInputStream();
     verifyNoMoreInteractions(socket);
@@ -204,9 +204,9 @@ public class CustomProtocolParserTest {
     Request parse = parser.parse(socket);
 
     assertNotNull(parse);
-    assertEquals(Method.WITHDRAWN.name(), parse.getRequestParam("method"));
-    assertEquals("222850", parse.getRequestParam("id"));
-    assertEquals("1519800922", parse.getRequestParam("time"));
+    assertEquals(Method.WITHDRAWN, parse.getMethod());
+    assertEquals(222850, parse.getPostBoxId());
+    assertEquals(1519800922, parse.getEpochTime());
 
     verify(socket).getInputStream();
     verifyNoMoreInteractions(socket);
@@ -269,10 +269,10 @@ public class CustomProtocolParserTest {
     Request parse = parser.parse(socket);
 
     assertNotNull(parse);
-    assertEquals(Method.KEEP_ALIVE.name(), parse.getRequestParam("method"));
-    assertEquals("222850", parse.getRequestParam("id"));
-    assertEquals("5", parse.getRequestParam("count"));
-    assertEquals("1519800922", parse.getRequestParam("time"));
+    assertEquals(Method.KEEP_ALIVE, parse.getMethod());
+    assertEquals(222850, parse.getPostBoxId());
+    assertEquals(5, parse.getLettersCount());
+    assertEquals(1519800922, parse.getEpochTime());
 
     verify(socket).getInputStream();
     verifyNoMoreInteractions(socket);

@@ -28,10 +28,10 @@ public class KeepAlive implements RequestParser {
     String letterCount = matcher.group(2);
     String epochTime = matcher.group(3);
     return new RequestBuilder()
-        .setParam("method", keepAlive.name())
-        .setParam("id", id)
-        .setParam("count", letterCount)
-        .setParam("time", epochTime)
+        .method(keepAlive)
+        .id(id)
+        .lettersCount(letterCount)
+        .time(epochTime)
         .build();
   }
 }

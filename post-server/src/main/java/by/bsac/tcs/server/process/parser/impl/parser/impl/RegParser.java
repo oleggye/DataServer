@@ -26,8 +26,8 @@ public class RegParser implements RequestParser {
 
     String id = matcher.group(1);
     return new RequestBuilder()
-        .setParam("method", reg.name())
-        .setParam("id", id)
+        .method(reg)
+        .id(id)
         .build();
   }
 }

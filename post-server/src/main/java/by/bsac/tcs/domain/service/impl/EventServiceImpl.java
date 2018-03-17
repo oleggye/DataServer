@@ -4,19 +4,19 @@ import by.bsac.tcs.domain.dao.EventLogDao;
 import by.bsac.tcs.domain.dao.EventLogDaoFactory;
 import by.bsac.tcs.domain.dao.exception.DaoException;
 import by.bsac.tcs.domain.model.EventLog;
-import by.bsac.tcs.domain.service.EventLogService;
+import by.bsac.tcs.domain.service.EventService;
 import by.bsac.tcs.domain.service.exception.EventLogServiceException;
 
-public class EventLogServiceImpl implements EventLogService {
+public class EventServiceImpl implements EventService {
 
   private EventLogDao eventLogDao;
 
-  public EventLogServiceImpl() {
+  public EventServiceImpl() {
     final EventLogDaoFactory daoFactory = EventLogDaoFactory.getInstance();
     this.eventLogDao = daoFactory.getDao();
   }
 
-  public EventLogServiceImpl(EventLogDao eventLogDao) {
+  public EventServiceImpl(EventLogDao eventLogDao) {
     this.eventLogDao = eventLogDao;
   }
 

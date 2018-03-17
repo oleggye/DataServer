@@ -18,9 +18,9 @@ public class EventLogDaoImpl implements EventLogDao {
   private static final Logger LOGGER = LoggerFactory.getLogger(EventLogDaoImpl.class);
 
   private static final String SELECT_BY_ID_SQL =
-      "select id, id_post_box, id_event, state  from event_log where id = ?";
+      "select id, id_post_box, id_event, state, time  from event_log where id = ?";
   private static final String INSERT_SQL =
-      "insert into event_log (id_post_box, id_event, state) values (?,?,?)";
+      "insert into event_log (id_post_box, id_event, state, time) values (?,?,?,?)";
 
   private DataSource dataSource;
   private static final ResultSetHandlerFactory HANDLER_FACTORY = ResultSetHandlerFactory
@@ -59,9 +59,10 @@ public class EventLogDaoImpl implements EventLogDao {
         .getConnection(); PreparedStatement preparedStatement = connection
         .prepareStatement(INSERT_SQL)) {
 
-      preparedStatement.setInt(1, (int) eventLog.getPostBoxId());
+      preparedStatement.setLong(1, (int) eventLog.getPostBoxId());
       preparedStatement.setInt(2, eventLog.getEvent().getEventId());
-      preparedStatement.setString(3, eventLog.getState());
+      preparedStatement.setInt(3, eventLog.getQuantity());
+      preparedStatement.setLong(4, eventLog.getEpochTime());
 
       preparedStatement.executeUpdate();
     } catch (SQLException e) {

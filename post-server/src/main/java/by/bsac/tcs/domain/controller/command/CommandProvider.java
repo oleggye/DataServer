@@ -3,11 +3,10 @@ package by.bsac.tcs.domain.controller.command;
 import by.bsac.tcs.domain.controller.command.impl.HasClosedCommand;
 import by.bsac.tcs.domain.controller.command.impl.HasOpenedCommand;
 import by.bsac.tcs.domain.controller.command.impl.KeepAliveCommand;
-import by.bsac.tcs.domain.controller.command.impl.LogCommand;
 import by.bsac.tcs.domain.controller.command.impl.QuantityChangedCommand;
 import by.bsac.tcs.domain.controller.command.impl.RegistrationCommand;
 import by.bsac.tcs.domain.controller.command.impl.WrongCommand;
-import by.bsac.tcs.domain.model.Event;
+import by.bsac.tcs.server.process.parser.impl.Method;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
@@ -18,41 +17,40 @@ public class CommandProvider {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(CommandProvider.class);
 
-  private final Map<Event, Command> commandStore;
+  private final Map<Method, Command> commandStore;
 
   private final Command wrongCommand = new WrongCommand();
 
   private CommandProvider() {
-    commandStore = new EnumMap<>(Event.class);
-    commandStore.put(Event.REGISTRATION, new RegistrationCommand());
-    commandStore.put(Event.KEEP_ALIVE, new KeepAliveCommand());
-    commandStore.put(Event.HAS_OPENED, new HasOpenedCommand());
-    commandStore.put(Event.HAS_CLOSED, new HasClosedCommand());
-    commandStore.put(Event.QUANTITY_CHANGED, new QuantityChangedCommand());
-    commandStore.put(Event.LOG, new LogCommand());
+    commandStore = new EnumMap<>(Method.class);
+    commandStore.put(Method.REG, new RegistrationCommand());
+    commandStore.put(Method.LIST, new QuantityChangedCommand());
+    commandStore.put(Method.WITHDRAWN, new HasOpenedCommand());
+    commandStore.put(Method.EMPTY, new HasClosedCommand());
+    commandStore.put(Method.KEEP_ALIVE, new KeepAliveCommand());
   }
 
   public static CommandProvider getInstance() {
     return SingletonHolder.getInstance();
   }
 
-  public Command getCommand(Event event) {
-    LOGGER.info("getCommand by event {}", event);
+  public Command getCommand(Method method) {
+    LOGGER.info("getCommand by method {}", method);
 
-    if (commandStore.containsKey(event)) {
-      return commandStore.get(event);
+    if (commandStore.containsKey(method)) {
+      return commandStore.get(method);
     }
-    LOGGER.warn("wrong event {} found!", event);
+    LOGGER.warn("wrong method {} found!", method);
     return wrongCommand;
   }
 
-  public Command getCommand(String eventName) {
-    if (Objects.isNull(eventName)) {
-      LOGGER.warn("eventName is null !");
+  public Command getCommand(String methodName) {
+    if (Objects.isNull(methodName)) {
+      LOGGER.warn("methodName is null !");
       return wrongCommand;
     }
-    Event event = Event.valueOf(eventName.toUpperCase());
-    return getCommand(event);
+    Method method = Method.valueOf(methodName.toUpperCase());
+    return getCommand(method);
   }
 
   private static class SingletonHolder {

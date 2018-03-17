@@ -3,8 +3,8 @@ package by.bsac.tcs.domain.controller.command.impl;
 import by.bsac.tcs.domain.controller.command.Command;
 import by.bsac.tcs.domain.controller.command.CommandException;
 import by.bsac.tcs.domain.model.EventLog;
-import by.bsac.tcs.domain.service.EventLogService;
-import by.bsac.tcs.domain.service.EventLogServiceFactory;
+import by.bsac.tcs.domain.service.EventService;
+import by.bsac.tcs.domain.service.EventServiceFactory;
 import by.bsac.tcs.domain.service.exception.ServiceException;
 import by.bsac.tcs.domain.util.converter.RequestConverter;
 import by.bsac.tcs.domain.util.converter.RequestConverterFactory;
@@ -16,15 +16,15 @@ public class LogCommand implements Command {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(LogCommand.class);
 
-  private EventLogService logService;
+  private EventService logService;
   private RequestConverter<EventLog> requestConverter;
 
   public LogCommand() {
-    this.logService = EventLogServiceFactory.getInstance().getEventLogService();
+    this.logService = EventServiceFactory.getInstance().getEventService();
     this.requestConverter = RequestConverterFactory.getInstance().getConverter(EventLog.class);
   }
 
-  public LogCommand(EventLogService logService,
+  public LogCommand(EventService logService,
       RequestConverter<EventLog> requestConverter) {
     this.logService = logService;
     this.requestConverter = requestConverter;

@@ -34,7 +34,7 @@ enum Event {
 
         if (isNull(requestType)) {
             throw new IllegalArgumentException(
-                    String.format("No such requestType constant for requestCode = %d", requestCode));
+                    String.format("No such method constant for requestCode = %d", requestCode));
         }
         return requestType
     }

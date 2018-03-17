@@ -44,7 +44,7 @@ public abstract class AbstractRequestManager implements RequestManager {
         pool.shutdownNow();
       }
     } else {
-      throw new IllegalStateException("Illegal manager state exception");
+      throw new IllegalStateException("Illegal manager quantity exception");
     }
     LOGGER.info("Request manager is successfully shutdown....");
   }

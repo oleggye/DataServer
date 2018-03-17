@@ -41,7 +41,7 @@ public class ServerSystemTest {
   }
 
   @Test
-  public void testWhenSendRequestWithEmptyData() throws Exception {
+  public void testWhenSendRequestWithEmptyData() {
     final String data = "";
     new TcpRequestBuilder()
         .serverAddress(SERVER_ADDRESS)
@@ -51,7 +51,7 @@ public class ServerSystemTest {
   }
 
   @Test
-  public void testWhenSendKeepAliveRequest() throws Exception {
+  public void testWhenSendKeepAliveRequest() {
     final String data = "KEEP_ALIVE:222850:5:1519800922\n";
     new TcpRequestBuilder()
         .serverAddress(SERVER_ADDRESS)

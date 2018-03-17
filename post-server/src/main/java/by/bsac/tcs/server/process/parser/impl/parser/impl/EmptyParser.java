@@ -27,9 +27,9 @@ public class EmptyParser implements RequestParser {
     String id = matcher.group(1);
     String epochTime = matcher.group(2);
     return new RequestBuilder()
-        .setParam("method", empty.name())
-        .setParam("id", id)
-        .setParam("time", epochTime)
+        .method(empty)
+        .id(id)
+        .time(epochTime)
         .build();
   }
 }

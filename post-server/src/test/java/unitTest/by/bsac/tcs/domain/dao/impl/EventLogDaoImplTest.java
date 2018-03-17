@@ -31,9 +31,11 @@ public class EventLogDaoImplTest {
     final long defaultId = 99;
     final long postBoxId = 1;
     final Event event = Event.REGISTRATION;
-    final String state = "success";
+    final int qunatity = 7;
+    final long epochTime = 1234567894;
 
-    final EventLog expectedEventLog = new EventLog(defaultId, postBoxId, event, state);
+    final EventLog expectedEventLog = new EventLog(defaultId, postBoxId, event, qunatity,
+        1234567894);
 
     dao.save(expectedEventLog);
 /*

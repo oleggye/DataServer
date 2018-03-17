@@ -15,21 +15,21 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class EventLogServiceImplTest {
+public class EventServiceImplTest {
 
   @InjectMocks
-  private EventLogServiceImpl eventLogService;
+  private EventServiceImpl eventLogService;
 
   @Mock
   private EventLogDao eventLogDAO;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
   }
 
   @Test
   public void log() throws Exception {
-    final EventLog eventLog = new EventLog(1, Event.LOG,"test");
+    final EventLog eventLog = new EventLog(1, Event.LOG, 5, 1234567891);
 
     eventLogService.log(eventLog);
 

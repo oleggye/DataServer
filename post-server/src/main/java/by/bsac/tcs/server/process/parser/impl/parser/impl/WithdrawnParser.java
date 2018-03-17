@@ -27,9 +27,9 @@ public class WithdrawnParser implements RequestParser {
     String id = matcher.group(1);
     String epochTime = matcher.group(2);
     return new RequestBuilder()
-        .setParam("method", withdrawn.name())
-        .setParam("id", id)
-        .setParam("time", epochTime)
+        .method(withdrawn)
+        .id(id)
+        .time(epochTime)
         .build();
   }
 }

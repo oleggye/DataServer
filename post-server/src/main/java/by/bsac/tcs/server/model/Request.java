@@ -1,29 +1,37 @@
 package by.bsac.tcs.server.model;
 
+import by.bsac.tcs.server.process.parser.impl.Method;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Request {
 
-  private RequestType requestType;
+  private Method method;
+  private long postBoxId;
+  private int lettersCount;
+  private long epochTime;
+
   private final Map<String, String> paramMap = new HashMap<>();
+
   private String response;
 
-  public RequestType getRequestType() {
-    return requestType;
+  public Request(Method method) {
+    if (method == null) {
+      throw new IllegalArgumentException("Request method can't be null!");
+    }
+    this.method = method;
   }
 
-  public void setRequestType(RequestType requestType) {
-    this.requestType = requestType;
+  public Method getMethod() {
+    return method;
   }
 
-  public String getRequestParam(String paramName) {
-    return paramMap.get(paramName);
+  public long getPostBoxId() {
+    return postBoxId;
   }
 
-  public void setRequestParam(String key, String val) {
-    paramMap.put(key, val);
+  public void setPostBoxId(long postBoxId) {
+    this.postBoxId = postBoxId;
   }
 
   public String getResponse() {
@@ -34,23 +42,27 @@ public class Request {
     this.response = response;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Request request = (Request) o;
-    return requestType == request.requestType
-        && Objects.equals(paramMap, request.paramMap)
-        && Objects.equals(response, request.response);
+  public int getLettersCount() {
+    return lettersCount;
   }
 
-  @Override
-  public int hashCode() {
+  public void setLettersCount(int lettersCount) {
+    this.lettersCount = lettersCount;
+  }
 
-    return Objects.hash(requestType, paramMap, response);
+  public long getEpochTime() {
+    return epochTime;
+  }
+
+  public void setEpochTime(long epochTime) {
+    this.epochTime = epochTime;
+  }
+
+  public String getRequestParam(String paramName) {
+    return paramMap.get(paramName);
+  }
+
+  public void setRequestParam(String key, String val) {
+    paramMap.put(key, val);
   }
 }
