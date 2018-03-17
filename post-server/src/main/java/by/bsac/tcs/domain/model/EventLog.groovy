@@ -2,8 +2,6 @@ package by.bsac.tcs.domain.model
 
 import groovy.transform.Canonical
 
-import java.time.LocalDateTime
-
 @Canonical
 class EventLog {
     long id

@@ -1,6 +1,6 @@
 package by.bsac.tcs.server.process.parser.impl.util
 
-import static java.util.Objects.*
+import static java.util.Objects.isNull
 
 class ProtocolPropertiesLoader {
 

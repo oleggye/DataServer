@@ -5,8 +5,6 @@ import by.bsac.tcs.domain.model.Event;
 import by.bsac.tcs.domain.model.EventLog;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 public class EventLogResultSetHandler implements ResultSetHandler<EventLog> {
 
