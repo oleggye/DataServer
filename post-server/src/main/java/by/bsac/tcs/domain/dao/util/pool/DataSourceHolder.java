@@ -6,7 +6,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DataSourceHolder {
+public final class DataSourceHolder {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceHolder.class);
 
@@ -18,7 +18,7 @@ public class DataSourceHolder {
   private final int DEFAULT_MAX_OPS = 20;
 
   private final DataSource dataSource;
-  private final DataSource proxyDataSource;
+  private DataSource proxyDataSource;
 
   private DataSourceHolder() {
     final ConnectionPropertiesBundle bundle = ConnectionPropertiesBundle.getInstance();
@@ -33,7 +33,11 @@ public class DataSourceHolder {
 
     this.dataSource = basicDataSource;
 
-    Class<?> clazz = basicDataSource.getClass();
+    makeProxy();
+  }
+
+  private void makeProxy() {
+    Class<?> clazz = dataSource.getClass();
 
     proxyDataSource = (DataSource) Proxy
         .newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), ((proxy, method, args) -> {
