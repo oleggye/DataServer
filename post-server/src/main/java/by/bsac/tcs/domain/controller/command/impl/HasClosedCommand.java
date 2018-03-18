@@ -4,6 +4,7 @@ import by.bsac.tcs.domain.controller.command.CommandException;
 import by.bsac.tcs.domain.model.EventLog;
 import by.bsac.tcs.domain.service.EventService;
 import by.bsac.tcs.domain.service.EventServiceFactory;
+import by.bsac.tcs.domain.service.exception.ServiceException;
 import by.bsac.tcs.domain.util.converter.RequestConverter;
 import by.bsac.tcs.domain.util.converter.RequestConverterFactory;
 import by.bsac.tcs.server.model.Request;
@@ -14,23 +15,33 @@ public class HasClosedCommand implements by.bsac.tcs.domain.controller.command.C
 
   private static final Logger LOGGER = LoggerFactory.getLogger(HasClosedCommand.class);
 
-  private final EventService logService;
+  private final EventService eventService;
   private final RequestConverter<EventLog> requestConverter;
 
   public HasClosedCommand() {
-    this.logService = EventServiceFactory.getInstance().getEventService();
+    this.eventService = EventServiceFactory.getInstance().getEventService();
     this.requestConverter = RequestConverterFactory.getInstance().getConverter(EventLog.class);
   }
 
-  public HasClosedCommand(EventService logService,
+  public HasClosedCommand(EventService eventService,
       RequestConverter<EventLog> requestConverter) {
-    this.logService = logService;
+    this.eventService = eventService;
     this.requestConverter = requestConverter;
   }
 
   @Override
   public void execute(Request request) throws CommandException {
     LOGGER.info("{} is executing...", this.getClass().getSimpleName());
-    throw new UnsupportedOperationException("Method temporary is not implemented!");
+
+    final EventLog eventLog = requestConverter.convert(request);
+
+    try {
+      final String response = eventService.changed(eventLog);
+      request.setResponse(response);
+    } catch (ServiceException e) {
+      final String message = String.format("An error occurred while eventLog event %s", eventLog);
+      LOGGER.error(message);
+      throw new CommandException(message, e);
+    }
   }
 }

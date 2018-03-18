@@ -5,7 +5,8 @@ import by.bsac.tcs.domain.dao.EventLogDaoFactory;
 import by.bsac.tcs.domain.dao.exception.DaoException;
 import by.bsac.tcs.domain.model.EventLog;
 import by.bsac.tcs.domain.service.EventService;
-import by.bsac.tcs.domain.service.exception.EventLogServiceException;
+import by.bsac.tcs.domain.service.exception.EventServiceException;
+import by.bsac.tcs.domain.service.exception.ServiceException;
 
 public class EventServiceImpl implements EventService {
 
@@ -21,11 +22,41 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
-  public void log(EventLog eventLog) throws EventLogServiceException {
+  public void log(EventLog eventLog) throws EventServiceException {
     try {
       eventLogDao.save(eventLog);
     } catch (DaoException e) {
-      throw new EventLogServiceException("An exception occurred while log()", e);
+      throw new EventServiceException("An exception occurred while log()", e);
     }
+  }
+
+  @Override
+  //TODO: add session
+  public String register(EventLog eventLog) throws ServiceException {
+    log(eventLog);
+    return "REGISTERED";
+  }
+
+  @Override
+  public String changed(EventLog eventLog) throws ServiceException {
+    log(eventLog);
+    return "LIST_REGISTERED";
+  }
+
+  @Override
+  public String opened(EventLog eventLog) throws ServiceException {
+    log(eventLog);
+    return "WITHDRAWN_REGISTERED";
+  }
+
+  @Override
+  public String closed(EventLog eventLog) throws ServiceException {
+    log(eventLog);
+    return "EMPTY_REGISTERED";
+  }
+
+  @Override
+  public void keepAlive(EventLog eventLog) throws ServiceException {
+    log(eventLog);
   }
 }

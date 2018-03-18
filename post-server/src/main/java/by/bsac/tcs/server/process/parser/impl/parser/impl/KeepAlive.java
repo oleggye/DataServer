@@ -9,15 +9,15 @@ import java.util.regex.Pattern;
 
 public class KeepAlive implements RequestParser {
 
-  private final Method keepAlive;
+  private final Method method;
 
-  public KeepAlive(Method keepAlive) {
-    this.keepAlive = keepAlive;
+  public KeepAlive(Method method) {
+    this.method = method;
   }
 
   @Override
   public Request parse(String requestString) {
-    Pattern pattern = keepAlive.getPattern();
+    Pattern pattern = method.getPattern();
     Matcher matcher = pattern.matcher(requestString);
 
     if (!matcher.find()) {
@@ -28,7 +28,7 @@ public class KeepAlive implements RequestParser {
     String letterCount = matcher.group(2);
     String epochTime = matcher.group(3);
     return new RequestBuilder()
-        .method(keepAlive)
+        .method(method)
         .id(id)
         .lettersCount(letterCount)
         .time(epochTime)

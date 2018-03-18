@@ -34,6 +34,7 @@ public class CustomProtocolParser implements ProtocolParser {
    * It's important that protocol sends \n as end of line flag , but BufferedReader uses it for its
    * purpose and then removes!!!
    */
+  //FIXME: need to verify the length of the request!
   private String readUserInput(final Socket clientSocket) throws ProtocolParseException {
     try (BufferedReader input = new BufferedReader(
         new InputStreamReader(clientSocket.getInputStream(),

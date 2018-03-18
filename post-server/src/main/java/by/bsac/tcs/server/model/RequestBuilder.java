@@ -26,7 +26,7 @@ public class RequestBuilder {
   }
 
   public RequestBuilder id(String postBoxId) {
-    this.postBoxId = Integer.valueOf(postBoxId);
+    this.postBoxId = Integer.parseInt(postBoxId);
     return this;
   }
 

@@ -34,12 +34,12 @@ public class LogCommand implements Command {
   public void execute(Request request) throws CommandException {
     LOGGER.info("{} is executing...", this.getClass().getSimpleName());
 
-    final EventLog log = requestConverter.convert(request);
+    final EventLog eventLog = requestConverter.convert(request);
 
     try {
-      logService.log(log);
+      logService.log(eventLog);
     } catch (ServiceException e) {
-      final String message = String.format("An error occurred while log event %s", log);
+      final String message = String.format("An error occurred while eventLog event %s", eventLog);
       LOGGER.error(message);
       throw new CommandException(message, e);
     }

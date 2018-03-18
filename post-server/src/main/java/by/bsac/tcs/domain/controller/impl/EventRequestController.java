@@ -14,7 +14,15 @@ public class EventRequestController implements RequestController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EventRequestController.class);
 
-  private static final CommandProvider provider = CommandProvider.getInstance();
+  private final CommandProvider provider;
+
+  public EventRequestController() {
+    provider = CommandProvider.getInstance();
+  }
+
+  public EventRequestController(CommandProvider provider) {
+    this.provider = provider;
+  }
 
   @Override
   public void process(Request request) throws ControllerException {

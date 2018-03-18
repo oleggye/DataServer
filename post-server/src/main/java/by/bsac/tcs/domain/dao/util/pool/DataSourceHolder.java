@@ -10,6 +10,13 @@ public class DataSourceHolder {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceHolder.class);
 
+  private final String DEFAULT_URI = "jdbc:h2:~/test";
+  private final String DEFAULT_USERNAME = "sa";
+  private final String DEFAULT_PASSWORD = "";
+  private final int DEFAULT_MIN_IDLE = 5;
+  private final int DEFAULT_MAX_IDLE = 10;
+  private final int DEFAULT_MAX_OPS = 20;
+
   private final DataSource dataSource;
   private final DataSource proxyDataSource;
 
@@ -17,12 +24,12 @@ public class DataSourceHolder {
     final ConnectionPropertiesBundle bundle = ConnectionPropertiesBundle.getInstance();
     final BasicDataSource basicDataSource = new BasicDataSource();
 
-    basicDataSource.setUrl(bundle.getUrl());
-    basicDataSource.setUsername(bundle.getUser());
-    basicDataSource.setPassword(bundle.getPassword());
-    basicDataSource.setMinIdle(5);
-    basicDataSource.setMaxIdle(10);
-    basicDataSource.setMaxOpenPreparedStatements(100);
+    basicDataSource.setUrl(bundle.getUrl().orElse(DEFAULT_URI));
+    basicDataSource.setUsername(bundle.getUser().orElse(DEFAULT_USERNAME));
+    basicDataSource.setPassword(bundle.getPassword().orElse(DEFAULT_PASSWORD));
+    basicDataSource.setMinIdle(bundle.getMinIdle().orElse(DEFAULT_MIN_IDLE));
+    basicDataSource.setMaxIdle(bundle.getMaxIdle().orElse(DEFAULT_MAX_IDLE));
+    basicDataSource.setMaxOpenPreparedStatements(bundle.getMaxOPS().orElse(DEFAULT_MAX_OPS));
 
     this.dataSource = basicDataSource;
 
