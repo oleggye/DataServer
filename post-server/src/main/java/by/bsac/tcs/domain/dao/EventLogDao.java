@@ -7,6 +7,6 @@ public interface EventLogDao {
 
   EventLog findById(long id) throws DaoException;
 
-  void save(EventLog eventLog) throws DaoException;
+  long save(EventLog eventLog) throws DaoException;
 
 }

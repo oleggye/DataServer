@@ -31,6 +31,17 @@ public class CustomProtocolParserTest {
     parser = new CustomProtocolParser();
   }
 
+  @Test(expected = RuntimeException.class)
+  public void testParseWhenPassedToLongRequest() throws Exception {
+    final String userRequest = "111111111111111111111111111111111";
+
+    InputStream stream = prepareInputStream(userRequest);
+
+    when(socket.getInputStream()).thenReturn(stream);
+
+    parser.parse(socket);
+  }
+
   //REG
   @Test()
   public void testParseWhenPassedCorrectRegMethodThanOk() throws Exception {

@@ -19,6 +19,7 @@ public class CustomProtocolParser implements ProtocolParser {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(CustomProtocolParser.class);
   private static final ParserFactory factory = ParserFactory.getInstance();
+  private static final int MAX_REQUEST_LENGTH = 30;
 
   @Override
   public Request parse(final Socket clientSocket) throws ProtocolParseException {
@@ -33,14 +34,24 @@ public class CustomProtocolParser implements ProtocolParser {
   /**
    * It's important that protocol sends \n as end of line flag , but BufferedReader uses it for its
    * purpose and then removes!!!
+   *
+   * Important: we don't need to close the socket here, because it'll closed after response is
+   * written
    */
-  //FIXME: need to verify the length of the request!
   private String readUserInput(final Socket clientSocket) throws ProtocolParseException {
-    try (BufferedReader input = new BufferedReader(
-        new InputStreamReader(clientSocket.getInputStream(),
-            StandardCharsets.UTF_8))) {
+    try {
+      BufferedReader input = new BufferedReader(
+          new InputStreamReader(clientSocket.getInputStream(),
+              StandardCharsets.UTF_8));
 
-      return input.lines().reduce("", (a, b) -> a + b);
+      return input.lines().reduce("", (a, b) -> {
+        if (b != null && b.length() > MAX_REQUEST_LENGTH) {
+          final String errorMessage = "Request's length exceeded";
+          LOGGER.error(errorMessage);
+          throw new IllegalArgumentException(errorMessage);
+        }
+        return a + b;
+      });
 
 
     } catch (IOException e) {
@@ -49,6 +60,7 @@ public class CustomProtocolParser implements ProtocolParser {
       throw new ProtocolParseException(errorMessage, e);
     }
   }
+
 
   private Request parseUserInput(final String userInput) throws ProtocolParseException {
     Method method = validateUserInputAndTakeMethod(userInput);

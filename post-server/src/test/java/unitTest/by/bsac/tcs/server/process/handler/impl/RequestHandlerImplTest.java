@@ -1,9 +1,9 @@
 package by.bsac.tcs.server.process.handler.impl;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -14,6 +14,7 @@ import by.bsac.tcs.server.model.Request;
 import by.bsac.tcs.server.process.handler.exception.RequestHandlerException;
 import by.bsac.tcs.server.process.parser.ProtocolParser;
 import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
+import by.bsac.tcs.server.process.response.ResponseWriter;
 import java.net.Socket;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,22 +37,23 @@ public class RequestHandlerImplTest {
   @Mock
   private RequestController requestController;
 
- /* @Before
-  public void setUp() throws Exception {
-    MockitoAnnotations.initMocks(this);
-  }*/
+  @Mock
+  private ResponseWriter responseWriter;
 
   @Test
   public void runSuccessfully() throws Exception {
     final Request request = mock(Request.class);
     when(parser.parse(socket)).thenReturn(request);
+    doNothing().when(responseWriter).write(socket, request);
 
     requestHandler.run();
 
-    verify(parser, times(1)).parse(socket);
+    verify(parser).parse(socket);
     verifyNoMoreInteractions(parser);
-    verify(requestController, times(1)).process(request);
+    verify(requestController).process(request);
     verifyNoMoreInteractions(requestController);
+    verify(responseWriter).write(socket, request);
+    verifyNoMoreInteractions(responseWriter);
   }
 
   @Test(expected = RequestHandlerException.class)

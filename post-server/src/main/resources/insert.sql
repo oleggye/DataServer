@@ -1,8 +1,11 @@
 -- Delete all data from tables --
 USE `smart_post_box`;
+SET FOREIGN_KEY_CHECKS=0;
+
 DELETE FROM `smart_post_box`.`post_box`;
 DELETE FROM `smart_post_box`.`event`;
 DELETE FROM `smart_post_box`.`event_log`;
+SET FOREIGN_KEY_CHECKS=1;
 
 COMMIT;
 

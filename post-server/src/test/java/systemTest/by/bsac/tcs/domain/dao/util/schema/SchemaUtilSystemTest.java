@@ -1,15 +1,15 @@
 package by.bsac.tcs.domain.dao.util.schema;
 
-import by.bsac.tcs.domain.dao.util.pool.DataSourceHolder;
+import by.bsac.tcs.domain.dao.util.pool.DataSourceProducer;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SchemaUtilTest {
+public class SchemaUtilSystemTest {
 
   private static final SchemaUtil SCHEMA_UTIL = SchemaUtil.getInstance();
-  private static final DataSourceHolder HOLDER = DataSourceHolder.getInstance();
+  private static final DataSourceProducer HOLDER = DataSourceProducer.getInstance();
 
   private DataSource dataSource;
 

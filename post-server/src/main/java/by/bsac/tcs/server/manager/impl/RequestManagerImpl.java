@@ -23,7 +23,8 @@ public class RequestManagerImpl extends AbstractRequestManager {
   }
 
   public void manage(final Socket socket) {
-    LOGGER.info(LogMessageSharper.formIncomingUserLogMessage(socket));
+    String infoMessage = LogMessageSharper.formIncomingUserLogMessage(socket);
+    LOGGER.info(infoMessage);
     final RequestHandler requestHandler = handlerFactory.getRequestHandler(socket);
     pool.submit(requestHandler);
   }

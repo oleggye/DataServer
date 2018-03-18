@@ -51,6 +51,16 @@ public class ServerSystemTest {
   }
 
   @Test
+  public void testWhenSendVeryLongRequest() {
+    final String data = "111111111111111111111111111111111111";
+    new TcpRequestBuilder()
+        .serverAddress(SERVER_ADDRESS)
+        .serverPort(SERVER_PORT)
+        .requestData(data)
+        .perform();
+  }
+
+  @Test
   public void testWhenSendKeepAliveRequest() {
     final String data = "KEEP_ALIVE:222850:5:1519800922\n";
     new TcpRequestBuilder()

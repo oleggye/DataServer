@@ -1,7 +1,7 @@
 package by.bsac.tcs.domain.dao;
 
 import by.bsac.tcs.domain.dao.impl.EventLogDaoImpl;
-import by.bsac.tcs.domain.dao.util.pool.DataSourceHolder;
+import by.bsac.tcs.domain.dao.util.pool.DataSourceProducer;
 
 public class EventLogDaoFactory {
 
@@ -9,7 +9,7 @@ public class EventLogDaoFactory {
   }
 
   private static final EventLogDao eventLogDao = new EventLogDaoImpl(
-      DataSourceHolder.getInstance().getDataSource());
+      DataSourceProducer.getInstance().getDataSource());
 
   public static EventLogDaoFactory getInstance() {
     return SingletonHolder.getInstance();
