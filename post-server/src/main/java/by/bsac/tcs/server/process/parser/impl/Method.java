@@ -4,7 +4,7 @@ import by.bsac.tcs.server.process.parser.impl.util.ProtocolPropertiesLoader;
 import java.util.regex.Pattern;
 
 public enum Method {
-  REG, LIST, WITHDRAWN, EMPTY, KEEP_ALIVE;
+  REG, LETTER, WITHDRAWN, EMPTY, KEEP_ALIVE;
 
   private final Pattern pattern;
 

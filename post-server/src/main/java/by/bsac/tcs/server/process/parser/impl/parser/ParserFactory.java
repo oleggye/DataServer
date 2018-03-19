@@ -2,14 +2,14 @@ package by.bsac.tcs.server.process.parser.impl.parser;
 
 import static by.bsac.tcs.server.process.parser.impl.Method.EMPTY;
 import static by.bsac.tcs.server.process.parser.impl.Method.KEEP_ALIVE;
-import static by.bsac.tcs.server.process.parser.impl.Method.LIST;
+import static by.bsac.tcs.server.process.parser.impl.Method.LETTER;
 import static by.bsac.tcs.server.process.parser.impl.Method.REG;
 import static by.bsac.tcs.server.process.parser.impl.Method.WITHDRAWN;
 
 import by.bsac.tcs.server.process.parser.impl.Method;
 import by.bsac.tcs.server.process.parser.impl.parser.impl.EmptyParser;
 import by.bsac.tcs.server.process.parser.impl.parser.impl.KeepAlive;
-import by.bsac.tcs.server.process.parser.impl.parser.impl.ListParser;
+import by.bsac.tcs.server.process.parser.impl.parser.impl.LetterParser;
 import by.bsac.tcs.server.process.parser.impl.parser.impl.RegParser;
 import by.bsac.tcs.server.process.parser.impl.parser.impl.WithdrawnParser;
 import com.google.common.collect.ImmutableMap;
@@ -23,7 +23,7 @@ public class ParserFactory {
     parserMap =
         ImmutableMap.of(
             REG, new RegParser(REG),
-            LIST, new ListParser(LIST),
+            LETTER, new LetterParser(LETTER),
             WITHDRAWN, new WithdrawnParser(WITHDRAWN),
             EMPTY, new EmptyParser(EMPTY),
             KEEP_ALIVE, new KeepAlive(KEEP_ALIVE));

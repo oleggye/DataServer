@@ -56,7 +56,7 @@ public class EventServiceImplTest {
   public void testChangedSuccess() throws Exception {
     String result = eventLogService.changed(eventLog);
 
-    Assert.assertEquals("LIST_REGISTERED", result);
+    Assert.assertEquals("LETTER_REGISTERED", result);
     verify(eventLogDAO, times(1)).save(eventLog);
     verifyNoMoreInteractions(eventLogDAO);
   }

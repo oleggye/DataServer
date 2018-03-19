@@ -3,6 +3,7 @@ package by.bsac.tcs.domain.dao.util.schema;
 import com.google.common.annotations.VisibleForTesting;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.sql.DataSource;
@@ -47,7 +48,7 @@ public final class SchemaUtil {
   private InputStreamReader getInputStreamReader(final String fileName) {
     InputStream inputStream = this.getClass().getClassLoader()
         .getResourceAsStream(fileName);
-    return new InputStreamReader(inputStream);
+    return new InputStreamReader(inputStream, StandardCharsets.UTF_8);
   }
 
   private static class SingletonHolder {

@@ -84,10 +84,10 @@ public class CustomProtocolParserTest {
     parser.parse(socket);
   }
 
-  //LIST
+  //LETTER
   @Test()
-  public void testParseWhenPassedCorrectListMethodThanOk() throws Exception {
-    final String userRequest = "LIST:222850:1519800922";
+  public void testParseWhenPassedCorrectLetterMethodThanOk() throws Exception {
+    final String userRequest = "LETTER:222850:5:1519800922";
 
     InputStream stream = prepareInputStream(userRequest);
 
@@ -96,8 +96,9 @@ public class CustomProtocolParserTest {
     Request parse = parser.parse(socket);
 
     assertNotNull(parse);
-    assertEquals(Method.LIST, parse.getMethod());
+    assertEquals(Method.LETTER, parse.getMethod());
     assertEquals(222850, parse.getPostBoxId());
+    assertEquals(5, parse.getLettersCount());
     assertEquals(1519800922, parse.getEpochTime());
 
     verify(socket).getInputStream();
@@ -105,8 +106,8 @@ public class CustomProtocolParserTest {
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedListMethodWithoutIdThanException() throws Exception {
-    final String userRequest = "LIST::1519800922";
+  public void testParseWhenPassedLetterMethodWithoutIdThanException() throws Exception {
+    final String userRequest = "LETTER::5:1519800922";
 
     InputStream stream = prepareInputStream(userRequest);
 
@@ -116,9 +117,9 @@ public class CustomProtocolParserTest {
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedListMethodWithAlphabeticCharacterInIdThanException()
+  public void testParseWhenPassedLetterMethodWithAlphabeticCharacterInIdThanException()
       throws Exception {
-    final String userRequest = "LIST:222s50:1519800922";
+    final String userRequest = "LETTER:222s50:5:1519800922";
 
     InputStream stream = prepareInputStream(userRequest);
 
@@ -128,8 +129,18 @@ public class CustomProtocolParserTest {
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedListMethodWithoutTimeThanException() throws Exception {
-    final String userRequest = "LIST:222850:";
+  public void testParseWhenPassedLetterMethodWithoutQuantityThanException() throws Exception {
+    final String userRequest = "KEEP_ALIVE:222850::1519800922";
+
+    InputStream stream = prepareInputStream(userRequest);
+
+    when(socket.getInputStream()).thenReturn(stream);
+
+    parser.parse(socket);
+  }
+  @Test(expected = ProtocolParseException.class)
+  public void testParseWhenPassedLetterMethodWithoutTimeThanException() throws Exception {
+    final String userRequest = "LETTER:222850:5:";
 
     InputStream stream = prepareInputStream(userRequest);
 

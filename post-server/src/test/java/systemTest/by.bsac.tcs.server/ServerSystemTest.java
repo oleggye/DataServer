@@ -1,6 +1,10 @@
 package by.bsac.tcs.server;
 
-import java.util.concurrent.TimeUnit;
+import static org.junit.Assert.assertEquals;
+
+import by.bsac.tcs.server.util.NoResponseException;
+import by.bsac.tcs.server.util.TcpRequester;
+import by.bsac.tcs.server.util.model.RequestBuilder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -9,7 +13,6 @@ public class ServerSystemTest {
 
   private static final String SERVER_ADDRESS = "127.0.0.1";
   private static final int SERVER_PORT = 8888;
-  private static final long SLEEP_TIMEOUT_SEC = 4;
 
   private static Server server;
   private static Thread serverThread;
@@ -27,11 +30,11 @@ public class ServerSystemTest {
   }
 
   /**
-   * Use delay before server stop to allow the server process all requests from test classes
+   * Don't need to use delay before server stop because of {@link TcpRequester} implementation
    */
   @AfterClass
-  public static void tearDownAfterClass() throws Exception {
-    TimeUnit.SECONDS.sleep(SLEEP_TIMEOUT_SEC);
+  public static void tearDownAfterClass() {
+    //TimeUnit.SECONDS.sleep(SLEEP_TIMEOUT_SEC);
     if (server != null) {
       server.stop();
     }
@@ -40,33 +43,42 @@ public class ServerSystemTest {
     }
   }
 
-  @Test
+  @Test(expected = NoResponseException.class)
   public void testWhenSendRequestWithEmptyData() {
     final String data = "";
-    new TcpRequestBuilder()
-        .serverAddress(SERVER_ADDRESS)
-        .serverPort(SERVER_PORT)
-        .requestData(data)
-        .perform();
+    performRequest(data);
   }
 
-  @Test
+  @Test(expected = NoResponseException.class)
   public void testWhenSendVeryLongRequest() {
     final String data = "111111111111111111111111111111111111";
-    new TcpRequestBuilder()
-        .serverAddress(SERVER_ADDRESS)
-        .serverPort(SERVER_PORT)
-        .requestData(data)
-        .perform();
+    performRequest(data);
   }
 
   @Test
   public void testWhenSendKeepAliveRequest() {
     final String data = "KEEP_ALIVE:222850:5:1519800922\n";
-    new TcpRequestBuilder()
-        .serverAddress(SERVER_ADDRESS)
-        .serverPort(SERVER_PORT)
-        .requestData(data)
-        .perform();
+
+    String response = performRequest(data);
+
+    assertEquals(null, response);
+  }
+
+  @Test
+  public void testWhenSendRegRequest() {
+    final String data = "REG:222850\n";
+
+    String response = performRequest(data);
+
+    assertEquals("LETTER_REGISTERED", response);
+  }
+
+  private String performRequest(String data) {
+    return new TcpRequester()
+        .perform(
+            new RequestBuilder()
+                .serverAddress(SERVER_ADDRESS)
+                .serverPort(SERVER_PORT)
+                .requestData(data));
   }
 }

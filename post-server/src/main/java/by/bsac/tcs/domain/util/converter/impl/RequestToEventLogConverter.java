@@ -13,7 +13,7 @@ public class RequestToEventLogConverter implements RequestConverter {
   private static final Map<Method, Event> METHOD_EVENT_MAP =
       ImmutableMap.of(
           Method.REG, Event.REGISTRATION,
-          Method.LIST, Event.QUANTITY_CHANGED,
+          Method.LETTER, Event.QUANTITY_CHANGED,
           Method.WITHDRAWN, Event.HAS_OPENED,
           Method.EMPTY, Event.HAS_CLOSED,
           Method.KEEP_ALIVE, Event.KEEP_ALIVE

@@ -40,7 +40,7 @@ public class EventServiceImpl implements EventService {
   @Override
   public String changed(EventLog eventLog) throws ServiceException {
     log(eventLog);
-    return "LIST_REGISTERED";
+    return "LETTER_REGISTERED";
   }
 
   @Override

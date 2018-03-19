@@ -14,7 +14,7 @@ public final class DataSourceProducer {
 
   private static final String DEFAULT_URI = "jdbc:h2:~/test";
   private static final String DEFAULT_USERNAME = "sa";
-  private static final String DEFAULT_PASSWORD = "";
+  private static final String DEFAULT_PASS = "";
   private static final int DEFAULT_MIN_IDLE = 5;
   private static final int DEFAULT_MAX_IDLE = 10;
   private static final int DEFAULT_MAX_OPS = 20;
@@ -28,7 +28,7 @@ public final class DataSourceProducer {
 
     basicDataSource.setUrl(bundle.getUrl().orElse(DEFAULT_URI));
     basicDataSource.setUsername(bundle.getUser().orElse(DEFAULT_USERNAME));
-    basicDataSource.setPassword(bundle.getPassword().orElse(DEFAULT_PASSWORD));
+    basicDataSource.setPassword(bundle.getPassword().orElse(DEFAULT_PASS));
     basicDataSource.setMinIdle(bundle.getMinIdle().orElse(DEFAULT_MIN_IDLE));
     basicDataSource.setMaxIdle(bundle.getMaxIdle().orElse(DEFAULT_MAX_IDLE));
     basicDataSource.setMaxOpenPreparedStatements(bundle.getMaxOPS().orElse(DEFAULT_MAX_OPS));

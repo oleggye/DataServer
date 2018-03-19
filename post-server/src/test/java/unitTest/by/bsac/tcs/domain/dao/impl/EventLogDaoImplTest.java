@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import by.bsac.tcs.domain.dao.util.handler.ResultSetHandler;
 import by.bsac.tcs.domain.model.Event;
 import by.bsac.tcs.domain.model.EventLog;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,6 +44,7 @@ public class EventLogDaoImplTest {
   @Mock
   private ResultSet resultSet;
 
+  @SuppressFBWarnings("OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE")
   @Before
   public void setUp() throws SQLException {
     when(dataSource.getConnection()).thenReturn(connection);
@@ -50,12 +52,14 @@ public class EventLogDaoImplTest {
     doNothing().when(preparedStatement).close();
   }
 
+  @SuppressFBWarnings("ODR_OPEN_DATABASE_RESOURCE")
   @After
   public void tearDown() throws SQLException {
     verify(dataSource).getConnection();
     verify(preparedStatement).close();
   }
 
+  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED")
   @Test
   public void findById() throws Exception {
     EventLog expectedEventLog = new EventLog(0, null, 0,0);

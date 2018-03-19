@@ -24,7 +24,7 @@ public class CommandProvider {
   private CommandProvider() {
     commandStore = new EnumMap<>(Method.class);
     commandStore.put(Method.REG, new RegistrationCommand());
-    commandStore.put(Method.LIST, new QuantityChangedCommand());
+    commandStore.put(Method.LETTER, new QuantityChangedCommand());
     commandStore.put(Method.WITHDRAWN, new HasOpenedCommand());
     commandStore.put(Method.EMPTY, new HasClosedCommand());
     commandStore.put(Method.KEEP_ALIVE, new KeepAliveCommand());

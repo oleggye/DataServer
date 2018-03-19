@@ -20,6 +20,7 @@ public class CustomProtocolParser implements ProtocolParser {
   private static final Logger LOGGER = LoggerFactory.getLogger(CustomProtocolParser.class);
   private static final ParserFactory factory = ParserFactory.getInstance();
   private static final int MAX_REQUEST_LENGTH = 30;
+  private static final int INPUT_STREAM_TIME_OUT_MILLISECONDS = 100;
 
   @Override
   public Request parse(final Socket clientSocket) throws ProtocolParseException {
@@ -44,20 +45,24 @@ public class CustomProtocolParser implements ProtocolParser {
           new InputStreamReader(clientSocket.getInputStream(),
               StandardCharsets.UTF_8));
 
-      return input.lines().reduce("", (a, b) -> {
-        if (b != null && b.length() > MAX_REQUEST_LENGTH) {
-          final String errorMessage = "Request's length exceeded";
-          LOGGER.error(errorMessage);
-          throw new IllegalArgumentException(errorMessage);
-        }
-        return a + b;
-      });
+      clientSocket.setSoTimeout(INPUT_STREAM_TIME_OUT_MILLISECONDS);
 
+      final String userInput = input.readLine();
+      checkForExcessLength(userInput);
 
+      return userInput;
     } catch (IOException e) {
       final String errorMessage = "Can't read client's data";
       LOGGER.error(errorMessage, e);
       throw new ProtocolParseException(errorMessage, e);
+    }
+  }
+
+  private void checkForExcessLength(final String userInput) {
+    if (userInput.length() > MAX_REQUEST_LENGTH) {
+      final String errorMessage = "Request's length exceeded";
+      LOGGER.error(errorMessage);
+      throw new IllegalArgumentException(errorMessage);
     }
   }
 

@@ -13,7 +13,7 @@ public final class ConnectionPropertiesBundle {
   private static final String FILE_NAME = "db";
   private static final String URL_KEY = "db.url";
   private static final String USER_KEY = "db.user";
-  private static final String PASSWORD_KEY = "db.password";
+  private static final String PASS_KEY = "db.password";
   private static final String MIN_IDLE_KEY = "db.minIdle";
   private static final String MAX_IDLE_KEY = "db.minIdle";
   private static final String MAX_OPS_KEY = "db.maxOPS";
@@ -60,7 +60,7 @@ public final class ConnectionPropertiesBundle {
   }
 
   public Optional<String> getPassword() {
-    return getProperty(PASSWORD_KEY);
+    return getProperty(PASS_KEY);
   }
 
   public Optional<Integer> getMinIdle() {

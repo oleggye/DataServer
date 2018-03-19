@@ -7,17 +7,17 @@ import by.bsac.tcs.server.process.parser.impl.parser.RequestParser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ListParser implements RequestParser {
+public class LetterParser implements RequestParser {
 
-  private final Method list;
+  private final Method method;
 
-  public ListParser(Method list) {
-    this.list = list;
+  public LetterParser(Method method) {
+    this.method = method;
   }
 
   @Override
   public Request parse(String requestString) {
-    Pattern pattern = list.getPattern();
+    Pattern pattern = method.getPattern();
     Matcher matcher = pattern.matcher(requestString);
 
     if (!matcher.find()) {
@@ -25,10 +25,12 @@ public class ListParser implements RequestParser {
     }
 
     String id = matcher.group(1);
-    String epochTime = matcher.group(2);
+    String letterCount = matcher.group(2);
+    String epochTime = matcher.group(3);
     return new RequestBuilder()
-        .method(list)
+        .method(method)
         .id(id)
+        .lettersCount(letterCount)
         .time(epochTime)
         .build();
   }
