@@ -20,23 +20,28 @@ import org.slf4j.LoggerFactory;
 public class TcpRequester {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(TcpRequester.class);
-  private static final ExecutorService executor = Executors.newFixedThreadPool(2);
+
+  private static final int DEFAULT_EXECUTOR_SERVICE_THREADS_COUNT = 2;
+  private static final ExecutorService executor = Executors
+      .newFixedThreadPool(DEFAULT_EXECUTOR_SERVICE_THREADS_COUNT);
 
   private static final String TIME_EXCEED_MESSAGE_FORMAT = "Time out of %d %s is exceeded";
+
+  private static final long DEFAULT_TIMEOUT = 7;
+  private static final TimeUnit DEFAULT_TIME_UNIT = TimeUnit.SECONDS;
 
   private final long timeout;
   private final TimeUnit timeUnit;
 
   public TcpRequester() {
-    this.timeout = 5;
-    this.timeUnit = TimeUnit.SECONDS;
+    this.timeout = DEFAULT_TIMEOUT;
+    this.timeUnit = DEFAULT_TIME_UNIT;
   }
 
   public TcpRequester(long timeout, TimeUnit timeUnit) {
     this.timeout = timeout;
     this.timeUnit = timeUnit;
   }
-
 
   /**
    * Open socket to a server

@@ -56,21 +56,48 @@ public class ServerSystemTest {
   }
 
   @Test
+  public void testWhenSendRegRequest() {
+    final String data = "REG:222850\n";
+
+    String response = performRequest(data);
+
+    assertEquals("REGISTERED", response);
+  }
+
+  @Test
+  public void testWhenSendLetterRequest() {
+    final String data = "LETTER:222850:5:1519800922\n";
+
+    String response = performRequest(data);
+
+    assertEquals("LETTER_REGISTERED", response);
+  }
+
+  @Test
+  public void testWhenSendEmptyRequest() {
+    final String data = "EMPTY:222850:1519800922\n";
+
+    String response = performRequest(data);
+
+    assertEquals("EMPTY_REGISTERED", response);
+  }
+
+  @Test
+  public void testWhenSendWithdrawnRequest() {
+    final String data = "WITHDRAWN:222850:1519800922\n";
+
+    String response = performRequest(data);
+
+    assertEquals("WITHDRAWN_REGISTERED", response);
+  }
+
+  @Test
   public void testWhenSendKeepAliveRequest() {
     final String data = "KEEP_ALIVE:222850:5:1519800922\n";
 
     String response = performRequest(data);
 
     assertEquals(null, response);
-  }
-
-  @Test
-  public void testWhenSendRegRequest() {
-    final String data = "REG:222850\n";
-
-    String response = performRequest(data);
-
-    assertEquals("LETTER_REGISTERED", response);
   }
 
   private String performRequest(String data) {

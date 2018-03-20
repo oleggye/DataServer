@@ -31,7 +31,7 @@ public final class SchemaUtil {
       insertData(connection);
     } catch (SQLException e) {
       LOGGER.info("An exception acquired while prepare schema", e);
-      throw new RuntimeException(e);
+      throw new IllegalStateException(e);
     }
   }
 

@@ -1,5 +1,7 @@
 package by.bsac.tcs.server.process.parser.impl;
 
+import static java.util.Objects.isNull;
+
 import by.bsac.tcs.server.model.Request;
 import by.bsac.tcs.server.process.parser.ProtocolParser;
 import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
@@ -59,8 +61,9 @@ public class CustomProtocolParser implements ProtocolParser {
   }
 
   private void checkForExcessLength(final String userInput) {
-    if (userInput.length() > MAX_REQUEST_LENGTH) {
-      final String errorMessage = "Request's length exceeded";
+    if (isNull(userInput) ||
+        userInput.length() > MAX_REQUEST_LENGTH) {
+      final String errorMessage = "Request is null or its length exceeded!";
       LOGGER.error(errorMessage);
       throw new IllegalArgumentException(errorMessage);
     }

@@ -22,7 +22,7 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
-  public void log(EventLog eventLog) throws EventServiceException {
+  public void log(EventLog eventLog) throws ServiceException {
     try {
       eventLogDao.save(eventLog);
     } catch (DaoException e) {
