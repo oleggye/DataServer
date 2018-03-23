@@ -7,25 +7,42 @@
   <groupId>by.bsac.tcs</groupId>
   <artifactId>data-by.bsac.tcs.server</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
   <modules>
     <module>post-server</module>
   </modules>
-  <packaging>pom</packaging>
 
   <properties>
     <java.version>1.8</java.version>
+
+    <!--logging-->
     <slf4j.version>1.7.25</slf4j.version>
     <logback.version>1.2.3</logback.version>
+
+    <!--test-->
     <junit.version>4.12</junit.version>
     <mockito.version>2.15.0</mockito.version>
-    <mongodb.version>3.5.0</mongodb.version>
+
+    <!--db-->
     <h2.version>1.4.196</h2.version>
     <dbcp2.version>2.2.0</dbcp2.version>
     <mysql.version>8.0.8-dmr</mysql.version>
+
+    <!--code analysis-->
     <findbugs.version>3.0.0</findbugs.version>
+
+    <!--util-->
     <guava.version>24.0-jre</guava.version>
     <commons-collections4.version>4.1</commons-collections4.version>
     <commons-lang3.version>3.7</commons-lang3.version>
+    <groovy-all.version>2.4.14</groovy-all.version>
+
+    <!--build-->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+    <groovy-eclipse-compiler.version>2.9.2-04</groovy-eclipse-compiler.version>
+    <groovy-eclipse-batch.version>2.4.14-01</groovy-eclipse-batch.version>
   </properties>
 
   <dependencyManagement>
@@ -46,6 +63,37 @@
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
         <version>${logback.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>${commons-collections4.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-all</artifactId>
+        <version>${groovy-all.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>annotations</artifactId>
+        <version>${findbugs.version}</version>
+        <scope>compile</scope>
       </dependency>
 
       <dependency>
@@ -79,33 +127,56 @@
         <version>${mockito.version}</version>
         <scope>test</scope>
       </dependency>
-
-      <dependency>
-        <groupId>com.google.code.findbugs</groupId>
-        <artifactId>annotations</artifactId>
-        <version>${findbugs.version}</version>
-        <scope>compile</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>${guava.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-collections4</artifactId>
-        <version>${commons-collections4.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-lang3</artifactId>
-        <version>${commons-lang3.version}</version>
-      </dependency>
-
     </dependencies>
   </dependencyManagement>
 
+  <build>
+    <pluginManagement>
+
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+            <encoding>UTF-8</encoding>
+            <showDeprecation>true</showDeprecation>
+            <showWarnings>true</showWarnings>
+            <verbose>true</verbose>
+            <compilerId>groovy-eclipse-compiler</compilerId>
+          </configuration>
+
+          <dependencies>
+            <dependency>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy-eclipse-compiler</artifactId>
+              <version>${groovy-eclipse-compiler.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy-eclipse-batch</artifactId>
+              <version>${groovy-eclipse-batch.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>bintray</id>
+      <name>Groovy Bintray</name>
+      <url>https://dl.bintray.com/groovy/maven</url>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 </project>

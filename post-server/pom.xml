@@ -10,6 +10,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>post-by.bsac.tcs.server</artifactId>
+  <packaging>jar</packaging>
+  <name>post-server</name>
 
   <dependencies>
 
@@ -62,6 +64,11 @@
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -69,10 +76,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
       </plugin>
     </plugins>
   </build>
