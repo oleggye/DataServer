@@ -7,6 +7,7 @@ import by.bsac.tcs.server.util.TcpRequester;
 import by.bsac.tcs.server.util.model.RequestBuilder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ServerSystemTest {
@@ -43,6 +44,7 @@ public class ServerSystemTest {
     }
   }
 
+  @Ignore
   @Test(expected = NoResponseException.class)
   public void testWhenSendRequestWithEmptyData() {
     final String data = "";

@@ -27,7 +27,7 @@ public class TcpRequester {
 
   private static final String TIME_EXCEED_MESSAGE_FORMAT = "Time out of %d %s is exceeded";
 
-  private static final long DEFAULT_TIMEOUT = 7;
+  private static final long DEFAULT_TIMEOUT = 6;
   private static final TimeUnit DEFAULT_TIME_UNIT = TimeUnit.SECONDS;
 
   private final long timeout;
