@@ -56,7 +56,8 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
-  public void keepAlive(EventLog eventLog) throws ServiceException {
+  public String keepAlive(EventLog eventLog) throws ServiceException {
     log(eventLog);
+    return "KEEP_ALIVE_REGISTERED";
   }
 }

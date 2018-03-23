@@ -5,6 +5,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 import by.bsac.tcs.domain.controller.command.CommandException;
 import by.bsac.tcs.domain.model.EventLog;
@@ -17,13 +18,15 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class KeepAliveCommandTest extends GenericCommandTest {
 
+  private static final String EXCEPTED_MESSAGE = "KEEP_ALIVE_REGISTERED";
+
   @InjectMocks
   private KeepAliveCommand command;
 
   @Override
   protected void beforeTestExecuteSuccess() throws ServiceException {
     super.beforeTestExecuteSuccess();
-    doNothing().when(eventService).keepAlive(any(EventLog.class));
+    when(eventService.keepAlive(any(EventLog.class))).thenReturn(EXCEPTED_MESSAGE);
   }
 
   @Override
@@ -31,6 +34,8 @@ public class KeepAliveCommandTest extends GenericCommandTest {
     super.afterTestExecuteSuccess();
     verify(eventService).keepAlive(eventLog);
     verifyNoMoreInteractions(eventService);
+    verify(request).setResponse(EXCEPTED_MESSAGE);
+    verifyNoMoreInteractions(request);
   }
 
   @Test
@@ -43,7 +48,7 @@ public class KeepAliveCommandTest extends GenericCommandTest {
   @Override
   protected void beforeTestExecuteFailsWhenServiceException() throws ServiceException {
     super.beforeTestExecuteFailsWhenServiceException();
-    doThrow(ServiceException.class).when(eventService).keepAlive(any(EventLog.class));
+    when(eventService.keepAlive(any(EventLog.class))).thenThrow(ServiceException.class);
   }
 
   @Test(expected = CommandException.class)

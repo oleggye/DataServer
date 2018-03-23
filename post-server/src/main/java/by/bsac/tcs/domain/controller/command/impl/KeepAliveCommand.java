@@ -37,7 +37,8 @@ public class KeepAliveCommand implements Command {
     final EventLog eventLog = requestConverter.convert(request);
 
     try {
-      eventService.keepAlive(eventLog);
+      final String response = eventService.keepAlive(eventLog);
+      request.setResponse(response);
     } catch (ServiceException e) {
       final String message = String.format("An error occurred while eventLog event %s", eventLog);
       LOGGER.error(message);

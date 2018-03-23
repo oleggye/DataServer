@@ -15,5 +15,5 @@ public interface EventService {
 
   String closed(EventLog eventLog) throws ServiceException;
 
-  void keepAlive(EventLog eventLog) throws ServiceException;
+  String keepAlive(EventLog eventLog) throws ServiceException;
 }

@@ -41,7 +41,6 @@ public class HasOpenedCommandTest extends GenericCommandTest {
     beforeTestExecuteSuccess();
     command.execute(request);
     afterTestExecuteSuccess();
-
   }
 
   @Override

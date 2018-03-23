@@ -97,7 +97,7 @@ public class ServerSystemTest {
 
     String response = performRequest(data);
 
-    assertEquals(null, response);
+    assertEquals("KEEP_ALIVE_REGISTERED", response);
   }
 
   private String performRequest(String data) {
