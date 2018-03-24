@@ -14,8 +14,7 @@ import java.nio.charset.StandardCharsets;
 public class SimpleResponseWriter implements ResponseWriter {
 
   /**
-   * When close() method will be invoked on the socket - the socket will be close so, I am using
-   * this ability
+   * Write a response to a client
    */
   public void write(Socket socket, Request request) throws ResponseWriterException {
 
@@ -28,7 +27,6 @@ public class SimpleResponseWriter implements ResponseWriter {
         writer.write(response);
         writer.flush();
       }
-
 
     } catch (IOException e) {
       throw new ResponseWriterException("Can't write response", e);
