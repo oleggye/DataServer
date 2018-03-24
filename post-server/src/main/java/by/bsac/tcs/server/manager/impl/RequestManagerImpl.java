@@ -26,6 +26,7 @@ public class RequestManagerImpl extends AbstractRequestManager {
     String infoMessage = LogMessageSharper.formIncomingUserLogMessage(socket);
     LOGGER.info(infoMessage);
     final RequestHandler requestHandler = handlerFactory.getRequestHandler(socket);
+
     pool.submit(requestHandler);
   }
 }

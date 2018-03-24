@@ -14,7 +14,7 @@ public final class LogMessageSharper {
   public static String formIncomingUserLogMessage(final Socket socket) {
     InetAddress address = socket.getLocalAddress();
     String hostAddress = address.getHostAddress();
-    int port = socket.getLocalPort();
+    int port = socket.getPort();
     return String.format(INCOMING_REQUEST_MESSAGE_PATTERN, hostAddress, port);
   }
 }

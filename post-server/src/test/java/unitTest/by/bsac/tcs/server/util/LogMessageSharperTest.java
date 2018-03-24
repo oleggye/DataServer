@@ -10,9 +10,12 @@ import java.net.InetAddress;
 import java.net.Socket;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class LogMessageSharperTest {
 
   @Mock
@@ -21,13 +24,8 @@ public class LogMessageSharperTest {
   @Mock
   private InetAddress inetAddress;
 
-  @Before
-  public void setUp() throws Exception {
-    MockitoAnnotations.initMocks(this);
-  }
-
   @Test
-  public void formIncomingUserLogMessage() throws Exception {
+  public void formIncomingUserLogMessage() {
     final String hostAddress = "127.9.12.2";
     final int port = 777;
 
@@ -35,17 +33,17 @@ public class LogMessageSharperTest {
         .format("new incoming request from %s:%d", hostAddress, port);
 
     when(socket.getLocalAddress()).thenReturn(inetAddress);
-    when(socket.getLocalPort()).thenReturn(port);
+    when(socket.getPort()).thenReturn(port);
     when(inetAddress.getHostAddress()).thenReturn(hostAddress);
 
     String actualMessage = LogMessageSharper.formIncomingUserLogMessage(socket);
 
     assertEquals(expectedMessage, actualMessage);
 
-    verify(socket, times(1)).getLocalAddress();
-    verify(socket, times(1)).getLocalPort();
+    verify(socket).getLocalAddress();
+    verify(socket).getPort();
     verifyNoMoreInteractions(socket);
-    verify(inetAddress, times(1)).getHostAddress();
+    verify(inetAddress).getHostAddress();
     verifyNoMoreInteractions(inetAddress);
   }
 }

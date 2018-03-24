@@ -7,6 +7,7 @@ import by.bsac.tcs.server.process.parser.ProtocolParser;
 import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
 import by.bsac.tcs.server.process.parser.impl.parser.ParserFactory;
 import by.bsac.tcs.server.process.parser.impl.parser.RequestParser;
+import by.bsac.tcs.server.util.ApplicationPropertiesLoader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,8 +21,16 @@ import org.slf4j.LoggerFactory;
 public class CustomProtocolParser implements ProtocolParser {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(CustomProtocolParser.class);
+  private static final ApplicationPropertiesLoader APPLICATION_PROPERTIES_LOADER = ApplicationPropertiesLoader
+      .getInstance();
+
   private static final ParserFactory factory = ParserFactory.getInstance();
-  private static final int MAX_REQUEST_LENGTH = 30;
+
+  private final int requestMaxLength;
+
+  public CustomProtocolParser() {
+    requestMaxLength = APPLICATION_PROPERTIES_LOADER.getRequestMaxLength();
+  }
 
   @Override
   public Request parse(final Socket clientSocket) throws ProtocolParseException {
@@ -59,7 +68,7 @@ public class CustomProtocolParser implements ProtocolParser {
 
   private void checkForExcessLength(final String userInput) {
     if (isNull(userInput) ||
-        userInput.length() > MAX_REQUEST_LENGTH) {
+        userInput.length() > requestMaxLength) {
       final String errorMessage = "Request is null or its length exceeded!";
       LOGGER.error(errorMessage);
       throw new IllegalArgumentException(errorMessage);

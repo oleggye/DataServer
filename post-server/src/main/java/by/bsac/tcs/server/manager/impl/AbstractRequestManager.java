@@ -2,6 +2,7 @@ package by.bsac.tcs.server.manager.impl;
 
 import by.bsac.tcs.server.manager.RequestManager;
 import by.bsac.tcs.server.manager.exception.RequestManagerException;
+import by.bsac.tcs.server.util.ApplicationPropertiesLoader;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -11,16 +12,24 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractRequestManager implements RequestManager {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRequestManager.class);
+  private static final ApplicationPropertiesLoader APPLICATION_PROPERTIES_LOADER = ApplicationPropertiesLoader
+      .getInstance();
 
-  private static final long TIME_OUT_SECONDS = 3;
+  private final long poolTimeoutSeconds;
+  private final int threadCount;
 
   protected ExecutorService pool;
+
+  protected AbstractRequestManager() {
+    poolTimeoutSeconds = APPLICATION_PROPERTIES_LOADER.getPoolShutDownTimeout();
+    threadCount = APPLICATION_PROPERTIES_LOADER.getPoolThreadCount();
+  }
 
   /**
    * Method initializes pool which process user's requests.
    */
   public void init() {
-    pool = Executors.newCachedThreadPool();
+    pool = Executors.newFixedThreadPool(threadCount);
   }
 
   /**
@@ -32,7 +41,7 @@ public abstract class AbstractRequestManager implements RequestManager {
       pool.shutdown();
 
       try {
-        pool.awaitTermination(TIME_OUT_SECONDS, TimeUnit.SECONDS);
+        pool.awaitTermination(poolTimeoutSeconds, TimeUnit.SECONDS);
 
       } catch (InterruptedException e) {
 

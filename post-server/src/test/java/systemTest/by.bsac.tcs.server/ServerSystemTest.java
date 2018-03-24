@@ -7,7 +7,6 @@ import by.bsac.tcs.server.util.TcpRequester;
 import by.bsac.tcs.server.util.model.RequestBuilder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class ServerSystemTest {
@@ -22,12 +21,13 @@ public class ServerSystemTest {
    * Start the server as a new thread add save ref to it
    */
   @BeforeClass
-  public static void setUpBeforeClass() {
+  public static void setUpBeforeClass() throws InterruptedException {
     serverThread = new Thread(() -> {
       server = new Server(SERVER_PORT);
       server.start();
     });
     serverThread.start();
+    Thread.sleep(1000);
   }
 
   /**

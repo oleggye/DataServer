@@ -21,13 +21,13 @@ public class TcpRequester {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(TcpRequester.class);
 
-  private static final int DEFAULT_EXECUTOR_SERVICE_THREADS_COUNT = 2;
+  private static final int DEFAULT_EXECUTOR_SERVICE_THREADS_COUNT = 3;
   private static final ExecutorService executor = Executors
       .newFixedThreadPool(DEFAULT_EXECUTOR_SERVICE_THREADS_COUNT);
 
   private static final String TIME_EXCEED_MESSAGE_FORMAT = "Time out of %d %s is exceeded";
 
-  private static final long DEFAULT_TIMEOUT = 6;
+  private static final long DEFAULT_TIMEOUT = 3;
   private static final TimeUnit DEFAULT_TIME_UNIT = TimeUnit.SECONDS;
 
   private final long timeout;

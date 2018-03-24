@@ -9,6 +9,7 @@ import by.bsac.tcs.server.process.parser.ProtocolParser;
 import by.bsac.tcs.server.process.parser.ProtocolParserFactory;
 import by.bsac.tcs.server.process.response.ResponseWriter;
 import by.bsac.tcs.server.process.response.ResponseWriterFactory;
+import by.bsac.tcs.server.util.ApplicationPropertiesLoader;
 import java.io.IOException;
 import java.net.Socket;
 import org.slf4j.Logger;
@@ -17,49 +18,56 @@ import org.slf4j.LoggerFactory;
 public class RequestHandlerImpl implements RequestHandler {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(RequestHandlerImpl.class);
-
-  private static final int INPUT_STREAM_TIME_OUT_MILLISECONDS = 100;
+  private static final ApplicationPropertiesLoader APPLICATION_PROPERTIES_LOADER = ApplicationPropertiesLoader
+      .getInstance();
 
   private static final ProtocolParserFactory PARSER_FACTORY = ProtocolParserFactory.getInstance();
   private static final ControllerFactory CONTROLLER_FACTORY = ControllerFactory.getInstance();
   private static final ResponseWriterFactory RESPONSE_WRITER_FACTORY = ResponseWriterFactory
       .getInstance();
 
+  private final int socketTimeoutMilliseconds;
+
   private final Socket clientSocket;
   private final ProtocolParser parser;
   private final RequestController requestController;
   private final ResponseWriter responseWriter;
 
-  public RequestHandlerImpl(Socket clientSocket) {
+  public RequestHandlerImpl(final Socket clientSocket) {
     this.clientSocket = clientSocket;
     this.parser = PARSER_FACTORY.getProtocolParser();
     this.requestController = CONTROLLER_FACTORY.getController();
     this.responseWriter = RESPONSE_WRITER_FACTORY.getResponseWriter();
+    socketTimeoutMilliseconds = APPLICATION_PROPERTIES_LOADER.getSocketTimeout();
   }
 
-  public RequestHandlerImpl(Socket clientSocket,
-      ProtocolParser parser,
-      RequestController requestController) {
+  public RequestHandlerImpl(
+      final Socket clientSocket,
+      final ProtocolParser parser,
+      final RequestController requestController) {
     this.clientSocket = clientSocket;
     this.parser = parser;
     this.requestController = requestController;
     this.responseWriter = RESPONSE_WRITER_FACTORY.getResponseWriter();
+    socketTimeoutMilliseconds = APPLICATION_PROPERTIES_LOADER.getSocketTimeout();
   }
 
-  public RequestHandlerImpl(Socket clientSocket,
-      ProtocolParser parser,
-      RequestController requestController,
-      ResponseWriter responseWriter) {
+  public RequestHandlerImpl(
+      final Socket clientSocket,
+      final ProtocolParser parser,
+      final RequestController requestController,
+      final ResponseWriter responseWriter) {
     this.clientSocket = clientSocket;
     this.parser = parser;
     this.requestController = requestController;
     this.responseWriter = responseWriter;
+    socketTimeoutMilliseconds = APPLICATION_PROPERTIES_LOADER.getSocketTimeout();
   }
 
   @Override
   public void run() {
     try {
-      clientSocket.setSoTimeout(INPUT_STREAM_TIME_OUT_MILLISECONDS);
+      clientSocket.setSoTimeout(socketTimeoutMilliseconds);
 
       Request request = parser.parse(clientSocket);
       LOGGER.debug("Request was parsed");
@@ -68,7 +76,7 @@ public class RequestHandlerImpl implements RequestHandler {
       responseWriter.write(clientSocket, request);
       LOGGER.debug("Response was written");
 
-      closeSocketItPossible();
+      closeSocketIfPossible();
     } catch (Exception e) {
       String message = "Can't manage client process";
       LOGGER.error(message, e);
@@ -76,7 +84,7 @@ public class RequestHandlerImpl implements RequestHandler {
     }
   }
 
-  private void closeSocketItPossible() throws IOException {
+  private void closeSocketIfPossible() throws IOException {
     if (!clientSocket.isClosed()) {
       clientSocket.close();
     }

@@ -1,18 +1,23 @@
 package by.bsac.tcs;
 
 import by.bsac.tcs.server.Server;
+import by.bsac.tcs.server.util.ApplicationPropertiesLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Application {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
-  private static final int DEFAULT_PORT = 8888;
+
+  private static final ApplicationPropertiesLoader APPLICATION_PROPERTIES_LOADER = ApplicationPropertiesLoader
+      .getInstance();
 
   public static void main(String[] args) {
     LOGGER.info("Starting by.bsac.tcs.server application......");
 
-    final int portNumber = isPortArgumentSet(args) ? parsePortNumber(args[0]) : DEFAULT_PORT;
+    final int portNumber =
+        isPortArgumentSet(args) ? parsePortNumber(args[0])
+            : APPLICATION_PROPERTIES_LOADER.getPort();
 
     Server server = new Server(portNumber);
     server.start();
