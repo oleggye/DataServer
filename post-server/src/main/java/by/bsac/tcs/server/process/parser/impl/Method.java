@@ -1,6 +1,6 @@
 package by.bsac.tcs.server.process.parser.impl;
 
-import by.bsac.tcs.server.process.parser.impl.util.ProtocolPropertiesLoader;
+import by.bsac.tcs.server.util.loader.ProtocolPropertiesLoader;
 import java.util.regex.Pattern;
 
 public enum Method {

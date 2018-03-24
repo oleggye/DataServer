@@ -2,7 +2,7 @@ package by.bsac.tcs.server.manager.impl;
 
 import by.bsac.tcs.server.manager.RequestManager;
 import by.bsac.tcs.server.manager.exception.RequestManagerException;
-import by.bsac.tcs.server.util.ApplicationPropertiesLoader;
+import by.bsac.tcs.server.util.loader.ApplicationPropertiesLoader;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;

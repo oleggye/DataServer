@@ -1,5 +1,6 @@
 package by.bsac.tcs.server.util;
 
+import by.bsac.tcs.server.util.loader.ApplicationPropertiesLoader;
 import java.net.Socket;
 import java.net.SocketException;
 

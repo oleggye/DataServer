@@ -1,7 +1,7 @@
 package by.bsac.tcs;
 
 import by.bsac.tcs.server.Server;
-import by.bsac.tcs.server.util.ApplicationPropertiesLoader;
+import by.bsac.tcs.server.util.loader.ApplicationPropertiesLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

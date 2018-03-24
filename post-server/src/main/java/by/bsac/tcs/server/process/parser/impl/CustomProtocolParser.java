@@ -7,7 +7,7 @@ import by.bsac.tcs.server.process.parser.ProtocolParser;
 import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
 import by.bsac.tcs.server.process.parser.impl.parser.ParserFactory;
 import by.bsac.tcs.server.process.parser.impl.parser.RequestParser;
-import by.bsac.tcs.server.util.ApplicationPropertiesLoader;
+import by.bsac.tcs.server.util.loader.ApplicationPropertiesLoader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

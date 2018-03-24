@@ -1,36 +1,16 @@
-package by.bsac.tcs.server.util
+package by.bsac.tcs.server.util.loader
 
-import static java.util.Objects.isNull
-
-class ApplicationPropertiesLoader {
+class ApplicationPropertiesLoader extends PropertiesLoader {
 
     private static final String FILE_NAME = 'application.properties'
 
-    private final Properties properties
-
     private ApplicationPropertiesLoader() {
-        properties = new Properties()
-        def inputStream = this.getClass().getClassLoader().getResourceAsStream(FILE_NAME)
-        properties.load(inputStream)
+        super(FILE_NAME)
     }
 
     static ApplicationPropertiesLoader getInstance() {
         return SingletonHolder.getInstance()
     }
-
-    String getProperty(String key) {
-        checkKey(key)
-        return properties.getProperty(key)
-    }
-
-    int getIntProperty(String key) {
-        return getProperty(key) as int
-    }
-
-    boolean getBooleanProperty(String key) {
-        return getProperty(key) as boolean
-    }
-
 
     int getPort() {
         return getIntProperty("server.port")
@@ -60,12 +40,6 @@ class ApplicationPropertiesLoader {
         return getBooleanProperty("socket.reuse_address")
     }
 
-    private void checkKey(String key) {
-        if (isNull(key) && key.empty) {
-            throw new IllegalArgumentException("Illegal key argument: " + key)
-        }
-    }
-
     private static class SingletonHolder {
 
         private static final ApplicationPropertiesLoader INSTANCE =
@@ -75,5 +49,4 @@ class ApplicationPropertiesLoader {
             return INSTANCE
         }
     }
-
 }
