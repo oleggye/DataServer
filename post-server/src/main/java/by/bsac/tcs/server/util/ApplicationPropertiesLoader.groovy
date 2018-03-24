@@ -5,7 +5,6 @@ import static java.util.Objects.isNull
 class ApplicationPropertiesLoader {
 
     private static final String FILE_NAME = 'application.properties'
-    private static final ApplicationPropertiesLoader INSTANCE = new ApplicationPropertiesLoader()
 
     private final Properties properties
 
@@ -16,7 +15,7 @@ class ApplicationPropertiesLoader {
     }
 
     static ApplicationPropertiesLoader getInstance() {
-        return INSTANCE
+        return SingletonHolder.getInstance()
     }
 
     String getProperty(String key) {
@@ -27,6 +26,11 @@ class ApplicationPropertiesLoader {
     int getIntProperty(String key) {
         return getProperty(key) as int
     }
+
+    boolean getBooleanProperty(String key) {
+        return getProperty(key) as boolean
+    }
+
 
     int getPort() {
         return getIntProperty("server.port")
@@ -45,12 +49,30 @@ class ApplicationPropertiesLoader {
     }
 
     int getRequestMaxLength() {
-        return getIntProperty("request.length.max")
+        return getIntProperty("request.max_length")
+    }
+
+    boolean isKeepAlive() {
+        return getBooleanProperty("socket.keep_alive")
+    }
+
+    boolean isReuseAddress() {
+        return getBooleanProperty("socket.reuse_address")
     }
 
     private void checkKey(String key) {
         if (isNull(key) && key.empty) {
             throw new IllegalArgumentException("Illegal key argument: " + key)
+        }
+    }
+
+    private static class SingletonHolder {
+
+        private static final ApplicationPropertiesLoader INSTANCE =
+                new ApplicationPropertiesLoader()
+
+        static ApplicationPropertiesLoader getInstance() {
+            return INSTANCE
         }
     }
 
