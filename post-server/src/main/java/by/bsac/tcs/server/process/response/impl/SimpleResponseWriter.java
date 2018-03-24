@@ -26,6 +26,7 @@ public class SimpleResponseWriter implements ResponseWriter {
 
       if (isNotBlank(response)) {
         writer.write(response);
+        writer.flush();
       }
 
 

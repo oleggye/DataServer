@@ -187,7 +187,7 @@ public class CustomProtocolParserTest {
   }
 
   //KEEP_ALIVE
-  @Test()
+  @Test
   public void testParseWhenPassedCorrectKeepAliveMethodThanOk() throws Exception {
     final String userRequest = "KEEP_ALIVE:222850:5:1519800922";
     Request parse = prepareUserRequestAndParse(userRequest);
@@ -252,7 +252,6 @@ public class CustomProtocolParserTest {
 
   private void verifySocket() throws IOException {
     verify(socket).getInputStream();
-    verify(socket).setSoTimeout(any(Integer.class));
     verifyNoMoreInteractions(socket);
   }
 }

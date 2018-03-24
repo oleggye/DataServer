@@ -50,6 +50,8 @@ public class RequestHandlerImplTest {
 
     verify(parser).parse(socket);
     verifyNoMoreInteractions(parser);
+    verify(socket).setSoTimeout(any(Integer.class));
+    verifyNoMoreInteractions(parser);
     verify(requestController).process(request);
     verifyNoMoreInteractions(requestController);
     verify(responseWriter).write(socket, request);

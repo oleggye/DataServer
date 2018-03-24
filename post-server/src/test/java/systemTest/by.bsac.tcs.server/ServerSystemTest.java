@@ -44,7 +44,6 @@ public class ServerSystemTest {
     }
   }
 
-  @Ignore
   @Test(expected = NoResponseException.class)
   public void testWhenSendRequestWithEmptyData() {
     final String data = "";

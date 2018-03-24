@@ -9,6 +9,7 @@ import by.bsac.tcs.server.process.parser.ProtocolParser;
 import by.bsac.tcs.server.process.parser.ProtocolParserFactory;
 import by.bsac.tcs.server.process.response.ResponseWriter;
 import by.bsac.tcs.server.process.response.ResponseWriterFactory;
+import java.io.IOException;
 import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,8 @@ import org.slf4j.LoggerFactory;
 public class RequestHandlerImpl implements RequestHandler {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(RequestHandlerImpl.class);
+
+  private static final int INPUT_STREAM_TIME_OUT_MILLISECONDS = 100;
 
   private static final ProtocolParserFactory PARSER_FACTORY = ProtocolParserFactory.getInstance();
   private static final ControllerFactory CONTROLLER_FACTORY = ControllerFactory.getInstance();
@@ -56,6 +59,8 @@ public class RequestHandlerImpl implements RequestHandler {
   @Override
   public void run() {
     try {
+      clientSocket.setSoTimeout(INPUT_STREAM_TIME_OUT_MILLISECONDS);
+
       Request request = parser.parse(clientSocket);
       LOGGER.debug("Request was parsed");
       requestController.process(request);
@@ -63,10 +68,17 @@ public class RequestHandlerImpl implements RequestHandler {
       responseWriter.write(clientSocket, request);
       LOGGER.debug("Response was written");
 
+      closeSocketItPossible();
     } catch (Exception e) {
       String message = "Can't manage client process";
       LOGGER.error(message, e);
       throw new RequestHandlerException(message, e);
+    }
+  }
+
+  private void closeSocketItPossible() throws IOException {
+    if (!clientSocket.isClosed()) {
+      clientSocket.close();
     }
   }
 }

@@ -22,7 +22,6 @@ public class CustomProtocolParser implements ProtocolParser {
   private static final Logger LOGGER = LoggerFactory.getLogger(CustomProtocolParser.class);
   private static final ParserFactory factory = ParserFactory.getInstance();
   private static final int MAX_REQUEST_LENGTH = 30;
-  private static final int INPUT_STREAM_TIME_OUT_MILLISECONDS = 100;
 
   @Override
   public Request parse(final Socket clientSocket) throws ProtocolParseException {
@@ -46,8 +45,6 @@ public class CustomProtocolParser implements ProtocolParser {
       BufferedReader input = new BufferedReader(
           new InputStreamReader(clientSocket.getInputStream(),
               StandardCharsets.UTF_8));
-
-      clientSocket.setSoTimeout(INPUT_STREAM_TIME_OUT_MILLISECONDS);
 
       final String userInput = input.readLine();
       checkForExcessLength(userInput);

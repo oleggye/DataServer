@@ -12,6 +12,7 @@
   <artifactId>post-by.bsac.tcs.server</artifactId>
   <packaging>jar</packaging>
   <name>post-server</name>
+  <version>1.1-SNAPSHOT</version>
 
   <dependencies>
 
