@@ -32,32 +32,27 @@ public class EventServiceImpl implements EventService {
 
   @Override
   //TODO: add session
-  public String register(EventLog eventLog) throws ServiceException {
+  public void register(EventLog eventLog) throws ServiceException {
     log(eventLog);
-    return "REGISTERED";
   }
 
   @Override
-  public String changed(EventLog eventLog) throws ServiceException {
+  public void changed(EventLog eventLog) throws ServiceException {
     log(eventLog);
-    return "LETTER_REGISTERED";
   }
 
   @Override
-  public String opened(EventLog eventLog) throws ServiceException {
+  public void opened(EventLog eventLog) throws ServiceException {
     log(eventLog);
-    return "WITHDRAWN_REGISTERED";
   }
 
   @Override
-  public String closed(EventLog eventLog) throws ServiceException {
+  public void closed(EventLog eventLog) throws ServiceException {
     log(eventLog);
-    return "EMPTY_REGISTERED";
   }
 
   @Override
-  public String keepAlive(EventLog eventLog) throws ServiceException {
+  public void keepAlive(EventLog eventLog) throws ServiceException {
     log(eventLog);
-    return "KEEP_ALIVE_REGISTERED";
   }
 }

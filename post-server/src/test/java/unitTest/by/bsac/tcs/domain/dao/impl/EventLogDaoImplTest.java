@@ -6,6 +6,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import by.bsac.tcs.domain.dao.exception.DaoException;
 import by.bsac.tcs.domain.dao.util.handler.ResultSetHandler;
 import by.bsac.tcs.domain.model.Event;
 import by.bsac.tcs.domain.model.EventLog;
@@ -61,7 +62,7 @@ public class EventLogDaoImplTest {
 
   @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED")
   @Test
-  public void findById() throws Exception {
+  public void findById() throws DaoException, SQLException {
     EventLog expectedEventLog = new EventLog(0, null, 0,0);
 
     doNothing().when(preparedStatement).setLong(any(Integer.class), any(Long.class));
@@ -78,7 +79,7 @@ public class EventLogDaoImplTest {
   }
 
   @Test
-  public void save() throws Exception {
+  public void save() throws DaoException, SQLException {
     long expectedId = 99;
     final long postBoxId = 222850;
     final Event event = Event.REGISTRATION;

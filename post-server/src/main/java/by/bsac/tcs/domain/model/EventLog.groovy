@@ -22,4 +22,15 @@ class EventLog {
         this.event = event
         this.quantity = quantity
     }
+
+    @Override
+    public String toString() {
+        return "EventLog{" +
+                "id=" + id +
+                ", postBoxId=" + postBoxId +
+                ", event=" + event +
+                ", quantity=" + quantity +
+                ", epochTime=" + epochTime +
+                '}';
+    }
 }

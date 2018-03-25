@@ -10,7 +10,7 @@ import by.bsac.tcs.domain.dao.EventLogDao;
 import by.bsac.tcs.domain.dao.exception.DaoException;
 import by.bsac.tcs.domain.model.EventLog;
 import by.bsac.tcs.domain.service.exception.EventServiceException;
-import org.junit.Assert;
+import by.bsac.tcs.domain.service.exception.ServiceException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -30,7 +30,7 @@ public class EventServiceImplTest {
   private EventLog eventLog;
 
   @Test
-  public void testLog() throws Exception {
+  public void testLog() throws ServiceException, DaoException {
     eventLogService.log(eventLog);
 
     verify(eventLogDAO, times(1)).save(eventLog);
@@ -38,67 +38,59 @@ public class EventServiceImplTest {
   }
 
   @Test
-  public void testRegisteredSuccess() throws Exception {
-    String result = eventLogService.register(eventLog);
-
-    Assert.assertEquals("REGISTERED", result);
+  public void testRegisteredSuccess() throws ServiceException, DaoException {
+    eventLogService.register(eventLog);
     verify(eventLogDAO, times(1)).save(eventLog);
     verifyNoMoreInteractions(eventLogDAO);
   }
 
   @Test(expected = EventServiceException.class)
-  public void testRegisteredFail() throws Exception {
+  public void testRegisteredFail() throws ServiceException, DaoException {
     doThrow(DaoException.class).when(eventLogDAO).save(any(EventLog.class));
     eventLogService.register(eventLog);
   }
 
   @Test
-  public void testChangedSuccess() throws Exception {
-    String result = eventLogService.changed(eventLog);
-
-    Assert.assertEquals("LETTER_REGISTERED", result);
+  public void testChangedSuccess() throws ServiceException, DaoException {
+    eventLogService.changed(eventLog);
     verify(eventLogDAO, times(1)).save(eventLog);
     verifyNoMoreInteractions(eventLogDAO);
   }
 
   @Test(expected = EventServiceException.class)
-  public void testChangedFail() throws Exception {
+  public void testChangedFail() throws ServiceException, DaoException {
     doThrow(DaoException.class).when(eventLogDAO).save(any(EventLog.class));
     eventLogService.changed(eventLog);
   }
 
   @Test
-  public void testOpenedSuccess() throws Exception {
-    String result = eventLogService.opened(eventLog);
-
-    Assert.assertEquals("WITHDRAWN_REGISTERED", result);
+  public void testOpenedSuccess() throws ServiceException, DaoException {
+    eventLogService.opened(eventLog);
     verify(eventLogDAO, times(1)).save(eventLog);
     verifyNoMoreInteractions(eventLogDAO);
   }
 
   @Test(expected = EventServiceException.class)
-  public void testOpenedFail() throws Exception {
+  public void testOpenedFail() throws ServiceException, DaoException {
     doThrow(DaoException.class).when(eventLogDAO).save(any(EventLog.class));
     eventLogService.opened(eventLog);
   }
 
   @Test
-  public void testClosedSuccess() throws Exception {
-    String result = eventLogService.closed(eventLog);
-
-    Assert.assertEquals("EMPTY_REGISTERED", result);
+  public void testClosedSuccess() throws ServiceException, DaoException {
+    eventLogService.closed(eventLog);
     verify(eventLogDAO, times(1)).save(eventLog);
     verifyNoMoreInteractions(eventLogDAO);
   }
 
   @Test(expected = EventServiceException.class)
-  public void testClosedFail() throws Exception {
+  public void testClosedFail() throws ServiceException, DaoException {
     doThrow(DaoException.class).when(eventLogDAO).save(any(EventLog.class));
     eventLogService.closed(eventLog);
   }
 
   @Test
-  public void testKeepAliveSuccess() throws Exception {
+  public void testKeepAliveSuccess() throws ServiceException, DaoException {
     eventLogService.keepAlive(eventLog);
 
     verify(eventLogDAO, times(1)).save(eventLog);
@@ -106,7 +98,7 @@ public class EventServiceImplTest {
   }
 
   @Test(expected = EventServiceException.class)
-  public void testKeepAliveFail() throws Exception {
+  public void testKeepAliveFail() throws ServiceException, DaoException {
     doThrow(DaoException.class).when(eventLogDAO).save(any(EventLog.class));
     eventLogService.keepAlive(eventLog);
   }

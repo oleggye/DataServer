@@ -12,7 +12,7 @@ import by.bsac.tcs.server.model.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class QuantityChangedCommand implements by.bsac.tcs.domain.controller.command.Command {
+public class QuantityChangedCommand extends ResponseCommand {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(QuantityChangedCommand.class);
 
@@ -37,8 +37,8 @@ public class QuantityChangedCommand implements by.bsac.tcs.domain.controller.com
     final EventLog eventLog = requestConverter.convert(request);
 
     try {
-      final String response = eventService.changed(eventLog);
-      request.setResponse(response);
+      eventService.changed(eventLog);
+      writeResponse(request);
     } catch (ServiceException e) {
       final String message = String.format("An error occurred while eventLog event %s", eventLog);
       LOGGER.error(message);

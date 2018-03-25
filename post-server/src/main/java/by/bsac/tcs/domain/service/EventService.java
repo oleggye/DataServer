@@ -7,13 +7,13 @@ public interface EventService {
 
   void log(EventLog eventLog) throws ServiceException;
 
-  String register(EventLog eventLog) throws ServiceException;
+  void register(EventLog eventLog) throws ServiceException;
 
-  String changed(EventLog eventLog) throws ServiceException;
+  void changed(EventLog eventLog) throws ServiceException;
 
-  String opened(EventLog eventLog) throws ServiceException;
+  void opened(EventLog eventLog) throws ServiceException;
 
-  String closed(EventLog eventLog) throws ServiceException;
+  void closed(EventLog eventLog) throws ServiceException;
 
-  String keepAlive(EventLog eventLog) throws ServiceException;
+  void keepAlive(EventLog eventLog) throws ServiceException;
 }

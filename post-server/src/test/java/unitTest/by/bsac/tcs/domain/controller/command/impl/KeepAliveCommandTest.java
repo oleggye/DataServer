@@ -1,6 +1,8 @@
 package by.bsac.tcs.domain.controller.command.impl;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -8,6 +10,8 @@ import static org.mockito.Mockito.when;
 import by.bsac.tcs.domain.controller.command.CommandException;
 import by.bsac.tcs.domain.model.EventLog;
 import by.bsac.tcs.domain.service.exception.ServiceException;
+import by.bsac.tcs.server.process.parser.impl.Method;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,15 +28,18 @@ public class KeepAliveCommandTest extends GenericCommandTest {
   @Override
   protected void beforeTestExecuteSuccess() throws ServiceException {
     super.beforeTestExecuteSuccess();
-    when(eventService.keepAlive(any(EventLog.class))).thenReturn(EXCEPTED_MESSAGE);
+    doNothing().when(eventService).keepAlive(any(EventLog.class));
+    when(request.getMethod()).thenReturn(Method.KEEP_ALIVE);
   }
 
+  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   @Override
   protected void afterTestExecuteSuccess() throws ServiceException {
     super.afterTestExecuteSuccess();
     verify(eventService).keepAlive(eventLog);
     verifyNoMoreInteractions(eventService);
     verify(request).setResponse(EXCEPTED_MESSAGE);
+    verify(request).getMethod();
     verifyNoMoreInteractions(request);
   }
 
@@ -46,7 +53,7 @@ public class KeepAliveCommandTest extends GenericCommandTest {
   @Override
   protected void beforeTestExecuteFailsWhenServiceException() throws ServiceException {
     super.beforeTestExecuteFailsWhenServiceException();
-    when(eventService.keepAlive(any(EventLog.class))).thenThrow(ServiceException.class);
+    doThrow(ServiceException.class).when(eventService).keepAlive(any(EventLog.class));
   }
 
   @Test(expected = CommandException.class)

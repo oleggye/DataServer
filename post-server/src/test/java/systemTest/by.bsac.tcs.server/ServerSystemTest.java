@@ -21,13 +21,12 @@ public class ServerSystemTest {
    * Start the server as a new thread add save ref to it
    */
   @BeforeClass
-  public static void setUpBeforeClass() throws InterruptedException {
+  public static void setUpBeforeClass() {
     serverThread = new Thread(() -> {
       server = new Server(SERVER_PORT);
       server.start();
     });
     serverThread.start();
-    Thread.sleep(1000);
   }
 
   /**

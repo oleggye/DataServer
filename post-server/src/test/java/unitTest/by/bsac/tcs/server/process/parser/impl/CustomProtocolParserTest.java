@@ -35,20 +35,21 @@ public class CustomProtocolParserTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testParseWhenPassedToLongRequest() throws Exception {
+  public void testParseWhenPassedToLongRequest() throws IOException, ProtocolParseException {
     final String userRequest = "111111111111111111111111111111111";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testParseWhenPassedNullRequest() throws Exception {
+  public void testParseWhenPassedNullRequest() throws IOException, ProtocolParseException {
     final String userRequest = null;
     prepareUserRequestAndParse(userRequest);
   }
 
   //REG
   @Test()
-  public void testParseWhenPassedCorrectRegMethodThanOk() throws Exception {
+  public void testParseWhenPassedCorrectRegMethodThanOk()
+      throws IOException, ProtocolParseException {
     final String userRequest = "REG:222850";
     Request parse = prepareUserRequestAndParse(userRequest);
 
@@ -60,21 +61,23 @@ public class CustomProtocolParserTest {
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedRegMethodWithoutIdThanException() throws Exception {
+  public void testParseWhenPassedRegMethodWithoutIdThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "REG:";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
   public void testParseWhenPassedRegMethodWithAlphabeticCharacterInIdThanException()
-      throws Exception {
+      throws IOException, ProtocolParseException {
     final String userRequest = "REG:22g850";
     prepareUserRequestAndParse(userRequest);
   }
 
   //LETTER
   @Test()
-  public void testParseWhenPassedCorrectLetterMethodThanOk() throws Exception {
+  public void testParseWhenPassedCorrectLetterMethodThanOk()
+      throws IOException, ProtocolParseException {
     final String userRequest = "LETTER:222850:5:1519800922";
     Request parse = prepareUserRequestAndParse(userRequest);
 
@@ -86,33 +89,37 @@ public class CustomProtocolParserTest {
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedLetterMethodWithoutIdThanException() throws Exception {
+  public void testParseWhenPassedLetterMethodWithoutIdThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "LETTER::5:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
   public void testParseWhenPassedLetterMethodWithAlphabeticCharacterInIdThanException()
-      throws Exception {
+      throws IOException, ProtocolParseException {
     final String userRequest = "LETTER:222s50:5:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedLetterMethodWithoutQuantityThanException() throws Exception {
+  public void testParseWhenPassedLetterMethodWithoutQuantityThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "LETTER:222850::1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedLetterMethodWithoutTimeThanException() throws Exception {
+  public void testParseWhenPassedLetterMethodWithoutTimeThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "LETTER:222850:5:";
     prepareUserRequestAndParse(userRequest);
   }
 
   //EMPTY
   @Test()
-  public void testParseWhenPassedCorrectEmptyMethodThanOk() throws Exception {
+  public void testParseWhenPassedCorrectEmptyMethodThanOk()
+      throws IOException, ProtocolParseException {
     final String userRequest = "EMPTY:222850:1519800922";
     Request parse = prepareUserRequestAndParse(userRequest);
 
@@ -123,33 +130,37 @@ public class CustomProtocolParserTest {
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedEmptyMethodWithoutIdThanException() throws Exception {
+  public void testParseWhenPassedEmptyMethodWithoutIdThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "EMPTY::1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
   public void testParseWhenPassedEmptyMethodWithAlphabeticCharacterInIdThanException()
-      throws Exception {
+      throws IOException, ProtocolParseException {
     final String userRequest = "EMPTY:222f50:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedEmptyMethodWithoutTimeThanException() throws Exception {
+  public void testParseWhenPassedEmptyMethodWithoutTimeThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "EMPTY:222850:5:";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedEmptyMethodWithoutEolThanException() throws Exception {
+  public void testParseWhenPassedEmptyMethodWithoutEolThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "EMPTY:222850:5:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   //WITHDRAWN
   @Test()
-  public void testParseWhenPassedCorrectWithdrawnMethodThanOk() throws Exception {
+  public void testParseWhenPassedCorrectWithdrawnMethodThanOk()
+      throws IOException, ProtocolParseException {
     final String userRequest = "WITHDRAWN:222850:1519800922";
     Request parse = prepareUserRequestAndParse(userRequest);
 
@@ -161,33 +172,37 @@ public class CustomProtocolParserTest {
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedWithdrawnMethodWithoutIdThanException() throws Exception {
+  public void testParseWhenPassedWithdrawnMethodWithoutIdThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "WITHDRAWN::1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
   public void testParseWhenPassedWithdrawnMethodWithAlphabeticCharacterInIdThanException()
-      throws Exception {
+      throws IOException, ProtocolParseException {
     final String userRequest = "WITHDRAWN:222f50:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedWithdrawnMethodWithoutTimeThanException() throws Exception {
+  public void testParseWhenPassedWithdrawnMethodWithoutTimeThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "WITHDRAWN:222850:";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedWithdrawnMethodWithoutEolThanException() throws Exception {
+  public void testParseWhenPassedWithdrawnMethodWithoutEolThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "WITHDRAWN:222850:5:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   //KEEP_ALIVE
   @Test
-  public void testParseWhenPassedCorrectKeepAliveMethodThanOk() throws Exception {
+  public void testParseWhenPassedCorrectKeepAliveMethodThanOk()
+      throws IOException, ProtocolParseException {
     final String userRequest = "KEEP_ALIVE:222850:5:1519800922";
     Request parse = prepareUserRequestAndParse(userRequest);
 
@@ -199,31 +214,35 @@ public class CustomProtocolParserTest {
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedKeepAliveMethodWithoutIdThanException() throws Exception {
+  public void testParseWhenPassedKeepAliveMethodWithoutIdThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "KEEP_ALIVE::5:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
   public void testParseWhenPassedKeepAliveMethodWithAlphabeticCharacterInIdThanException()
-      throws Exception {
+      throws IOException, ProtocolParseException {
     final String userRequest = "KEEP_ALIVE:222f50:5:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedKeepAliveMethodWithoutQuantityThanException() throws Exception {
+  public void testParseWhenPassedKeepAliveMethodWithoutQuantityThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "KEEP_ALIVE:222850:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
-  public void testParseWhenPassedKeepAliveMethodWithoutTimeThanException() throws Exception {
+  public void testParseWhenPassedKeepAliveMethodWithoutTimeThanException()
+      throws IOException, ProtocolParseException {
     final String userRequest = "KEEP_ALIVE:222850:5:";
     prepareUserRequestAndParse(userRequest);
   }
 
-  private InputStream prepareInputStream(final String userRequest) throws IOException {
+  private InputStream prepareInputStream(final String userRequest)
+      throws IOException {
     InputStream stream;
 
     if (nonNull(userRequest)) {

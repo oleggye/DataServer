@@ -28,7 +28,7 @@ enum Event {
 
         for (Event element : Event.values()) {
             if (element.typeCode == requestCode) {
-                requestType = element
+                return element
             }
         }
 
@@ -36,7 +36,6 @@ enum Event {
             throw new IllegalArgumentException(
                     String.format("No such method constant for requestCode = %d", requestCode));
         }
-        return requestType
     }
 
     int getEventId() {

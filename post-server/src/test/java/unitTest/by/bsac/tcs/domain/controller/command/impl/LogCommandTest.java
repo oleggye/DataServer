@@ -7,8 +7,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import by.bsac.tcs.domain.controller.command.CommandException;
 import by.bsac.tcs.domain.model.EventLog;
 import by.bsac.tcs.domain.service.EventService;
+import by.bsac.tcs.domain.service.exception.ServiceException;
 import by.bsac.tcs.domain.util.converter.RequestConverter;
 import by.bsac.tcs.server.model.Request;
 import org.junit.Test;
@@ -31,7 +33,7 @@ public class LogCommandTest {
   private Request request;
 
   @Test
-  public void testExecute() throws Exception {
+  public void testExecute() throws ServiceException, CommandException {
     final EventLog eventLog = mock(EventLog.class);
     when(requestConverter.convert(any(Request.class))).thenReturn(eventLog);
 

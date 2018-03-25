@@ -1,6 +1,5 @@
 package by.bsac.tcs.domain.controller.command.impl;
 
-import by.bsac.tcs.domain.controller.command.Command;
 import by.bsac.tcs.domain.controller.command.CommandException;
 import by.bsac.tcs.domain.model.EventLog;
 import by.bsac.tcs.domain.service.EventService;
@@ -12,7 +11,7 @@ import by.bsac.tcs.server.model.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HasOpenedCommand implements Command {
+public class HasOpenedCommand extends ResponseCommand {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(HasOpenedCommand.class);
 
@@ -37,8 +36,8 @@ public class HasOpenedCommand implements Command {
     final EventLog eventLog = requestConverter.convert(request);
 
     try {
-      final String response = eventService.opened(eventLog);
-      request.setResponse(response);
+      eventService.opened(eventLog);
+      writeResponse(request);
     } catch (ServiceException e) {
       final String message = String.format("An error occurred while eventLog event %s", eventLog);
       LOGGER.error(message);

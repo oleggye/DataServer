@@ -7,7 +7,7 @@ import org.junit.Test;
 public class EventTest {
 
   @Test
-  public void shouldReturnRegistrationRequestTypeByTypeCodeZero() throws Exception {
+  public void shouldReturnRegistrationRequestTypeByTypeCodeZero() {
     final int typeCode = 0;
     final RequestType expectedRequestType = RequestType.REGISTRATION;
 
@@ -15,7 +15,7 @@ public class EventTest {
   }
 
   @Test
-  public void shouldReturnKeepAliveRequestTypeByTypeCodeOne() throws Exception {
+  public void shouldReturnKeepAliveRequestTypeByTypeCodeOne() {
     final int typeCode = 1;
     final RequestType expectedRequestType = RequestType.KEEP_ALIVE;
 
@@ -23,7 +23,7 @@ public class EventTest {
   }
 
   @Test
-  public void shouldReturnHasOpenedRequestTypeByTypeCodeTwo() throws Exception {
+  public void shouldReturnHasOpenedRequestTypeByTypeCodeTwo() {
     final int typeCode = 2;
     final RequestType expectedRequestType = RequestType.HAS_OPENED;
 
@@ -31,7 +31,7 @@ public class EventTest {
   }
 
   @Test
-  public void shouldReturnHasClosedRequestTypeByTypeCodeThree() throws Exception {
+  public void shouldReturnHasClosedRequestTypeByTypeCodeThree() {
     final int typeCode = 3;
     final RequestType expectedRequestType = RequestType.HAS_CLOSED;
 
@@ -39,7 +39,7 @@ public class EventTest {
   }
 
   @Test
-  public void shouldReturnHasClosedRequestTypeByTypeCodeTwo() throws Exception {
+  public void shouldReturnHasClosedRequestTypeByTypeCodeTwo() {
     final int typeCode = 4;
     final RequestType expectedRequestType = RequestType.STATE_CHANGED;
 

@@ -15,6 +15,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class LogMessageSharperTest {
 
+  private static final String HOSTNAME_ADDRESS = "127.9.12.2";
+
   @Mock
   private Socket socket;
 
@@ -23,7 +25,7 @@ public class LogMessageSharperTest {
 
   @Test
   public void formIncomingUserLogMessage() {
-    final String hostAddress = "127.9.12.2";
+    final String hostAddress = HOSTNAME_ADDRESS;
     final int port = 777;
 
     final String expectedMessage = String

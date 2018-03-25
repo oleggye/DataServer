@@ -11,7 +11,7 @@ import by.bsac.tcs.server.model.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HasClosedCommand implements by.bsac.tcs.domain.controller.command.Command {
+public class HasClosedCommand extends ResponseCommand {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(HasClosedCommand.class);
 
@@ -36,8 +36,8 @@ public class HasClosedCommand implements by.bsac.tcs.domain.controller.command.C
     final EventLog eventLog = requestConverter.convert(request);
 
     try {
-      final String response = eventService.closed(eventLog);
-      request.setResponse(response);
+      eventService.closed(eventLog);
+      writeResponse(request);
     } catch (ServiceException e) {
       final String message = String.format("An error occurred while eventLog event %s", eventLog);
       LOGGER.error(message);

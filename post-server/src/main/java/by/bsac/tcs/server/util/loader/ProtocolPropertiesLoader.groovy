@@ -1,9 +1,12 @@
 package by.bsac.tcs.server.util.loader
 
+import by.bsac.tcs.server.process.parser.impl.Method
+
 class ProtocolPropertiesLoader extends PropertiesLoader {
 
     private static final String FILE_NAME = 'protocol.properties'
     private static final String METHOD_REGEXP_PROPERTY_FORMAT = 'method.%s.regexp'
+    private static final String METHOD_RESPONSE_PROPERTY_FORMAT = 'method.%s.response'
 
     private ProtocolPropertiesLoader() {
         super(FILE_NAME)
@@ -13,11 +16,21 @@ class ProtocolPropertiesLoader extends PropertiesLoader {
         return SingletonHolder.getInstance()
     }
 
-    String getMethodsRegexpProperty(String methodName) {
+    String getMethodsRegexpProperty(final String methodName) {
         checkKey(methodName)
-        methodName = methodName.toLowerCase()
-        String methodKey = sprintf(METHOD_REGEXP_PROPERTY_FORMAT, methodName)
+        String methodKey = sprintf(METHOD_REGEXP_PROPERTY_FORMAT, methodName.toLowerCase())
         return getProperty(methodKey)
+    }
+
+    String getMethodsResponseProperty(final String methodName) {
+        checkKey(methodName)
+        String methodKey = sprintf(METHOD_RESPONSE_PROPERTY_FORMAT, methodName.toLowerCase())
+        return getProperty(methodKey)
+    }
+
+    String getMethodsResponseProperty(final Method method) {
+        final String methodName = method != null ? method.name() : null
+        return getMethodsResponseProperty(methodName)
     }
 
     private static class SingletonHolder {

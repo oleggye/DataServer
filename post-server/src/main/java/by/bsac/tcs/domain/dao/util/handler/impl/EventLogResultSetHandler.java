@@ -1,5 +1,7 @@
 package by.bsac.tcs.domain.dao.util.handler.impl;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 import by.bsac.tcs.domain.dao.util.handler.ResultSetHandler;
 import by.bsac.tcs.domain.model.Event;
 import by.bsac.tcs.domain.model.EventLog;
@@ -25,12 +27,21 @@ public class EventLogResultSetHandler implements ResultSetHandler<EventLog> {
       final int idEvent = resultSet.getInt(ID_EVENT);
       final Event event = Event.getEvent(idEvent);
 
-      final int quantity = Integer.parseInt(resultSet.getString(QUANTITY));
+      final String quantityString = resultSet.getString(QUANTITY);
+      final int quantity = parseQuantity(quantityString);
 
       long epochTime = resultSet.getLong(TIME);
 
       eventLog = new EventLog(id, idPostBox, event, quantity, epochTime);
     }
     return eventLog;
+  }
+
+  private int parseQuantity(final String quantityString) {
+    if (isBlank(quantityString)) {
+      return 0;
+    } else {
+      return Integer.parseInt(quantityString);
+    }
   }
 }

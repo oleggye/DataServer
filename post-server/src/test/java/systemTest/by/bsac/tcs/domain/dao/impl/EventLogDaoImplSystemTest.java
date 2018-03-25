@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import by.bsac.tcs.domain.dao.EventLogDao;
+import by.bsac.tcs.domain.dao.exception.DaoException;
 import by.bsac.tcs.domain.dao.util.pool.DataSourceProducer;
 import by.bsac.tcs.domain.model.Event;
 import by.bsac.tcs.domain.model.EventLog;
@@ -23,15 +24,25 @@ public class EventLogDaoImplSystemTest {
   }
 
   @Test
-  public void findById() throws Exception {
-    final long id = 222850;
+  public void findById() throws DaoException {
+    final long id = 1;
+    final long postBoxId = 222850;
+    final Event event = Event.REGISTRATION;
+    final int quantity = 0;
+    final long epochTime = 0;
+
     EventLog eventLog = dao.findById(id);
 
-    System.out.println(eventLog);
+    assertNotNull(eventLog);
+    assertEquals(id, eventLog.getId());
+    assertEquals(postBoxId, eventLog.getPostBoxId());
+    assertEquals(event, eventLog.getEvent());
+    assertEquals(quantity, eventLog.getQuantity());
+    assertEquals(epochTime, eventLog.getEpochTime());
   }
 
   @Test
-  public void save() throws Exception {
+  public void save() throws DaoException {
     final long postBoxId = 222850;
     final Event event = Event.REGISTRATION;
     final int quantity = 7;
