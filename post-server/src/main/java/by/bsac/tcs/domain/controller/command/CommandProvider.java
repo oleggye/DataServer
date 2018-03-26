@@ -6,7 +6,7 @@ import by.bsac.tcs.domain.controller.command.impl.KeepAliveCommand;
 import by.bsac.tcs.domain.controller.command.impl.QuantityChangedCommand;
 import by.bsac.tcs.domain.controller.command.impl.RegistrationCommand;
 import by.bsac.tcs.domain.controller.command.impl.WrongCommand;
-import by.bsac.tcs.server.process.parser.impl.Method;
+import by.bsac.tcs.server.model.Method;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
@@ -34,6 +34,9 @@ public class CommandProvider {
     return SingletonHolder.getInstance();
   }
 
+  /**
+   * Return a command according the passed method
+   */
   public Command getCommand(Method method) {
     LOGGER.info("getCommand by method {}", method);
 
@@ -44,6 +47,9 @@ public class CommandProvider {
     return wrongCommand;
   }
 
+  /**
+   * Return a command according the passed method name
+   */
   public Command getCommand(String methodName) {
     if (Objects.isNull(methodName)) {
       LOGGER.warn("methodName is null !");

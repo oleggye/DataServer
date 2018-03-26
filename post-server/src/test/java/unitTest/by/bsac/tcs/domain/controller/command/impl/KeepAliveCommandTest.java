@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 import by.bsac.tcs.domain.controller.command.CommandException;
 import by.bsac.tcs.domain.model.EventLog;
 import by.bsac.tcs.domain.service.exception.ServiceException;
-import by.bsac.tcs.server.process.parser.impl.Method;
+import by.bsac.tcs.server.model.Method;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class KeepAliveCommandTest extends GenericCommandTest {
 
-  private static final String EXCEPTED_MESSAGE = "KEEP_ALIVE_REGISTERED";
+  private static final String EXCEPTED_MESSAGE = "I_ALIVE_REGISTERED";
 
   @InjectMocks
   private KeepAliveCommand command;

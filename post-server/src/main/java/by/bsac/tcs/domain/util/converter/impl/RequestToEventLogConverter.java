@@ -3,8 +3,8 @@ package by.bsac.tcs.domain.util.converter.impl;
 import by.bsac.tcs.domain.model.Event;
 import by.bsac.tcs.domain.model.EventLog;
 import by.bsac.tcs.domain.util.converter.RequestConverter;
+import by.bsac.tcs.server.model.Method;
 import by.bsac.tcs.server.model.Request;
-import by.bsac.tcs.server.process.parser.impl.Method;
 import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 

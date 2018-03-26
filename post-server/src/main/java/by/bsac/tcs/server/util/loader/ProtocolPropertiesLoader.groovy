@@ -1,6 +1,6 @@
 package by.bsac.tcs.server.util.loader
 
-import by.bsac.tcs.server.process.parser.impl.Method
+import by.bsac.tcs.server.model.Method
 
 class ProtocolPropertiesLoader extends PropertiesLoader {
 

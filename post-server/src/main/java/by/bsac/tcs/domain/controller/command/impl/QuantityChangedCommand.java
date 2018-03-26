@@ -1,6 +1,5 @@
 package by.bsac.tcs.domain.controller.command.impl;
 
-
 import by.bsac.tcs.domain.controller.command.CommandException;
 import by.bsac.tcs.domain.model.EventLog;
 import by.bsac.tcs.domain.service.EventService;

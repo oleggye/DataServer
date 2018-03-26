@@ -1,12 +1,12 @@
 package by.bsac.tcs.server.process.parser.impl.parser;
 
-import static by.bsac.tcs.server.process.parser.impl.Method.EMPTY;
-import static by.bsac.tcs.server.process.parser.impl.Method.KEEP_ALIVE;
-import static by.bsac.tcs.server.process.parser.impl.Method.LETTER;
-import static by.bsac.tcs.server.process.parser.impl.Method.REG;
-import static by.bsac.tcs.server.process.parser.impl.Method.WITHDRAWN;
+import static by.bsac.tcs.server.model.Method.EMPTY;
+import static by.bsac.tcs.server.model.Method.KEEP_ALIVE;
+import static by.bsac.tcs.server.model.Method.LETTER;
+import static by.bsac.tcs.server.model.Method.REG;
+import static by.bsac.tcs.server.model.Method.WITHDRAWN;
 
-import by.bsac.tcs.server.process.parser.impl.Method;
+import by.bsac.tcs.server.model.Method;
 import by.bsac.tcs.server.process.parser.impl.parser.impl.EmptyParser;
 import by.bsac.tcs.server.process.parser.impl.parser.impl.KeepAlive;
 import by.bsac.tcs.server.process.parser.impl.parser.impl.LetterParser;

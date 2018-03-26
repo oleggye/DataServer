@@ -1,7 +1,8 @@
 package by.bsac.tcs.server.process.parser.impl;
 
-import static java.util.Objects.isNull;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
+import by.bsac.tcs.server.model.Method;
 import by.bsac.tcs.server.model.Request;
 import by.bsac.tcs.server.process.parser.ProtocolParser;
 import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
@@ -21,8 +22,8 @@ import org.slf4j.LoggerFactory;
 public class CustomProtocolParser implements ProtocolParser {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(CustomProtocolParser.class);
-  private static final ApplicationPropertiesLoader APPLICATION_PROPERTIES_LOADER = ApplicationPropertiesLoader
-      .getInstance();
+  private static final ApplicationPropertiesLoader APPLICATION_PROPERTIES_LOADER =
+      ApplicationPropertiesLoader.getInstance();
 
   private static final ParserFactory factory = ParserFactory.getInstance();
 
@@ -43,11 +44,9 @@ public class CustomProtocolParser implements ProtocolParser {
   }
 
   /**
-   * It's important that protocol sends \n as end of line flag , but BufferedReader uses it for its
-   * purpose and then removes!!!
-   *
-   * Important: we don't need to close the socket here, because it'll closed after response is
-   * written
+   * It's important that protocol sends <strong>\n</strong> as end of line flag , but BufferedReader
+   * uses it for its purpose and then removes!!! Important: we don't need to close the socket here,
+   * because it'll closed after response is written
    */
   private String readUserInput(final Socket clientSocket) throws ProtocolParseException {
     try {
@@ -56,7 +55,7 @@ public class CustomProtocolParser implements ProtocolParser {
               StandardCharsets.UTF_8));
 
       final String userInput = input.readLine();
-      checkForExcessLength(userInput);
+      checkUserInput(userInput);
 
       return userInput;
     } catch (IOException e) {
@@ -66,12 +65,12 @@ public class CustomProtocolParser implements ProtocolParser {
     }
   }
 
-  private void checkForExcessLength(final String userInput) {
-    if (isNull(userInput) ||
-        userInput.length() > requestMaxLength) {
-      final String errorMessage = "Request is null or its length exceeded!";
+  private void checkUserInput(final String userInput) throws ProtocolParseException {
+    if (isBlank(userInput)
+        || userInput.length() > requestMaxLength) {
+      final String errorMessage = "Request is incorrect!";
       LOGGER.error(errorMessage);
-      throw new IllegalArgumentException(errorMessage);
+      throw new ProtocolParseException(errorMessage);
     }
   }
 

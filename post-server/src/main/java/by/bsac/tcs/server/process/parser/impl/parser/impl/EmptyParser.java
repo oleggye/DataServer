@@ -1,8 +1,8 @@
 package by.bsac.tcs.server.process.parser.impl.parser.impl;
 
+import by.bsac.tcs.server.model.Method;
 import by.bsac.tcs.server.model.Request;
 import by.bsac.tcs.server.model.RequestBuilder;
-import by.bsac.tcs.server.process.parser.impl.Method;
 import by.bsac.tcs.server.process.parser.impl.parser.RequestParser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

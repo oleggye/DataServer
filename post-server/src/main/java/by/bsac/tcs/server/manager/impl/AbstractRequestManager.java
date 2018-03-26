@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractRequestManager implements RequestManager {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRequestManager.class);
-  private static final ApplicationPropertiesLoader APPLICATION_PROPERTIES_LOADER = ApplicationPropertiesLoader
-      .getInstance();
+  private static final ApplicationPropertiesLoader APPLICATION_PROPERTIES_LOADER =
+      ApplicationPropertiesLoader.getInstance();
 
   private final long poolTimeoutSeconds;
   private final int threadCount;

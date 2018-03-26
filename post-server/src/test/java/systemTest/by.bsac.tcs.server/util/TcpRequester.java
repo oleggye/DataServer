@@ -6,14 +6,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +22,7 @@ public class TcpRequester {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(TcpRequester.class);
 
-  private static final int DEFAULT_EXECUTOR_SERVICE_THREADS_COUNT = 3;
+  private static final int DEFAULT_EXECUTOR_SERVICE_THREADS_COUNT = 1;
   private static final ExecutorService executor = Executors
       .newFixedThreadPool(DEFAULT_EXECUTOR_SERVICE_THREADS_COUNT);
 
@@ -48,17 +49,22 @@ public class TcpRequester {
    */
   public String perform(RequestBuilder requestBuilder) {
     Request request = requestBuilder.build();
-    try (Socket socket = new Socket(request.getServerAddress(), request.getPort())) {
+
+    try (Socket socket = new Socket(
+        request.getServerAddress(), request.getPort())) {
 
       writeRequest(socket, request.getRequestData());
 
       return readResponse(socket);
-    } catch (IOException e) {
+    } catch (ConnectException e) {
+      final String message = "An exception occurred while perform request";
+      LOGGER.info(message, e);
+      throw new NoResponseException(message, e);
+    } catch (Exception e) {
       final String message = "An exception occurred while perform request";
       LOGGER.error(message, e);
       throw new RuntimeException(e);
     }
-
   }
 
   private void writeRequest(Socket socket, String requestData) throws IOException {
@@ -78,9 +84,9 @@ public class TcpRequester {
       Future<String> responseFuture = executor.submit(responseCallable);
 
       return responseFuture.get(timeout, timeUnit);
-
-    } catch (TimeoutException e) {
+    } catch (SocketTimeoutException e) {
       final String message = String.format(TIME_EXCEED_MESSAGE_FORMAT, timeout, timeUnit.name());
+      LOGGER.error(message);
       throw new NoResponseException(message, e);
     } catch (Exception e) {
       throw new IllegalStateException(e);

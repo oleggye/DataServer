@@ -5,8 +5,8 @@ import by.bsac.tcs.domain.controller.command.Command;
 import by.bsac.tcs.domain.controller.command.CommandException;
 import by.bsac.tcs.domain.controller.command.CommandProvider;
 import by.bsac.tcs.domain.controller.exception.ControllerException;
+import by.bsac.tcs.server.model.Method;
 import by.bsac.tcs.server.model.Request;
-import by.bsac.tcs.server.process.parser.impl.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

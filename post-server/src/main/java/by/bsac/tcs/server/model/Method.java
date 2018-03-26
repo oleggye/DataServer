@@ -1,4 +1,4 @@
-package by.bsac.tcs.server.process.parser.impl;
+package by.bsac.tcs.server.model;
 
 import by.bsac.tcs.server.util.loader.ProtocolPropertiesLoader;
 import java.util.regex.Pattern;
@@ -16,7 +16,7 @@ public enum Method {
     pattern = Pattern.compile(regexp);
   }
 
-  public Pattern getPattern(){
+  public Pattern getPattern() {
     return pattern;
   }
 }

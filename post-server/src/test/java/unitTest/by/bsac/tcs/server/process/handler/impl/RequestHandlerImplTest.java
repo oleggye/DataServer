@@ -15,6 +15,7 @@ import by.bsac.tcs.server.process.handler.exception.RequestHandlerException;
 import by.bsac.tcs.server.process.parser.ProtocolParser;
 import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
 import by.bsac.tcs.server.process.response.ResponseWriter;
+import by.bsac.tcs.server.util.config.impl.SocketConfigurerImpl;
 import java.net.Socket;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,17 +41,22 @@ public class RequestHandlerImplTest {
   @Mock
   private ResponseWriter responseWriter;
 
+  @Mock
+  private SocketConfigurerImpl socketConfigurerImpl;
+
   @Test
   public void runSuccessfully() throws Exception {
     final Request request = mock(Request.class);
+    doNothing().when(socketConfigurerImpl).configure(any(Socket.class));
     when(parser.parse(socket)).thenReturn(request);
+    doNothing().when(requestController).process(any(Request.class));
     doNothing().when(responseWriter).write(socket, request);
 
     requestHandler.run();
 
+    verify(socketConfigurerImpl).configure(socket);
+    verifyNoMoreInteractions(socketConfigurerImpl);
     verify(parser).parse(socket);
-    verifyNoMoreInteractions(parser);
-    verify(socket).setSoTimeout(any(Integer.class));
     verifyNoMoreInteractions(parser);
     verify(requestController).process(request);
     verifyNoMoreInteractions(requestController);
@@ -60,6 +66,7 @@ public class RequestHandlerImplTest {
 
   @Test(expected = RequestHandlerException.class)
   public void runWithExceptionWhenParse() throws Exception {
+    doNothing().when(socketConfigurerImpl).configure(any(Socket.class));
     when(parser.parse(socket)).thenThrow(ProtocolParseException.class);
 
     requestHandler.run();
@@ -68,7 +75,8 @@ public class RequestHandlerImplTest {
   @Test(expected = RequestHandlerException.class)
   public void runWithExceptionWhenControllerProcess() throws Exception {
     final Request request = mock(Request.class);
-    when(parser.parse(socket)).thenReturn(request);
+    doNothing().when(socketConfigurerImpl).configure(any(Socket.class));
+    when(parser.parse(any(Socket.class))).thenReturn(request);
     doThrow(ControllerException.class).when(requestController).process(any(Request.class));
 
     requestHandler.run();

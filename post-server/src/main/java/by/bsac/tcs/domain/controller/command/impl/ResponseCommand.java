@@ -1,8 +1,8 @@
 package by.bsac.tcs.domain.controller.command.impl;
 
 import by.bsac.tcs.domain.controller.command.Command;
+import by.bsac.tcs.server.model.Method;
 import by.bsac.tcs.server.model.Request;
-import by.bsac.tcs.server.process.parser.impl.Method;
 import by.bsac.tcs.server.util.loader.ProtocolPropertiesLoader;
 
 abstract class ResponseCommand implements Command {

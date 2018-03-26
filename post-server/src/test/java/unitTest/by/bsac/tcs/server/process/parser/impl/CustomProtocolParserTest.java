@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import by.bsac.tcs.server.model.Method;
 import by.bsac.tcs.server.model.Request;
 import by.bsac.tcs.server.process.parser.ProtocolParser;
 import by.bsac.tcs.server.process.parser.exception.ProtocolParseException;
@@ -34,13 +35,13 @@ public class CustomProtocolParserTest {
     parser = new CustomProtocolParser();
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = ProtocolParseException.class)
   public void testParseWhenPassedToLongRequest() throws IOException, ProtocolParseException {
     final String userRequest = "111111111111111111111111111111111";
     prepareUserRequestAndParse(userRequest);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = ProtocolParseException.class)
   public void testParseWhenPassedNullRequest() throws IOException, ProtocolParseException {
     final String userRequest = null;
     prepareUserRequestAndParse(userRequest);
@@ -199,11 +200,11 @@ public class CustomProtocolParserTest {
     prepareUserRequestAndParse(userRequest);
   }
 
-  //KEEP_ALIVE
+  //I_ALIVE
   @Test
   public void testParseWhenPassedCorrectKeepAliveMethodThanOk()
       throws IOException, ProtocolParseException {
-    final String userRequest = "KEEP_ALIVE:222850:5:1519800922";
+    final String userRequest = "I_ALIVE:222850:5:1519800922";
     Request parse = prepareUserRequestAndParse(userRequest);
 
     assertNotNull(parse);
@@ -216,28 +217,28 @@ public class CustomProtocolParserTest {
   @Test(expected = ProtocolParseException.class)
   public void testParseWhenPassedKeepAliveMethodWithoutIdThanException()
       throws IOException, ProtocolParseException {
-    final String userRequest = "KEEP_ALIVE::5:1519800922";
+    final String userRequest = "I_ALIVE::5:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
   public void testParseWhenPassedKeepAliveMethodWithAlphabeticCharacterInIdThanException()
       throws IOException, ProtocolParseException {
-    final String userRequest = "KEEP_ALIVE:222f50:5:1519800922";
+    final String userRequest = "I_ALIVE:222f50:5:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
   public void testParseWhenPassedKeepAliveMethodWithoutQuantityThanException()
       throws IOException, ProtocolParseException {
-    final String userRequest = "KEEP_ALIVE:222850:1519800922";
+    final String userRequest = "I_ALIVE:222850:1519800922";
     prepareUserRequestAndParse(userRequest);
   }
 
   @Test(expected = ProtocolParseException.class)
   public void testParseWhenPassedKeepAliveMethodWithoutTimeThanException()
       throws IOException, ProtocolParseException {
-    final String userRequest = "KEEP_ALIVE:222850:5:";
+    final String userRequest = "I_ALIVE:222850:5:";
     prepareUserRequestAndParse(userRequest);
   }
 

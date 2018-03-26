@@ -36,7 +36,7 @@ public class RequestManagerImplTest {
   private RequestHandler requestHandler;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     MockitoAnnotations.initMocks(this);
   }
 
@@ -54,7 +54,7 @@ public class RequestManagerImplTest {
 
   @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   @Test
-  public void invokeManageMethod() throws Exception {
+  public void invokeManageMethod() {
     requestManager.pool = pool;
     Socket socket = mock(Socket.class);
 

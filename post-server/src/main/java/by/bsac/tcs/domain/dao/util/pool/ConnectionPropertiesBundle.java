@@ -28,6 +28,9 @@ public final class ConnectionPropertiesBundle {
     return SingletonHolder.getInstance();
   }
 
+  /**
+   * Return an Optional String property by key
+   */
   public Optional<String> getProperty(String key) {
     try {
       return Optional.of(bundle.getString(key));
@@ -37,6 +40,9 @@ public final class ConnectionPropertiesBundle {
     return Optional.empty();
   }
 
+  /**
+   * Return an Optional Integer property by key
+   */
   public Optional<Integer> getIntProperty(String key) {
     try {
       String stringValue = bundle.getString(key);
@@ -71,7 +77,7 @@ public final class ConnectionPropertiesBundle {
     return getIntProperty(MAX_IDLE_KEY);
   }
 
-  public Optional<Integer> getMaxOPS() {
+  public Optional<Integer> getMaxOps() {
     return getIntProperty(MAX_OPS_KEY);
   }
 

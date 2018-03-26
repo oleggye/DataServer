@@ -9,8 +9,8 @@ public class Application {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
-  private static final ApplicationPropertiesLoader APPLICATION_PROPERTIES_LOADER = ApplicationPropertiesLoader
-      .getInstance();
+  private static final ApplicationPropertiesLoader APPLICATION_PROPERTIES_LOADER =
+      ApplicationPropertiesLoader.getInstance();
 
   public static void main(String[] args) {
     LOGGER.info("Starting by.bsac.tcs.server application......");

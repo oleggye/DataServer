@@ -1,6 +1,6 @@
 package integrationTest.by.bsac.tcs.server.process.parser.impl.custom;
 
-import by.bsac.tcs.server.process.parser.impl.Method;
+import by.bsac.tcs.server.model.Method;
 import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;

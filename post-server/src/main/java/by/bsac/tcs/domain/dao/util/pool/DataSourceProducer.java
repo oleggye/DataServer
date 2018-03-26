@@ -31,7 +31,7 @@ public final class DataSourceProducer {
     basicDataSource.setPassword(bundle.getPassword().orElse(DEFAULT_PASS));
     basicDataSource.setMinIdle(bundle.getMinIdle().orElse(DEFAULT_MIN_IDLE));
     basicDataSource.setMaxIdle(bundle.getMaxIdle().orElse(DEFAULT_MAX_IDLE));
-    basicDataSource.setMaxOpenPreparedStatements(bundle.getMaxOPS().orElse(DEFAULT_MAX_OPS));
+    basicDataSource.setMaxOpenPreparedStatements(bundle.getMaxOps().orElse(DEFAULT_MAX_OPS));
 
     this.dataSource = basicDataSource;
 
@@ -43,6 +43,9 @@ public final class DataSourceProducer {
     return SingletonHolder.getInstance();
   }
 
+  /**
+   * Return a configured instance of {@link DataSource}
+   */
   public DataSource getDataSource() {
     if (Objects.equals(DEFAULT_URI, dataSource.getUrl())) {
       SchemaUtil.getInstance().prepareSchema(dataSource);
