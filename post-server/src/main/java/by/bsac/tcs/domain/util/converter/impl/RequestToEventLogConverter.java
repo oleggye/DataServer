@@ -19,7 +19,7 @@ public class RequestToEventLogConverter implements RequestConverter {
           Method.KEEP_ALIVE, Event.KEEP_ALIVE
       );
 
-  public EventLog convert(Request request) {
+  public EventLog convert(final Request request) {
     final long postBoxId = request.getPostBoxId();
 
     Method method = request.getMethod();

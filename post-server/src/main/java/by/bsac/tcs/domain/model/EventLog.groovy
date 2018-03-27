@@ -21,6 +21,7 @@ class EventLog {
         this.postBoxId = postBoxId
         this.event = event
         this.quantity = quantity
+        this.epochTime = epochTime
     }
 
     @Override

@@ -4,9 +4,9 @@ import by.bsac.tcs.server.model.Method;
 import by.bsac.tcs.server.model.RequestBuilder;
 import java.util.regex.Matcher;
 
-public class EmptyParser extends GenericRequestParser {
+public class KeepAliveParser extends GenericRequestParser {
 
-  public EmptyParser(Method method) {
+  public KeepAliveParser(Method method) {
     super(method);
   }
 
@@ -15,9 +15,11 @@ public class EmptyParser extends GenericRequestParser {
       RequestBuilder requestBuilder,
       Matcher matcher) {
     String id = matcher.group(1);
-    String epochTime = matcher.group(2);
+    String letterCount = matcher.group(2);
+    String epochTime = matcher.group(3);
     return requestBuilder
         .id(id)
+        .lettersCount(letterCount)
         .time(epochTime);
   }
 }

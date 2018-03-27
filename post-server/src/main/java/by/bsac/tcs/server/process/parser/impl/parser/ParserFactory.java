@@ -8,7 +8,7 @@ import static by.bsac.tcs.server.model.Method.WITHDRAWN;
 
 import by.bsac.tcs.server.model.Method;
 import by.bsac.tcs.server.process.parser.impl.parser.impl.EmptyParser;
-import by.bsac.tcs.server.process.parser.impl.parser.impl.KeepAlive;
+import by.bsac.tcs.server.process.parser.impl.parser.impl.KeepAliveParser;
 import by.bsac.tcs.server.process.parser.impl.parser.impl.LetterParser;
 import by.bsac.tcs.server.process.parser.impl.parser.impl.RegParser;
 import by.bsac.tcs.server.process.parser.impl.parser.impl.WithdrawnParser;
@@ -26,7 +26,7 @@ public class ParserFactory {
             LETTER, new LetterParser(LETTER),
             WITHDRAWN, new WithdrawnParser(WITHDRAWN),
             EMPTY, new EmptyParser(EMPTY),
-            KEEP_ALIVE, new KeepAlive(KEEP_ALIVE));
+            KEEP_ALIVE, new KeepAliveParser(KEEP_ALIVE));
   }
 
   public static ParserFactory getInstance() {

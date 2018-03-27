@@ -1,33 +1,21 @@
 package by.bsac.tcs.server.process.parser.impl.parser.impl;
 
 import by.bsac.tcs.server.model.Method;
-import by.bsac.tcs.server.model.Request;
 import by.bsac.tcs.server.model.RequestBuilder;
-import by.bsac.tcs.server.process.parser.impl.parser.RequestParser;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class RegParser implements RequestParser {
+public class RegParser extends GenericRequestParser {
 
-  private final Method reg;
-
-  public RegParser(Method reg) {
-    this.reg = reg;
+  public RegParser(Method method) {
+    super(method);
   }
 
   @Override
-  public Request parse(String requestString) {
-    Pattern pattern = reg.getPattern();
-    Matcher matcher = pattern.matcher(requestString);
-
-    if (!matcher.find()) {
-      throw new IllegalArgumentException("Wrong requestString: " + requestString);
-    }
-
+  protected RequestBuilder populateRequestBuilder(
+      RequestBuilder requestBuilder,
+      Matcher matcher) {
     String id = matcher.group(1);
-    return new RequestBuilder()
-        .method(reg)
-        .id(id)
-        .build();
+    return requestBuilder
+        .id(id);
   }
 }

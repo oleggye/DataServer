@@ -63,7 +63,7 @@ public class EventLogDaoImplTest {
   @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED")
   @Test
   public void findById() throws DaoException, SQLException {
-    EventLog expectedEventLog = new EventLog(0, null, 0,0);
+    EventLog expectedEventLog = new EventLog(0, null, 0, 0);
 
     doNothing().when(preparedStatement).setLong(any(Integer.class), any(Long.class));
     when(preparedStatement.executeQuery()).thenReturn(resultSet);
