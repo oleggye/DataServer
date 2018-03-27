@@ -15,6 +15,7 @@ class EventLog {
         this.postBoxId = postBoxId
         this.event = event
         this.quantity = quantity
+        this.epochTime = epochTime
     }
 
     EventLog(long postBoxId, Event event, int quantity, long epochTime) {
@@ -25,13 +26,13 @@ class EventLog {
     }
 
     @Override
-    public String toString() {
+    String toString() {
         return "EventLog{" +
                 "id=" + id +
                 ", postBoxId=" + postBoxId +
                 ", event=" + event +
                 ", quantity=" + quantity +
                 ", epochTime=" + epochTime +
-                '}';
+                '}'
     }
 }

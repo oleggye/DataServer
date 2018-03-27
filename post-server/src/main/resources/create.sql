@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `smart_post_box`.`event_log` (
   `id_post_box` INT UNSIGNED NOT NULL,
   `id_event` INT UNSIGNED NOT NULL,
   `quantity` INT UNSIGNED NULL,
-  `time` MEDIUMTEXT NOT NULL,
+  `time` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
 
  foreign key (`id_post_box`) references `smart_post_box`.`post_box` (`id`),

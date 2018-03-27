@@ -29,7 +29,7 @@ public class EventLogDaoImplSystemTest {
     final long postBoxId = 222850;
     final Event event = Event.REGISTRATION;
     final int quantity = 0;
-    final long epochTime = 0;
+    final long epochTime = 1234567891;
 
     EventLog eventLog = dao.findById(id);
 
