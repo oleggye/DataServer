@@ -65,17 +65,26 @@ public class EventLogDaoImpl implements EventLogDao {
     try (Connection connection = dataSource
         .getConnection(); PreparedStatement preparedStatement = connection
         .prepareStatement(INSERT_SQL)) {
-      connection.setAutoCommit(false);
+      try {
+        connection.setAutoCommit(false);
 
-      preparedStatement.setLong(1, (int) eventLog.getPostBoxId());
-      preparedStatement.setInt(2, eventLog.getEvent().getEventId());
-      preparedStatement.setInt(3, eventLog.getQuantity());
-      preparedStatement.setLong(4, eventLog.getEpochTime());
+        preparedStatement.setLong(1, (int) eventLog.getPostBoxId());
+        preparedStatement.setInt(2, eventLog.getEvent().getEventId());
+        preparedStatement.setInt(3, eventLog.getQuantity());
+        preparedStatement.setLong(4, eventLog.getEpochTime());
 
-      long insertedIndex = getInsertedIndex(preparedStatement);
-      connection.commit();
+        long insertedIndex = getInsertedIndex(preparedStatement);
+        connection.commit();
 
-      return insertedIndex;
+        return insertedIndex;
+      } catch (SQLException e) {
+        connection.rollback();
+        final String message = "An exception occurred while save";
+        LOGGER.error(message, e);
+        throw new DaoException(message, e);
+      } finally {
+        connection.setAutoCommit(true);
+      }
 
     } catch (SQLException e) {
       final String message = "An exception occurred while save";

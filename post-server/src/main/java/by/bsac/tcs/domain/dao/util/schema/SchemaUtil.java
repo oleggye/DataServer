@@ -26,12 +26,20 @@ public final class SchemaUtil {
 
   public void prepareSchema(DataSource dataSource) {
     try (Connection connection = dataSource.getConnection()) {
-      connection.setAutoCommit(false);
 
-      createSchema(connection);
-      insertData(connection);
+      try {
+        connection.setAutoCommit(false);
+        createSchema(connection);
+        insertData(connection);
 
-      connection.commit();
+        connection.commit();
+      } catch (SQLException e) {
+        connection.rollback();
+        LOGGER.info("An exception acquired while prepare schema", e);
+        throw new IllegalStateException(e);
+      } finally {
+        connection.setAutoCommit(true);
+      }
     } catch (SQLException e) {
       LOGGER.info("An exception acquired while prepare schema", e);
       throw new IllegalStateException(e);
