@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +65,7 @@ public class EventLogDaoImpl implements EventLogDao {
 
     try (Connection connection = dataSource
         .getConnection(); PreparedStatement preparedStatement = connection
-        .prepareStatement(INSERT_SQL)) {
+        .prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
       try {
         connection.setAutoCommit(false);
 
