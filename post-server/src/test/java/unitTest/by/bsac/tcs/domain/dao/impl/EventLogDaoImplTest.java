@@ -2,6 +2,8 @@ package by.bsac.tcs.domain.dao.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,6 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.sql.DataSource;
 import org.junit.After;
 import org.junit.Before;
@@ -49,7 +52,8 @@ public class EventLogDaoImplTest {
   @Before
   public void setUp() throws SQLException {
     when(dataSource.getConnection()).thenReturn(connection);
-    when(connection.prepareStatement(any(String.class))).thenReturn(preparedStatement);
+    when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+    when(connection.prepareStatement(anyString(), anyInt())).thenReturn(preparedStatement);
     doNothing().when(preparedStatement).close();
   }
 

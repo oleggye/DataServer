@@ -22,7 +22,7 @@
 
     <!--test-->
     <junit.version>4.12</junit.version>
-    <mockito.version>2.15.0</mockito.version>
+    <mockito.version>2.18.3</mockito.version>
 
     <!--db-->
     <h2.version>1.4.196</h2.version>
@@ -30,10 +30,10 @@
     <mysql.version>8.0.8-dmr</mysql.version>
 
     <!--code analysis-->
-    <findbugs.version>3.0.0</findbugs.version>
+    <findbugs.version>3.0.1</findbugs.version>
 
     <!--util-->
-    <guava.version>24.0-jre</guava.version>
+    <guava.version>25.0-jre</guava.version>
     <commons-collections4.version>4.1</commons-collections4.version>
     <commons-lang3.version>3.7</commons-lang3.version>
     <groovy-all.version>2.4.14</groovy-all.version>
